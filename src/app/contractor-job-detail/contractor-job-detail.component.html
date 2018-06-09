@@ -1,0 +1,274 @@
+<section>
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup">
+            <h2 class="font_capitalizs">{{jobData?.jobTitle}}</h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)">Home</a></li>
+              <li class="right_arrow">></li>
+              <li><a href="javascript:void(0)" routerLink="../../jobSearch">jOB SEARCH </a></li>
+              <li class="right_arrow">></li>
+              <li><a href="javascript:void(0)" (click)="returnToSearch();">SEARCH RESULTS </a></li>
+              <li class="right_arrow">></li>
+              <li class="active">JOB RESULT </li>
+            </ul>
+
+            <div class="alert alert-success margin-tp18" *ngIf="showSuccessMsg">
+              <a href="javascript:void(0)" class="close" title="close" (click)="showSuccessMsg=false">×</a>{{successMsg}} <strong>succesfully!</strong>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+</section>
+<section>
+  <div class="container">
+    <div class="full_job_section1">
+      <div class="row">
+        <div class="col-md-14 col-sm-18">
+          <div class="job_search_img"> <img src="./assets/images/page-search.png" alt="search" title="search" class="img-responsive"> </div>
+        </div>
+        <div class="col-md-60 col-sm-52 col-md-offset-1">
+          <div class="application_full_detail">
+            <p><span>Location:</span>{{jobData?.cityTown || 'NA'}}</p>
+            <p><span>Rate:</span> £{{jobData?.prefereedRate?.minRate || 'NA'}} - £{{jobData?.prefereedRate?.maxRate || 'NA'}} p/{{jobData?.prefereedRate?.dailyHourlyRate == 'daily' ? 'd' : 'h'}}</p>
+            <p><span>Start Date:</span> {{jobData?.startDate | date : 'short' || 'NA'}}</p>
+            <p><span>Duration:</span> {{jobData?.duration || 'NA'}}</p>
+            <p><span>Reference: </span> {{jobData?.jobReference || 'NA'}}</p>
+          </div>
+        </div>
+        <div class="col-md-25 col-sm-30">
+          <div class="experis"> <img src="./assets/images/experis.png" alt="search" title="search" class="img-responsive"> </div>
+        </div>
+      </div>
+    </div>
+    <div class="full_job_section2">
+      <div class="row">
+        <div class="col-md-14 col-sm-20">
+          <div class="job_search_ads"> <img src="./assets/images/job-ads.png" alt="ads" title="ads" class="img-responsive"> </div>
+        </div>
+        <div class="col-md-60 col-sm-50 col-md-offset-1">
+          <div class="job_full_details">
+            <p [innerHTML]="jobData?.jobSpecification">
+            </p>
+            <!-- <p> The person hired for the position of Network Engineer will be responsible for the support of the global UTM and remote access environment. In this role the analyst will support Check Point UTMs, Cisco ASA Firewalls, Cisco ASA VPNs and Juniper SSL gateways.</p>
+                                <ul>
+                                    Primary Responsibilities include but are not limited to the following:
+                                    <li>* Support Check Point UTMs, Cisco ASA Firewalls, Cisco ASA VPNs and Juniper SSL gateways</li>
+                                    <li>* Support/Participate/Coordinate large network refresh projects.</li>
+ <li>* Determine client/user requirements.</li>
+                                    <li>* Assist/create procedural manuals and documents as needed.</li>
+                                    <li>* Maintain expertise in assigned area to fulfil position goals and objectives.</li>
+                                    <li>* Manage products throughout their life cycles.</li>
+                                    <li>* Participate/run weekly service review meetings with clients/vendors. </li>
+                                    <li>* Participate in an on call rotation for 2 week each month.</li>
+                                </ul>
+                                <ul>
+                                    Preferred Qualifications:
+                                    <li>* Bachelor's Degree from an accredited Institution</li>
+                                    <li>* CCSE Check Point certifications</li>
+                                    <li>* 3+ years supporting network technologies LAN Switching/Routing</li>
+                                    <li>* 3+ years supporting routing protocols and network desi</li>
+                                </ul>
+                                <p> Oscar Technology Limited is acting as an Employment Business in relation to this vacancy. </p>
+                                <p> All IT contract jobs on ContractRecruit are posted by IT recruitment companies and IT direct hirers based in the UK. We screen all IT Contract jobs that are posted to make sure they are relevant Contract roles within the core IT contract industries including Design and UX, Architecture and Development, Infrastructure and Support, PMO and Project Management and Intelligence and Analysis. </p> -->
+            <div class="contant_footer">
+              <div class="row">
+                <div class="col-sm-50 col-xs-44">
+                  <div class="full_job_social_icon share-buttons">
+                    <!-- <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> -->
+                    <share-buttons [tumblr]='false' [google]='false' [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false' url="http://dev.contractrecruit.co.uk/contractor_site/#/public/contractor_search/{{jobId}}"></share-buttons>
+                  </div>
+                </div>
+                <div class="col-sm-50 col-xs-56">
+                  <div *ngIf="!isPublic" class="sign_up_right_side margin_apply_bottom"> <a *ngIf="jobData?.applied != 1" href="javascript:void(0)" class="btn-primary font_capitaliz hover_white_pluse" (click)="applyJob(jobData)">Apply Now <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+                    <p *ngIf="jobData?.applied==1">You have already applied this job.</p>
+                  </div>
+
+                  <div *ngIf="isPublic" class="col-sm-68">
+                    <div class="sign_up_right_side margin_apply_bottom">
+                      <p><a href="javascript:void(0)" routerLink="../../contractorLogin" >Login</a> or <a href="javascript:void(0)" routerLink="../../contractorSignup">Sign Up</a> to Apply</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-23 col-sm-30 col-md-offset-2">
+          <div class="share_the_job share-buttons">
+            <label>Share this job</label>
+            <!-- <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> -->
+            <share-buttons [tumblr]='false' [google]='false' [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false' url="http://dev.contractrecruit.co.uk/contractor_site/#/public/contractor_search/{{jobId}}"></share-buttons>
+          </div>
+          <div class="return_search_results">
+            <a href="javascript:void(0)" class="btn-primary hover_white_pluse" (click)="returnToSearch()">Return to Search Results <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related_contracts">
+      <span class="font_size13">RELATED CONTRACTS</span>
+      <div class="row">
+        <div class=" col-md-33 col-sm-33" *ngFor="let item of jobList">
+          <div class="my_applications_box">
+            <div class="header_top"> 
+              <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p *ngIf="!isPublic"><span>15</span> Miles from Home</p>
+            <p *ngIf="isPublic">{{item.cityTown}}</p>
+            </div>
+            <div class="application_box_contant" routerLink="../{{item.jobid}}" style="cursor: pointer;">
+            <img style="height: 79px;" [src]="item.profileimage[0]?.attachment_url ? item.profileimage[0].attachment_url + '/' + item.profileimage[0].attachment_name : './assets/images/application1.png'" alt="ads" title="ads" class="img-responsive">
+            <h2>{{item.jobTitle}}</h2>
+          </div>
+            <div class="application_box_contant2"  routerLink="../{{item.jobid}}" style="cursor: pointer;">
+            <p><span>Location:</span>{{item.cityTown}}</p>
+            <p><span>Rate:</span> £{{item.prefereedRate.minRate}} - £{{item.prefereedRate.maxRate}} p/{{item.prefereedRate.dailyHourlyRate == 'daily' ? 'd' : 'h'}}</p>
+            <p><span>Start Date:</span> {{item.startDate | date }}</p>
+            <p><span>Duration:</span> {{item.duration}} </p>
+            <p class="full_contant" innerHTML="{{item.jobSpecification | slice : 0 : 200}}.." style="height: 90px;"></p>
+          </div>
+            <div class="footer_box">
+            <div class="pull-left social_box_footer share-buttons">
+              <share-buttons [tumblr]='false' [google]='false' [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false' url="http://dev.contractrecruit.co.uk/contractor_site/#/public/contractor_search/{{item.jobid}}"></share-buttons>
+            </div>
+            <div class="pull-right view_company" *ngIf="!isPublic && !item.applied">
+              <a href="javascript:void(0)" (click)="jobId=item.jobid;applyJob(item)">Apply Now<i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company" *ngIf="!isPublic && item.applied">
+              <p class="call-to-view ctvpad" style="float:right;padding-right:10px;">You’ve already applied to this!</p>
+            </div>
+            <div class="pull-right view_company" *ngIf="isPublic">
+              <p class="call-to-view ctvpad" style="float:right;padding-right:10px;"><a href="javascript:void(0)" (click)="login()">Login</a> or <a href="javascript: void(0)" (click)="signup()">Sign Up</a> to apply </p>
+              <ul>
+                <input type="hidden" name="siteurl_foryoumaylove" id="siteurl-youmaylove" value="https://stage.contractrecruit.co.uk/contractors/">
+              </ul>
+            </div>
+          </div>
+          </div>
+        </div>
+       <!--  <div class="col-md-34 col-sm-34">
+          <div class="my_applications_box">
+            <div class="header_top"> <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+              <p><span>45</span> Miles from Home</p>
+            </div>
+            <div class="application_box_contant"> <img src="./assets/images/application2.png" alt="ads" title="ads" class="img-responsive">
+              <h2>Cyber Security Specialist</h2>
+            </div>
+            <div class="application_box_contant2">
+              <p><span>Location:</span> Basingstoke, Hampshire</p>
+              <p><span>Rate:</span> £200 - £260 p/d</p>
+              <p><span>Start Date:</span> 10/07/2017</p>
+              <p><span>Duration:</span> 6 Months</p>
+              <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+                <br> Focusing on Retention you will be providing maternity cover...</p>
+            </div>
+            <div class="footer_box">
+              <div class="pull-left social_box_footer"> <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </div>
+              <div class="pull-right view_company"> <a href="javascript:void(0)">Apply Now <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="col-md-33 col-sm-33">
+          <div class="my_applications_box">
+            <div class="header_top"> <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+              <p><span>60</span> Miles from Home</p>
+            </div>
+            <div class="application_box_contant"> <img src="./assets/images/application3.png" alt="ads" title="ads" class="img-responsive">
+              <h2>ION Marketview</h2>
+            </div>
+            <div class="application_box_contant2">
+              <p><span>Location:</span> Basingstoke, Hampshire</p>
+              <p><span>Rate:</span> £200 - £260 p/d</p>
+              <p><span>Start Date:</span> 10/07/2017</p>
+              <p><span>Duration:</span> 6 Months</p>
+              <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+                <br> Focusing on Retention you will be providing maternity cover...</p>
+            </div>
+            <div class="footer_box">
+              <div class="pull-left social_box_footer"> <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </div>
+              <div class="pull-right view_company"> <a href="# hover_white_pluse">Apply Now <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="row" *ngIf="totalPage && totalPage > pageNo">
+      <div class="col-sm-100">
+        <div class="show_more_application" (click)="pageNo = pageNo+1;getJobList();"> <a href="javascript:void(0)" class="btn-primary hover_white_pluse width_320px"><span>SEE MORE RELATED CONTRACTS</span> <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+      </div>
+    </div>
+  </div>
+  <div class="contractrecruit_banner full_job_margin70">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-30 col-md-30">
+          <div class="green_logo"> <img src="./assets/images/contra-logo.png" alt="ads" title="ads" class="img-responsive"> </div>
+        </div>
+        <div class="col-sm-70 col-md-65 col-md-offset-5">
+          <div class="contract_right_part">
+            <ul>
+              <li>SiMPLE</li>
+              <li class="circle"><i class="fa fa-circle" aria-hidden="true"></i></li>
+              <li>FAST</li>
+              <li class="circle"><i class="fa fa-circle" aria-hidden="true"></i></li>
+              <li>RELiABLE</li>
+              <li class="circle"><i class="fa fa-circle" aria-hidden="true"></i></li>
+              <li>SECURE</li>
+            </ul>
+            <p>Welcome our IT Contractor focused payroll solution that understands your needs brought to you by your ContractRecruit team. We make setting yourself up for work easy with our dedicated support team. Just get in touch on <span>0203 3300 714</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="banner_find_out_more">
+            <p>Take Home upto <span>85% of your pay</span> on time every time with ContractRecruit Payroll Solutions</p>
+            <a href="javascript:void(0)" class="pull-right">FIND OUT MORE <i class="fa fa-plus" aria-hidden="true"></i></a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Choose CV & Cover Letter</h4>
+      </div>
+      <div class="modal-body">
+        <form id="CVchoices" action="apply.php">
+          <div class="modal3-mid">
+            <div class="cvrow">
+              <label for="chooseCV">Choose CV:</label>
+              <span class="select161">
+            <select class="inpfocus" name="user_cv" id="chooseCV" [(ngModel)]="selectedCv">
+              <option [value]="cv.attachment_id" *ngFor="let cv of cvList">{{cv.attachment_name}}</option>
+              </select>
+            </span></div>
+            <div class="cvrow">
+              <label for="chooseCover">Choose Cover Letter:</label>
+              <span class="select161">
+            <select class="inpfocus" name="user_cover" id="chooseCover" [(ngModel)]="selectedCover">
+              <option [value]="cover.attachment_id" *ngFor="let cover of coverList">{{cover.attachment_name}}</option>
+              <option value="0">None</option>
+              </select>
+            </span></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="apply()">Apply Now</button>
+      </div>
+    </div>
+  </div>
+</div>

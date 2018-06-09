@@ -1,0 +1,14 @@
+<div style="z-index: 100" class="services_header margin_bottom_10px"> <img src="./assets/images/artical-message-larg.png" alt="" title=""> <span>CONTRACTOR ADVICE</span> <a href="javascript:void(0)"><img src="./assets/images/services-menu.png" alt="" title="" class="menu_bar"></a>
+  <div class="navigation_services" >
+    <ul>
+      <li *ngFor="let adviceCategory of adviceCategoryData"><a href="javascript:void(0)" (click)="categoryClicked(adviceCategory)">{{adviceCategory.category_name}}</a></li>
+     <!--  <li><a href="javascript:void(0)">Insurance Providers</a></li>
+      <li><a href="javascript:void(0)">IT Training</a></li>
+      <li><a href="javascript:void(0)">Accountancy Services</a></li>
+      <li><a href="javascript:void(0)">Mortgage Solutions</a></li>
+      <li><a href="javascript:void(0)">CV Writing and Help</a></li>
+      <li><a href="javascript:void(0)">Working Abroad</a></li>
+      <li><a href="javascript:void(0)">MVL Advisors</a></li> -->
+    </ul>
+  </div>
+</div>

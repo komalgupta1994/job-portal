@@ -1,0 +1,155 @@
+<section id="">
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup">
+            <h2>{{companyDetail?.companyDetails?.companyName}} <span class="text_pink">PROFILE</span></h2>
+            <ul class="breadcomb margin_right_5px">
+              <li><a href="javascript:void(0)" class="hover_text_pink">Home</a></li>
+              <li class="right_arrow text_pink"> &gt; </li>
+              <li class="active">PROFILE</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+</section>
+<section>
+  <div class="container">
+    <div class="recruiter_profile_content_part">
+      <div class="row">
+        <div class="col-sm-25 col-md-20">
+          <img [src]="companyDetail?.profileimage[0]?.attachment_url + '/' + companyDetail?.profileimage[0]?.attachment_name" alt="" title="" class="img-responsive">
+        </div>
+        <div class="col-sm-75 col-md-80">
+          <div class="web_email_content">
+            <p><span>Website</span> {{comapnySocial?.webAddress || 'NA' }} </p>
+            <p><span>Email</span> {{comapnySocial?.emailAddress || 'NA'}}</p>
+            <p><span>Size</span> &lt;{{companyDetail?.companyDetails?.companySize ? companyDetail?.companyDetails?.companySize : 'NA'}} Employees</p>
+            <p><span>Location</span> {{companyDetail?.companyDetails?.companyAddress ? companyDetail?.companyDetails?.companyAddress : 'NA'}}</p>
+            <p><span>Description</span> {{companyDetail?.companyDescription ? companyDetail?.companyDescription : 'NA'}}<span class="text_manage"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="recruiter_profile_social">
+            <a href="{{comapnySocial?.rssData?.rssUrl}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="{{comapnySocial?.twitterData?.twitterUrl}}" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i></a>
+            <a href="{{comapnySocial?.webAddress}}" target="_blank"><i class="fa fa-laptop" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-100">
+        <div class="latest_contarctor_profile">
+          <h3>Latest Contracts</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class=" col-md-33 col-sm-33" *ngFor="let job of jobList">
+        <div class="my_applications_box" (click)="viewCompanyProfile()">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>15</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img style="height: 87px;" [src]="job.profileimage[0]?.attachment_url + '/' + job.profileimage[0]?.attachment_name ||    './assets/images/application1.png'" onError="this.src='./assets/images/application1.png'" alt="ads" title="ads" class="img-responsive">
+            <h2>{{job.jobTitle}}</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> {{job.cityTown}}</p>
+            <p><span>Rate:</span> £{{job.prefereedRate.minRate}} - £{{job.prefereedRate.maxRate}} p/{{job.prefereedRate.dailyHourlyRate =='daily'? 'd' :'h'}}</p>
+            <p><span>Start Date:</span> {{job.startDate| date:'medium' :'MM-dd-yyyy' }}</p>
+            <p><span>Duration:</span> {{job.duration}} Days</p>
+            <p class="full_contant" style="height: 53px;">{{job.jobSpecification | slice:0:100}}...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company" (click)="applyJob(job)">
+              <a href="javascript:void(0)">{{job.applied == 0 ? 'Apply Now': 'Applied'}} <i class="fa fa-plus plus_blue margin_left_20" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  <div class="col-md-34 col-sm-34">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./recruiterProfile_files/location-map.png" alt="ads" title="ads" class="img-responsive">
+                                <p><span>45</span> Miles from Home</p>
+                            </div>
+                            <div class="application_box_contant">
+                                <img src="./recruiterProfile_files/application2.png" alt="ads" title="ads" class="img-responsive">
+                                <h2>Cyber Security Specialist</h2>
+                            </div>
+                            <div class="application_box_contant2">
+                                <p><span>Location:</span> Basingstoke, Hampshire</p>
+                                <p><span>Rate:</span> £200 - £260 p/d</p>
+                                <p><span>Start Date:</span> 10/07/2017</p>
+                                <p><span>Duration:</span> 6 Months</p>
+                                <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+                                    <br> Focusing on Retention you will be providing maternity cover...</p>
+                            </div>
+                            <div class="footer_box">
+                                <div class="pull-left social_box_footer">
+                                    <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="pull-right view_company">
+                                    <a href="javascript:void(0)">Apply Now <i class="fa fa-plus plus_blue margin_left_20" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-33 col-sm-33">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./recruiterProfile_files/location-map.png" alt="ads" title="ads" class="img-responsive">
+                                <p><span>60</span> Miles from Home</p>
+                            </div>
+                            <div class="application_box_contant">
+                                <img src="./recruiterProfile_files/application3.png" alt="ads" title="ads" class="img-responsive">
+                                <h2>ION Marketview</h2>
+                            </div>
+                            <div class="application_box_contant2">
+                                <p><span>Location:</span> Basingstoke, Hampshire</p>
+                                <p><span>Rate:</span> £200 - £260 p/d</p>
+                                <p><span>Start Date:</span> 10/07/2017</p>
+                                <p><span>Duration:</span> 6 Months</p>
+                                <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+                                    <br> Focusing on Retention you will be providing maternity cover...</p>
+                            </div>
+                            <div class="footer_box">
+                                <div class="pull-left social_box_footer">
+                                    <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="pull-right view_company">
+                                    <a href="javascript:void(0)">Apply Now <i class="fa fa-plus plus_blue margin_left_20" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+    </div>
+    <div class="row" *ngIf="totalPage">
+      <div class="col-sm-100">
+        <div class="show_more_application" (click)="getAllJobs()">
+          <a href="javascript:void(0)" class="btn-primary width_280px  hover_white_pluse"><span>{{showAll ? 'SHOW ALL JOBS' : 'SHOW LESS JOBS'}}</span> <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

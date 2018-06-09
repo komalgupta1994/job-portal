@@ -1,0 +1,37 @@
+.industry_min_heights {
+    border: 1px solid #ccc !important;
+    /*width: 170px;*/
+    float: right;
+}
+.form-group {
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+.popup {
+    background: #000;
+    border: 0 none;
+    border-radius: 4px;
+    bottom: 34px;
+    box-shadow: 0 0 20px 0 #999;
+    color: #fff;
+    display: none;
+    font-size: 12px;
+    font-weight: 400;
+    left: -192px;
+    min-height: 50px;
+    padding: 12px 14px;
+    position: absolute;
+    top: auto;
+    width: 226px;
+    display: none;
+}
+.popup b {
+    background: rgba(0, 0, 0, 0) url("../../assets/images/tooltip-spike.png") no-repeat scroll 0 0;
+    bottom: -19px;
+    height: 22px;
+    left: 186px;
+    position: absolute;
+    top: auto;
+    width: 40px;
+}

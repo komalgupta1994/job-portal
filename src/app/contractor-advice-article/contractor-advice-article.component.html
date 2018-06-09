@@ -1,0 +1,137 @@
+        <section>
+            <div class="container">
+                <div class="full_job_section3">
+                    <div class="row">
+                        <div class="col-md-14 col-sm-20">
+                            <div class="job_article_img"> <img src="./assets/images/page-messages.png" alt="search" title="search" class="img-responsive"> </div>
+                            <div class="job_search_ads"> <img src="./assets/images/job-ads.png" alt="ads" title="ads" class="img-responsive"> </div>
+                        </div>
+                        <div class="col-md-56 col-sm-50 col-md-offset-1">
+                            <div class="job_full_details advice_article_headding">
+                                <h2>{{articleData?.title}}</h2>
+                                <p class="date_content"><span>{{articleData?.updated_at | date : 'dd/MM/yyyy'}}</span> | <span>{{articleData?.author}}</span></p>
+                                <p [innerHTML]="articleData?.description"> </p>
+                   
+                                <div class="contant_footer">
+                                    <div class="row">
+                                        <div class="col-sm-32 col-xs-100">
+                                            <div class="full_job_social_icon share-buttons">
+                                                <!-- <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> -->
+                                                <share-buttons [tumblr]='false'  [google]='false'  [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false'></share-buttons >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-68 col-xs-100">
+                                            <div class="sign_up_right_side return_articles" routerLink="../">  <a  href="javascript:void(0)" class="btn-primary font_capitaliz hover_white_pluse">RETURN TO ALL ARTICLES <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-27 col-sm-30 col-md-offset-2">
+                            <div class="share_the_job share_the_article share-buttons">
+                                <img src="./assets/images/advice-article.png" alt="ads" title="ads" class="img-responsive">
+                                <label>Share this article</label>
+                                <!-- <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> -->
+                                <share-buttons [tumblr]='false'  [google]='false'  [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false'></share-buttons >
+                            </div>
+                            <div class="return_search_results">
+                                <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weekly_newsletter login_form_section width_auto">
+                <div class="container">
+                    <form class="">
+                        <div class="row">
+                            <div class="col-md-45 col-sm-100">
+                                <p class="more_sign_up">Want more? <span>Sign up to our weekly newsletter</span></p>
+                            </div>
+                            <div class="col-md-39 col-sm-77">
+                                <div class="form-group mergin_bottom_none">
+                                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="ENTER YOUR EMAIL ADDRESS HERE...">
+                                </div>
+                            </div>
+                            <div class="col-md-16 col-sm-23">
+                                <a href="javascript:void(0)" type="submit" class="btn btn-default font_capitaliz hover_white_pluse">SIGN UP NOW <i class="fa fa-plus font_color_white" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="container">
+                <div class="related_contracts">
+                    <span class="font_size13 font_related_articles">RELATED ARTICLES</span>
+                    <div class="row">
+                        <div class=" col-md-33 col-sm-33">
+                            <div class="letest_news_box">
+                                <div class="book_mark"><a href="javascript:void(0)"><img src="./assets/images/it-news.png" alt="" title=""></a></div>
+                                <img src="./assets/images/letest-news.png" alt="" title="" class="img-responsive">
+                                <h5>IT Jobs going abroad a concern for Contractors</h5>
+                                <p>IT jobs going abroad are a major concern for IT Contractors in the UK with foreign companies hiring heavily and leaving little... </p>
+                                <div class="letest_news_footer"> <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> <a href="javascript:void(0)" class="btn-primary news_read_more">READ MORE<i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-34 col-sm-34">
+                            <div class="letest_news_box">
+                                <div class="book_mark"><a href="javascript:void(0)"><img src="./assets/images/it-news.png" alt="" title=""></a></div>
+                                <img src="./assets/images/letest-news.png" alt="" title="" class="img-responsive">
+                                <h5>IT Jobs going abroad a concern for Contractors</h5>
+                                <p>IT jobs going abroad are a major concern for IT Contractors in the UK with foreign companies hiring heavily and leaving little... </p>
+                                <div class="letest_news_footer"> <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> <a href="javascript:void(0)" class="btn-primary news_read_more">READ MORE<i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-33 col-sm-33">
+                            <div class="letest_news_box">
+                                <div class="book_mark"><a href="javascript:void(0)"><img src="./assets/images/it-news.png" alt="" title=""></a></div>
+                                <img src="./assets/images/letest-news.png" alt="" title="" class="img-responsive">
+                                <h5>IT Jobs going abroad a concern for Contractors</h5>
+                                <p>IT jobs going abroad are a major concern for IT Contractors in the UK with foreign companies hiring heavily and leaving little... </p>
+                                <div class="letest_news_footer share-buttons"> 
+                                    <!-- <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a> --> 
+
+                                    <share-buttons [tumblr]='false'  [google]='false'  [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false'></share-buttons >
+
+                                    <a href="javascript:void(0)" class="btn-primary news_read_more">READ MORE<i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-100">
+                        <div class="show_more_application"> <a href="javascript:void(0)" class="btn-primary hover_white_pluse"><span>SEE MORE ARTICLES</span> <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contractrecruit_banner full_job_margin70">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-30 col-md-30">
+                            <div class="green_logo"> <img src="./assets/images/contra-logo.png" alt="ads" title="ads" class="img-responsive"> </div>
+                        </div>
+                        <div class="col-sm-70 col-md-65 col-md-offset-5">
+                            <div class="contract_right_part">
+                                <ul>
+                                    <li>SiMPLE</li>
+                                    <li class="circle"><i class="fa fa-circle" aria-hidden="true"></i></li>
+                                    <li>FAST</li>
+                                    <li class="circle"><i class="fa fa-circle" aria-hidden="true"></i></li>
+                                    <li>RELiABLE</li>
+                                    <li class="circle"><i class="fa fa-circle" aria-hidden="true"></i></li>
+                                    <li>SECURE</li>
+                                </ul>
+                                <p>Welcome our IT Contractor focused payroll solution that understands your needs brought to you by your ContractRecruit team. We make setting yourself up for work easy with our dedicated support team. Just get in touch on <span>0203 3300 714</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-100">
+                            <div class="banner_find_out_more">
+                                <p>Take Home upto <span>85% of your pay</span> on time every time with ContractRecruit Payroll Solutions</p>
+                                <a href="javascript:void(0)" class="pull-right">FIND OUT MORE <i class="fa fa-plus" aria-hidden="true"></i></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

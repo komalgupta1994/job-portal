@@ -1,0 +1,12 @@
+#recuriter_logged_in_nav svg path {
+    fill: #00ccff;
+}
+@media(max-width: 990px){
+	#recuriter_logged_in_nav svg {
+      margin-top: 8px
+}
+
+}
+
+.home_page_inquery{ width:100%; }
+#inquerymaindiv .after_login_menu ul li{overflow: -webkit-paged-x;}

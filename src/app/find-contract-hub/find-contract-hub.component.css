@@ -1,0 +1,5 @@
+.contracthub_footer a:hover {
+	color: #333 !important;
+	opacity: 1;
+    -webkit-transition: all 0.1s ease 0s;
+}

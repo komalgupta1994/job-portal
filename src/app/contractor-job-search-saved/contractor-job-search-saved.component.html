@@ -1,0 +1,231 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup befourlogin_fontsize">
+            <h2 class="font_capitalizs">Saved <span>SEARCH</span></h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)">Home</a></li>
+              <li class="right_arrow">&gt;</li>
+              <li><a href="javascript:void(0)">Contractor </a></li>
+              <li class="right_arrow">&gt;</li>
+              <li class="active">Saved Search</li>
+            </ul>
+            <div class="alert alert-success margin-tp18" *ngIf="showSuccessMsg">
+              <a href="javascript:void(0)" class="close" title="close" (click)="showSuccessMsg=false">×</a>{{successMsg}} <strong>succesfully!</strong>
+            </div>
+            <div class="alert alert-danger margin-tp18" *ngIf="showErrorMsg">
+              <a href="javascript:void(0)" class="close" title="close" (click)="showErrorMsg=false">×</a>
+              <strong>Error!</strong> {{errorMsg}}
+            </div>
+            <div class="pull-right job_search">
+              <a href="javascript:void(0)" [routerLink]="['../jobSearch']" class="btn-primary hover_white_pluse width_180px">Return to Search <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+              <div style="display: inline;">
+                <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_180px" (click)="getListOfSavedSearch();showList=!showList">Saved Search <i class="fa fa-angle-down plus_blue font_size_margin text_pink" aria-hidden="true"></i></a>
+                <div class="form-group" *ngIf="showList">
+                  <ul *ngIf="savedSearchList && savedSearchList.length > 0" class="form-control industry_min_heights padding_none">
+                    <li *ngFor="let search of savedSearchList" (click)="searchSelect(search?.contractor_search_id);showList=false;">{{search?.contractor_search_name}}</li>
+                  </ul>
+
+                   <ul *ngIf="savedSearchList && savedSearchList.length == 0" class="form-control industry_min_heights padding_none">
+                    <li>No Saved Search</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="signup_form_section">
+            <div class="errorbox" *ngIf="((saveSearchForm && saveSearchForm.form && saveSearchForm.form.controls && saveSearchForm.form.invalid) || searchNameExist) && saveClicked"><b>The following error(s) occured:</b>
+              <br>
+              <li *ngIf="saveSearchForm.form.controls.searchName?.hasError( 'required')">Please enter search name</li>
+              <li *ngIf="saveSearchForm.form.controls.jobTitle?.hasError( 'required')">Please enter job title</li>
+              <li *ngIf="saveSearchForm.form.controls.keywords?.hasError( 'required')">Please enter keywords</li>
+              <li *ngIf="saveSearchForm.form.controls.excludingWords?.hasError( 'required')">Please enter excluding words</li>
+              <li *ngIf="saveSearchForm.form.controls.distance?.hasError( 'required')">Please enter distance</li>
+              <li *ngIf="saveSearchForm.form.controls.location?.hasError( 'required')">Please enter location</li>
+              <li *ngIf="saveSearchForm.form.controls.min?.hasError( 'required')">Please enter min rate</li>
+              <li *ngIf="saveSearchForm.form.controls.max?.hasError( 'required')">Please enter max rate</li>
+              <li *ngIf="saveSearchForm.form.controls.jobRefNumber?.hasError( 'required')">Please enter job reference number</li>
+             <!--  <li *ngIf="saveSearchForm.form.controls.postedSince?.hasError( 'required')">Please enter post duration</li> -->
+              <li *ngIf="searchNameExist">Search already saved with this name</li>
+
+            </div>
+            <form #saveSearchForm="ngForm">
+              <div class="job_search_keywords">
+                <h2>name</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group responsive_margin35">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/save-search-name.png" alt="Saved Search Name" title="Saved Search Name" class="img-responsive"></div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Saved Search Name" [(ngModel)]="searchName" name="searchName" required>
+                      <div class="input-group-addon upto_border_none responsive_width padding_left25">
+                        <div class="service_box">
+                          <input id="inlineCheckbox4" value="option4" type="checkbox">
+                          <label for="inlineCheckbox4" class="padding_right_font"> Email me jobs like this <span></span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2>Keywords</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/job-title.png" alt="Job Title" title="Job Title" class="img-responsive"></div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Job Title" [(ngModel)]="jobTitle" name="jobTitle" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/Keywords.png" alt="Keywords" title="Keywords" class="img-responsive"></div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Keywords (Boolean Search)" [(ngModel)]="keywords" name="keywords" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/excluding.png" alt="Excluding" title="Excluding" class="img-responsive"></div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Excluding these words (separate with commas)" [(ngModel)]="excludingWords" name="excludingWords" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2>Location &amp; Rates</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">Up to</div>
+                      <div class="select_option_arrow"></div>
+                      <select class="form-control background_drop_down" [(ngModel)]="distance" name="distance" >
+                        <option value="0">Miles</option>
+                        <option value="1">1 mile</option>
+                        <option value="5">5 miles</option>
+                        <option value="10">10 miles</option>
+                        <option value="20">20 miles</option>
+                        <option value="30">30 miles</option>
+                        <option value="40">40 miles</option>
+                        <option value="50">50 miles</option>
+                        <option value="100">100 miles</option>
+                        <option value="1500">National</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">From</div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="City, Town, or PostCode" autocorrect="off" autocapitalize="off" spellcheck="off" #search name="location" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-25 col-xs-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">From</div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Rate Min (£)" [(ngModel)]="minRate" name="min" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-25 col-xs-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">To</div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Rate Max (£)" [(ngModel)]="maxRate" name="max" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input value="daily" id="prepaid" name="service_type" checked="" type="radio" [(ngModel)]="rateType">
+                      <label for="prepaid" class="radio-inline"><span></span> Daily Rate </label>
+                      <input value="hourly" [(ngModel)]="rateType" id="postpaid" name="service_type" type="radio">
+                      <label for="postpaid" class="radio-inline"><span></span>Hourly Rate </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2>Contract Specification</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="form-control industry_sector">Industry Sector(S)</span>
+                      <div class="input-group-addon bordr_non"><img src="./assets/images/inform.png" alt="Enter Password" title="Password" class="img-responsive">
+                      <span class="tooltiptext_part">CTRL + click to select<br> multiple sectors</span>
+                      </div>
+                    </div>
+                    <select class="form-control padding_none contractor_profile min_height_335" name="industrySector" [(ngModel)]="industrySector" multiple="true">
+                      <option *ngFor="let industry of industrySectorData" value="{{industry.id}}">{{industry.industry}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="job_referance_margen">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon"><img src="./assets/images/reference-number.png" alt="Job Reference Number" title="Job Reference Number" class="img-responsive"></div>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Job Reference Number" [(ngModel)]="jobRefNumber" name="jobRefNumber" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon"><img src="./assets/images/show-contacts.png" alt="Show Contacts" title="Show Contacts" class="img-responsive"></div>
+                        <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Show Contacts Posted Since:" [(ngModel)]="postDuration" name="postedSince" required> -->
+                        <select class="form-control minimal background_drop_down" [(ngModel)]="postDuration" name="showContracts">
+                          <option value="0" selected disabled>Posted since</option>
+                          <option *ngFor ="let slot of timeSlotList" [value]="slot.id">{{slot.text}}</option>
+                          
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="margin_top_30">
+                <div class="row">
+                  <div class="col-sm-60">
+                    <div class="sign_up_left_side">
+                      <a href="javascript:void(0)" class="btn-primary font_capitaliz hover_white_pluse width_180px margin_bottom_10px" (click)="saveSearch(saveSearchForm);saveClicked=true;">Save Search <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+                      <a href="javascript:void(0)" class="btn-primary font_capitaliz hover_white_pluse width_180px" (click)="deleteSearch()">Delete Search <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                  <div class="col-sm-40">
+                    <div class="sign_up_right_side">
+                      <a href="javascript:void(0)" class="btn-primary font_capitaliz hover_white_pluse width_180px" (click)="runSearch()">Run Search <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

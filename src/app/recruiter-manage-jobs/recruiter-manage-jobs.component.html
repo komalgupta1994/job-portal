@@ -1,0 +1,395 @@
+<section id="min_height" class="margin_top_40">
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div class="container">
+                <div class="alert alert-success margin-tp18" *ngIf="jobPostFlag">
+                <a href="javascript:void(0)" class="close" title="close" (click)="jobPostFlag = !jobPostFlag">×</a> Post Job Delete <strong>succesfully!</strong>
+              </div>
+              <div class="alert alert-danger margin-tp18" *ngIf="jobPostFlagError">
+                <a href="javascript:void(0)" class="close" title="close" (click)="jobPostFlagError = !jobPostFlagError">×</a> Error While Deleting Job
+              </div>
+                <div class="row">
+                    <div class="col-sm-50">
+                        <div class="contractor_signup recruiter_signup">
+                            <h2 class="font_capitalizs">Manage <span class="text_pink">Jobs</span></h2>
+                            <ul class="breadcomb color_active">
+                                <li><a href="javascript:void(0)" [routerLink]="['../recruiter-home']">Home</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li class="active">MANAGE JOBS</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="applied_posted">
+                            <p>You have posted <span class="text_pink">{{listingData.length}}</span> Jobs
+                        </div>
+                    </div>
+                </div>
+
+                <div class="errorbox" *ngIf="listingData.length === 0 && !loading"><br> 
+                        <li>There is no record.</li>
+                    </div>
+                    <div *ngIf="loading" class="row">
+                  <img src="./assets/images/bx_loader.gif">
+                </div>
+                <div class="pager_section">
+                    <div class="row">
+                        <div class="col-sm-50" *ngIf="listingData.length !== 0 && !loading">
+                            <div class="pazer">
+                                <span>Show</span>                                
+                                <a href="javascript:void(0);" [ngClass]="9===currentPageNo ? 'active':''" (click)="onPageJobList('9')">9</a>
+                                <a href="javascript:void(0);" [ngClass]="12===currentPageNo ? 'active':''" (click)="onPageJobList('12')">12</a>
+                                <a href="javascript:void(0);" [ngClass]="15===currentPageNo ? 'active':''" (click)="onPageJobList('15')">15</a>
+                                <span>results per page</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-50">
+                            <div class="signup_form_section sort_by_watchdog choose_template responsive_size_widht_auto" *ngIf="listingData.length !== 0">
+                                <div class="form-group">
+                                    <div class="input-group responsive_width_100">
+                                        <div class="input-group-addon upto_border_none">Sort By:</div>
+                                        <select class="form-control minimal background_drop_down box_height_30 box_padding_3">
+                                            <!-- <option value="">SHOW LIVE JOBS</option> -->
+                                            <option value="{{item?.short_text}}" *ngFor="let item of sortByData">{{item?.short_name}}</option>
+                                            <!-- <option value="1">124536</option>
+                                            <option value="5">5124536</option>
+                                            <option value="10">10124536</option>
+                                            <option value="20">20124536</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contractor login end-->
+            <div class="container" *ngIf="!loading">
+                <div class="row">
+                    <div class=" col-md-33 col-sm-33"  *ngFor="let item of firstArray; let i=index;">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">{{item?.jobTitle ? item?.jobTitle : 'N/A'}}</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> {{item?.applied ? item?.applied : '0'}}</p>
+                                <p><span class="text_gray">Views</span> {{item?.views ? item?.views : '0'}}</p>
+                                <p><span class="text_pink">Watching </span> {{item?.watching ? item?.watching : '0'}}</p>
+                                <p><span class="text_gray">Reference Number  </span> {{item?.jobReference ? item?.jobReference : 'N/A'}}</p>
+                                <p><span class="text_gray">Date (Posted)    </span> {{item?.recuriter_job_created_at | date}}</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> {{ item?.expireDate | date}}</p>
+                                <p><span class="text_gray" >Posted By     </span>{{item?.recruiterNameId ? item?.recruiterNameId : 'N/A'}}</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']" (click)="passJobIdForPreview(item?.jobid)"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" [routerLink]="['../job-posting']" (click)="passJobId(item?.jobid)"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" (click)="refreshJob(item?.jobid, i)"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" (click)="deleteJob(item?.jobid)"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class=" col-md-34 col-sm-34">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-33 col-sm-33">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+
+
+                <!-- <div class="row">
+                    <div class="col-sm-33" *ngFor="let i of list">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-sm-34">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-sm-33">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div> -->
+                <!-- </div> -->
+                <app-ad-space *ngIf="listingData.length !== 0"></app-ad-space>
+                <div class="row">
+                    <div class=" col-md-33 col-sm-33" *ngFor="let item of secondArray;let i=index;">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">{{item?.jobTitle ? item?.jobTitle : 'N/A'}}</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> {{item?.applied ? item?.applied : '0'}}</p>
+                                <p><span class="text_gray">Views</span> {{item?.views ? item?.views : '0'}}</p>
+                                <p><span class="text_pink">Watching </span> {{item?.watching ? item?.watching : '0'}}</p>
+                                <p><span class="text_gray">Reference Number  </span> {{item?.jobReference ? item?.jobReference : 'N/A'}}</p>
+                                <p><span class="text_gray">Date (Posted)    </span> {{item?.recuriter_job_created_at | date}}</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> {{item?.expireDate | date}}</p>
+                                <p><span class="text_gray">Posted By     </span> {{item?.recruiterNameId ? item?.recruiterNameId : 'N/A'}}</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']" (click)="passJobId(item?.jobid)"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" [routerLink]="['../job-posting']" (click)="passJobId(item?.jobid)"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" (click)="refreshJob(item?.jobid, i)"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" (click)="deleteJob(item?.jobid)"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class=" col-md-34 col-sm-34">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-33 col-sm-33">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-md-33 col-sm-33">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-34 col-sm-34">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-33 col-sm-33">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="row" *ngIf="secondArray.length > 0">
+                    <div class="col-sm-33" *ngFor="let i of list">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-sm-34">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-sm-33">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div> -->
+                <!-- </div> -->
+                <app-ad-space *ngIf="secondArray.length > 0"></app-ad-space>
+                <div class="row">
+                    <div class=" col-md-33 col-sm-33" *ngFor="let item of thirdArray;let i=index;">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">{{item?.jobTitle ? item?.jobTitle : 'N/A'}}</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> {{item?.applied ? item?.applied : '0'}}</p>
+                                <p><span class="text_gray">Views</span> {{item?.views ? item?.views : '0'}}</p>
+                                <p><span class="text_pink">Watching </span> {{item?.watching ? item?.watching : '0'}}</p>
+                                <p><span class="text_gray">Reference Number  </span> {{item?.jobReference ? item?.jobReference : 'N/A'}}</p>
+                                <p><span class="text_gray">Date (Posted)    </span> {{item?.recuriter_job_created_at | date}}</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> {{ item?.expireDate | date}}</p>
+                                <p><span class="text_gray">Posted By     </span> {{item?.recruiterNameId ? item?.recruiterNameId : 'N/A'}}</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']" (click)="passJobId(item?.jobid)"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" [routerLink]="['../job-posting']" (click)="passJobId(item?.jobid)"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" (click)="refreshJob(item?.jobid, i)"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);" (click)="deleteJob(item?.jobid)"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                   <!--  <div class=" col-md-34 col-sm-34">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-33 col-sm-33">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/job-watchdogs.png" alt="ads" title="ads" class="img-responsive margin_top_five">
+                                <span class="job_test">Test</span>
+                            </div>
+                            <div class="application_box_contant2 recruiter_appications_box">
+                                <p><span class="text_pink">Applications </span> 1</p>
+                                <p><span class="text_gray">Views</span> 1</p>
+                                <p><span class="text_pink">Watching </span> 0</p>
+                                <p><span class="text_gray">Reference Number  </span> LQLBX3ULO</p>
+                                <p><span class="text_gray">Date (Posted)    </span> 31/07/2017</p>
+                                <p><span class="text_gray">Date (Expiration)  </span> 28/08/2017</p>
+                                <p><span class="text_gray">Posted By     </span> Anurag Srivastava</p>
+                            </div>
+                            <div class="manage_job_footer">
+                                <a href="javascript:void(0);" [routerLink]="['../preview-job']"><img src="./assets/images/job-view.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-edit.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-referce.png" alt="" title=""></a>
+                                <a href="javascript:void(0);"><img src="./assets/images/job-delete.png" alt="" title=""></a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="show_more_application">
+                <a *ngIf="listingData.length > 8" href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px" (click)="showMoreJobs()"><span>SHOW MORE JOBS</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+            </div>
+        </section>

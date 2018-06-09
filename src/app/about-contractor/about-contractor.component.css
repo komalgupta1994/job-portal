@@ -1,0 +1,9 @@
+.need_advanced {
+    color: #fff;
+    margin-top: 7px;
+}
+
+.need_advanced a {
+    color: #00ccff;
+    display: inline-block;
+}

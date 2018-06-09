@@ -1,0 +1,85 @@
+<section id="min_height">
+  <div id="contractor-login">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_login contractor_signup">
+            <h2 style="color: #fff;">CONTRACTOR <span>lOGIN</span></h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)" routerLink="../home">Home</a></li>
+              <li class="right_arrow">&gt;</li>
+              <li><a href="javascript:void(0)" routerLink="../home">Contractor </a></li>
+              <li class="right_arrow">&gt;</li>
+              <li class="active">Login </li>
+            </ul>
+          </div>
+          <div class="alert alert-success margin-tp18" *ngIf="succesLoginFlag">
+            <a href="javascript:void(0)" class="close" title="close" (click)="succesLoginFlag = false;">×</a> You are Log in <strong>succesfully!</strong>
+          </div>
+          <div class="login_form_section">
+            <div class="errorbox" *ngIf="(((f && f.form && f.form.controls && f.form.invalid) || totalInvalid) && f.submitted && !errorMsgFlag) || errorMsgFlag"><b>The following error(s) occured:</b>
+              <br>
+              <li *ngIf="errorMsgFlag">{{errorMsg}}</li>
+              <li *ngIf="f.form.controls.email?.hasError('required')">Your Email/password are incorrect or your account has not been activated yet.</li>
+              <li *ngIf="f.form.controls.email?.hasError('pattern')">Your Email/password are incorrect or your account has not been activated yet.</li>
+              <li *ngIf="f.form.controls.password?.hasError('required')">Please enter a password.</li>
+              <li *ngIf="f.form.controls.addNumber?.hasError('required')">Incorrect captcha code.</li>
+              <li *ngIf="!f.form.controls.addNumber?.hasError('required') && totalInvalid">Incorrect captcha code.</li>
+            </div>
+            <form #f="ngForm" (ngSubmit)="onLogin(f)">
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email*" [(ngModel)]="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group" style="width: 100%;">
+                      <input type="password" style="width: 100%;" class="form-control" id="Password" placeholder="Password*" [(ngModel)]="password" name="password" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-10 col-md-9 col-xs-25">
+                  <div class="form-group"> <span class="add_value">{{number}} + {{number2}} =</span></div>
+                </div>
+                <div class="col-sm-40 col-md-41 col-xs-75">
+                  <div class="form-group">
+                    <div class="input-group" style="width: 100%;">
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ARE YOU HUMAN ? *" [(ngModel)]="addNumber" name="addNumber" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50" style="text-align: right;">
+                  <button type="submit" class="form-group form_login btn-default"> login <i class="fa fa-plus" aria-hidden="true"></i> </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group forgot_click_here"> FORGOT YOUR PASSWORD? <a href="javascript:void(0SS)" routerLink="../contractor_forgot_password">CLICK HERE</a> </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-100">
+        <div class="login_form_section">
+          <div class="registered_sectionlogin">
+            <h2>Not Registered Yet? <span>Sign Up in Minutes.</span> Set up your profile now!</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis, velit eu pretium molestie, augue dolor euismod orci, ac efficitur metus magna ultrices urna. Duis porta, dui at venenatis imperdiet, ante dolor porttitor lectus, nec commodo nisi neque a sapien. Aenean sit amet blandit. </p>
+          </div>
+          <div class="sign_up_right_side" routerLink="../contractorSignup">
+            <a href="javascript:void(0)" class="btn-primary hover_white_pluse">SIGN UP <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,188 @@
+#profileMap {
+  height: 200px;
+}
+
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    width: 100%;
+    padding: 12px 0;
+   
+   
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    clear: none !important;
+     display:inherit !important;
+     width:auto !important; 
+     margin-left:auto !important;
+    margin-bottom:auto !important;
+    float:none !important;
+    height: 47px;
+}
+
+.fileUpload span {
+    width: 100%;
+    background: #000;
+}
+
+.add_sub_skills {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+
+.filecv {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+    border-bottom: 1px solid #000;
+   
+}
+.filecv input.upload {
+    position: absolute;
+    top: 0;
+    left: -82px;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 1;
+    filter: alpha(opacity=0);
+    clear: none !important;
+    width:120% !important; 
+    margin-left:auto !important;
+    margin-bottom:auto !important;
+    float:none !important;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.filecv span {
+    background: #00ccff none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 10px 12px 2px;
+    margin-top: -7px;
+    display: inline-block;
+}
+.filecv span img {
+    display: inline;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+
+.industry_min_heights select{
+	padding: 0 !important;
+	width: 100% !important;
+	border: 0 !important;
+}
+
+.errorbox {
+    border: 2px dashed #FF0066;
+    color: #000;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #E7EDEA;
+    font-weight: normal;
+}
+.errorbox >b {
+    font-weight: normal;
+    margin-bottom: 10px;
+    display: block;
+}
+.errorbox > li {
+    display: inline-block;
+    background: #000;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    color: #ffffff;
+}
+
+
+:host/deep/.min_height_335 {
+    min-height: 260px !important;
+}
+
+:host/deep/.contractor_profile {
+    border: 1px solid #ccc !important;
+    min-height: 260px;
+    overflow: auto;
+    padding: 15px 0;
+    width: 100% !important;
+}
+
+:host/deep/.form-control .contractor_profile > option:hover {
+    background: #4cdbff none repeat scroll 0 0 !important;
+    color: #fff;
+}
+
+:host/deep/.form-control .contractor_profile > {
+    background: #4cdbff none repeat scroll 0 0 !important;
+    color: #fff;
+
+}
+
+:host/deep/.form-control .contractor_profile > option {
+    color: #000;
+    cursor: context-menu;
+    font-size: 15px;
+    margin-bottom: 2px;
+    padding: 4px 20px 4px 10px;
+    font-family: 'HelveticaNeue';
+}
+/*
+:host/deep/.form-control .contractor_profile > option:first-child{
+    background: #4cdbff none repeat scroll 0 0;
+    color: #fff;
+    -webkit-transition: all 0.2s ease 0s;
+}*/
+
+:host/deep/.form-control{ padding: 0px; }
+
+
+:host/deep/.font_capitaliz {
+    text-transform: uppercase !important;
+}
+
+.first{
+    display: block;
+}
+
+
+.second{
+    display: none;
+}
+
+.toggle_block .first{
+    display: none;
+}
+
+
+.toggle_block .second{
+    display: block;
+}
+

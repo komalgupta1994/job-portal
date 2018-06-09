@@ -1,0 +1,313 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-100">
+        <div class="contract_hub_hadding">
+          <h5>WHAT ARE YOU INTERESTED IN?</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-40 col-md-30">
+        <ul id="services-nav-menu" class="clearfix">
+          <li *ngFor="let category of categoryData" (click)="categoryClicked(category)" [ngClass]="{'hover-active-state' : category.contract_hub_category_id==selectedContractorHubCategory }">
+            <a href="javascript:void(0)">
+              <div class="icon"> <img [src]="category.contract_hub_small_icon" onError="this.src='./assets/images/ContractMap-icon.png'" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>{{category.contract_hub_category_name}}</h4>
+                
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div class="directory_ads">
+          <div class="directory_ads_header">
+            <img src="./assets/images/directory-ads-logo.png" alt="" title="" class="">
+            <span>#</span>WorkSmart<span>PlayHard</span>
+          </div>
+          <div class="directory_ads_contant">
+            <p class="position_rotade"> <span>What do you do when</span>
+              <br>
+              <span> You’re not contracting? </span></p>
+            <img src="./assets/images/directory-tour.png" alt="" title="" class="">
+          </div>
+          <div class="directory_ads_footer">
+            <a href="https://www.facebook.com/ContractRecruit/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="https://twitter.com/contractrec" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://www.linkedin.com/company/2600056?trk=tyah" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-60 col-md-70">
+        <div class="recommended_companies" *ngIf="companyData?.recordsTotal > 0">
+          <h2>We have <span class="text_green">{{companyData?.recordsTotal}}</span> recommended {{companyData?.cat_name}}</h2>
+          <p [innerHTML]="companyData?.cat_desc"></p>
+        </div>
+        <div class="recommended_companies" *ngIf="!companyData?.recordsTotal || companyData?.recordsTotal ==  0">
+          <h2>We have <span class="text_green">No</span>  Records</h2>
+        </div>
+        <div class="row">
+          <!-- <div class="readmore_viewfull" style="display:none;">
+            <div class="col-sm-100 col-md-100">
+              <div class="contractor_directory_box">
+                <img src="./assets/images/umbrella-companies.png" alt="" title="" class="left_side_icon">
+                <div class="directory_box_contant">
+                  <div class="full_page_header">
+                    <h2>ContractorUmbrella Ltd</h2>
+                    <img src="./assets/images/directory-box-1.png" alt="" title="" class="">
+                  </div>
+                  <h5>Description of Services<span class="text_green">:</span></h5>
+                  <p>Parasol is a Professional Employment Organisation (PEO), and the leading provider of outsourced employment services to contractors, freelancers and the recruitment agencies that supply them. Parasol acts as an intermediary between contractors and their clients, meaning it takes care of all administration duties such as income tax and national insurance. We partner with over 2,500 recruitment agencies and have looked after over 90,000 satisfied contractors since our launch in 2000.</p>
+                  <p>With hundreds of expert head office staff, we are obsessive about excellent support and focused on ensuring all contractors get paid on time and in full. We’re a founding member of the Freelancer &amp; Contractor Service Association (FCSA) and compliance is at the heart of our service commitment.</p>
+                  <p>Parasol also provides contractors with access to all the employment rights and benefits given to permanent employees, including sick pay, holiday pay and maternity &amp; paternity pay.</p>
+                  <p>Contractors’ work style isn’t 9-5, so neither are Parasol’s services. Instead, Parasol is there to offer support whenever needed, whether that’s via its clever online portal or extended opening hours. Parasol’s expert team is available between 8am-8pm Monday-Thursday, 8am-7pm on Fridays and 10am-4pm on Saturdays.</p>
+                  <a href="javascript:void(0)" class="read_less">READ LESS  <i class="fa fa-minus text_green" aria-hidden="true"></i></a>
+                </div>
+                <div class="mobile_website">
+                  <div class="row">
+                    <div class="col-md-50 col-sm-100 col-xs-100">
+                      <div class="mobile_website_left">
+                        <ul>
+                          <li>
+                            <img src="./assets/images/location.png" alt="" title="" class="">
+                            <span>Warrington, Cheshire</span>
+                          </li>
+                          <li>
+                            <img src="./assets/images/mobile.png" alt="" title="" class="">
+                            <span>01206 713 680</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-50 col-sm-100 col-xs-100">
+                      <div class="mobile_website_right">
+                        <a href="javascript:void(0)">OPEN WEBSITE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="directory_box_footer">
+                  <a href="javascript:void(0)">UMBRELLA SERVICES </a>
+                  <a href="javascript:void(0)">LIMITED COMPANY   </a>
+                  <a href="javascript:void(0)">SOLE TRADER</a>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div *ngFor="let company of companyData?.data" class="col-sm-50 col-md-50">
+            <div class="contractor_directory_box">
+              <img [src]="companyData.cat_logo_small" onError="this.src='./assets/images/umbrella-companies.png'" alt="" title="" class="left_side_icon">
+              <div class="directory_box_contant">
+                <img [src]="company.contract_hub_company_logo_url" style="height: 130px; width: 200px;" alt="" title="" class="">
+                <h2>{{company.contract_hub_display_text}}</h2>
+                <h5>Description of Services<span class="text_green">:</span></h5>
+                <p [innerHTML]="company.contract_hub_company_desc"></p>
+                <a href="javascript:void(0)" id="read_full_page">READ MORE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+              </div>
+              <div class="mobile_website">
+                <div class="row">
+                  <div class="col-md-50 col-sm-100 col-xs-52">
+                    <div class="mobile_website_left">
+                      <img src="./assets/images/mobile.png" alt="" title="" class="">
+                      <span>{{company.contract_hub_company_phone}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-50 col-sm-100 col-xs-48" (click)="navigateToWeb(company.contract_hub_web_url)">
+                    <div class="mobile_website_right">
+                      <a href="javascript:void(0)">OPEN WEBSITE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="directory_box_footer">
+                <a href="javascript:void(0)">UMBRELLA SERVICES </a>
+                <a href="javascript:void(0)">LIMITED COMPANY   </a>
+                <a href="javascript:void(0)">SOLE TRADER</a>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-sm-50 col-md-50">
+            <div class="contractor_directory_box">
+              <img src="./assets/images/umbrella-companies.png" alt="" title="" class="left_side_icon">
+              <div class="directory_box_contant">
+                <img src="./assets/images/directory-box-2.png" alt="" title="" class="">
+                <h2>Tax4One</h2>
+                <h5>Description of Services<span class="text_green">:</span></h5>
+                <p>Parasol is a Professional Employment Organisation (PEO), and the leading provider of outsourced employment services to contractors, freelancers and the recruitment agencies that supply them. </p>
+                <a href="javascript:void(0)">READ MORE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+              </div>
+              <div class="mobile_website">
+                <div class="row">
+                  <div class="col-md-50 col-sm-100 col-xs-52">
+                    <div class="mobile_website_left">
+                      <img src="./assets/images/mobile.png" alt="" title="" class="">
+                      <span>01206 713 680</span>
+                    </div>
+                  </div>
+                  <div class="col-md-50 col-sm-100 col-xs-48">
+                    <div class="mobile_website_right">
+                      <a href="javascript:void(0)">OPEN WEBSITE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="directory_box_footer">
+                <a href="javascript:void(0)">UMBRELLA SERVICES </a>
+                <a href="javascript:void(0)">LIMITED COMPANY   </a>
+                <a href="javascript:void(0)">SOLE TRADER</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-50 col-md-50">
+            <div class="contractor_directory_box">
+              <img src="./assets/images/umbrella-companies.png" alt="" title="" class="left_side_icon">
+              <div class="directory_box_contant">
+                <img src="./assets/images/directory-box-3.png" alt="" title="" class="">
+                <h2>Ship Shape Pay</h2>
+                <h5>Description of Services<span class="text_green">:</span></h5>
+                <p>Parasol is a Professional Employment Organisation (PEO), and the leading provider of outsourced employment services to contractors, freelancers and the recruitment agencies that supply them. </p>
+                <a href="javascript:void(0)">READ MORE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+              </div>
+              <div class="mobile_website">
+                <div class="row">
+                  <div class="col-md-50 col-sm-100 col-xs-52">
+                    <div class="mobile_website_left">
+                      <img src="./assets/images/mobile.png" alt="" title="" class="">
+                      <span>01206 713 680</span>
+                    </div>
+                  </div>
+                  <div class="col-md-50 col-sm-100 col-xs-48">
+                    <div class="mobile_website_right">
+                      <a href="javascript:void(0)">OPEN WEBSITE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="directory_box_footer">
+                <a href="javascript:void(0)">UMBRELLA SERVICES </a>
+                <a href="javascript:void(0)">LIMITED COMPANY   </a>
+                <a href="javascript:void(0)">SOLE TRADER</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-50 col-md-50">
+            <div class="contractor_directory_box">
+              <img src="./assets/images/umbrella-companies.png" alt="" title="" class="left_side_icon">
+              <div class="directory_box_contant">
+                <img src="./assets/images/directory-box-4.png" alt="" title="" class="">
+                <h2>ContractRecruit Payroll Solutions</h2>
+                <h5>Description of Services<span class="text_green">:</span></h5>
+                <p>Parasol is a Professional Employment Organisation (PEO), and the leading provider of outsourced employment services to contractors, freelancers and the recruitment agencies that supply them. </p>
+                <a href="javascript:void(0)">READ MORE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+              </div>
+              <div class="mobile_website">
+                <div class="row">
+                  <div class="col-md-50 col-sm-100 col-xs-52">
+                    <div class="mobile_website_left">
+                      <img src="./assets/images/mobile.png" alt="" title="" class="">
+                      <span>01206 713 680</span>
+                    </div>
+                  </div>
+                  <div class="col-md-50 col-sm-100 col-xs-48">
+                    <div class="mobile_website_right">
+                      <a href="javascript:void(0)">OPEN WEBSITE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="directory_box_footer">
+                <a href="javascript:void(0)">UMBRELLA SERVICES </a>
+                <a href="javascript:void(0)">LIMITED COMPANY   </a>
+                <a href="javascript:void(0)">SOLE TRADER</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-50 col-md-50">
+            <div class="contractor_directory_box">
+              <img src="./assets/images/umbrella-companies.png" alt="" title="" class="left_side_icon">
+              <div class="directory_box_contant">
+                <img src="./assets/images/directory-box-1.png" alt="" title="" class="">
+                <h2>ContractorUmbrella Ltd</h2>
+                <h5>Description of Services<span class="text_green">:</span></h5>
+                <p>Parasol is a Professional Employment Organisation (PEO), and the leading provider of outsourced employment services to contractors, freelancers and the recruitment agencies that supply them. </p>
+                <a href="javascript:void(0)">READ MORE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+              </div>
+              <div class="mobile_website">
+                <div class="row">
+                  <div class="col-md-50 col-sm-100 col-xs-52">
+                    <div class="mobile_website_left">
+                      <img src="./assets/images/mobile.png" alt="" title="" class="">
+                      <span>01206 713 680</span>
+                    </div>
+                  </div>
+                  <div class="col-md-50 col-sm-100 col-xs-48">
+                    <div class="mobile_website_right">
+                      <a href="javascript:void(0)">OPEN WEBSITE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="directory_box_footer">
+                <a href="javascript:void(0)">UMBRELLA SERVICES </a>
+                <a href="javascript:void(0)">LIMITED COMPANY   </a>
+                <a href="javascript:void(0)">SOLE TRADER</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-50 col-md-50">
+            <div class="contractor_directory_box">
+              <img src="./assets/images/umbrella-companies.png" alt="" title="" class="left_side_icon">
+              <div class="directory_box_contant">
+                <img src="./assets/images/directory-box-2.png" alt="" title="" class="">
+                <h2>Tax4One</h2>
+                <h5>Description of Services<span class="text_green">:</span></h5>
+                <p>Parasol is a Professional Employment Organisation (PEO), and the leading provider of outsourced employment services to contractors, freelancers and the recruitment agencies that supply them. </p>
+                <a href="javascript:void(0)">READ MORE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+              </div>
+              <div class="mobile_website">
+                <div class="row">
+                  <div class="col-md-50 col-sm-100 col-xs-52">
+                    <div class="mobile_website_left">
+                      <img src="./assets/images/mobile.png" alt="" title="" class="">
+                      <span>01206 713 680</span>
+                    </div>
+                  </div>
+                  <div class="col-md-50 col-sm-100 col-xs-48">
+                    <div class="mobile_website_right">
+                      <a href="javascript:void(0)">OPEN WEBSITE <i class="fa fa-plus text_green" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="directory_box_footer">
+                <a href="javascript:void(0)">UMBRELLA SERVICES </a>
+                <a href="javascript:void(0)">LIMITED COMPANY   </a>
+                <a href="javascript:void(0)">SOLE TRADER</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="not_found_loking">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-40">
+          <div class="not_found_loking_left">
+            <span>Still not found what you’re looking for?</span>
+          </div>
+        </div>
+        <div class="col-sm-60">
+          <div class="not_found_loking_right">
+            <span class="color1">Umbrella</span> <span class="color2">Insurance</span> <span class="color3">Training </span>
+            <br>
+            <span class="color4">accounting</span> <span class="color5">mortgages</span> <span class="color6">CV Help </span>
+            <br>
+            <span class="color7">working Abroad</span> <span class="color8">MVl advice</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

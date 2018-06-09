@@ -1,0 +1,241 @@
+.errorbox {
+    border: 2px dashed #FF0066;
+    color: #000;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #E7EDEA;
+    font-weight: normal;
+}
+.errorbox >b {
+    font-weight: normal;
+    margin-bottom: 10px;
+    display: block;
+}
+.errorbox > li {
+    display: inline-block;
+    background: #000;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    color: #ffffff;
+}
+
+.watch_list_content p span {
+    color: #aaaaaa;
+    display: inline-block;
+    width: 28.5%;
+    position: relative;
+    left: 0px;
+    margin-left: -124px;
+}
+
+.watch_list_content p {
+    overflow: hidden;
+}
+
+.recruiter_searchresult_list p {
+    margin-bottom: 10px;
+}
+.display_block{
+    display: block;
+}
+.display_none{
+    display: none;
+}
+
+
+#document_list{display: none;}
+.more-details-toggle #document_list{display: block !important;}
+
+
+.modbox2 {
+    position: fixed;
+    z-index: 99999;
+    background: #f6f6f6;
+    left: 50% !important;
+    margin-left: -255px !important;
+}
+
+.modbox2 {
+    width: 510px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -205px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #e5e5e5;
+    font-size: 12px;
+    color: #393939;
+    overflow: hidden;
+    min-height: 215px;
+    height: auto;
+    margin-top: -103px;
+    border: 2px solid #333;
+    display: none;
+}
+
+.modbox2 h3 {
+    color: #393939;
+    margin: 0 0 15px;
+    border-bottom: 2px solid #666;
+    position: relative;
+    background: #f6f6f6;
+    font-size: 13px;
+    text-align: left;
+    padding: 7px 0 5px 10px;
+}
+
+.modbox2 .modal-inner {
+    width: auto;
+    padding: 15px 0 0;
+}
+.modal-inner {
+    width: 420px;
+    margin: auto;
+}
+
+.modbox2 .modalbase {
+    background: #fff;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+.modalbase {
+    margin-top: 10px;
+}
+
+.modalbase {
+    border-top: 2px solid #666;
+    clear: both;
+    float: left;
+    margin: 30px 0 0;
+    overflow: visible;
+    width: 100%;
+}
+
+.inputrowx {
+    margin-bottom: 15px;
+}
+.modbox2 label {
+    display: inline-block;
+    width: 185px;
+    padding: 8px 8px 0 0;
+    vertical-align: top;
+    font-size: 12px;
+    text-align: right;
+}
+.modbox2 label span {
+    color: #393939;
+}
+
+.closex {
+    border: 0;
+    padding: 0;
+    position: absolute;
+    right: 7px;
+    top: 8px;
+    width: 21px;
+    height: 21px;
+    
+}
+.modbox2 p.modalview {
+    float: left;
+    text-align: left;
+}
+#modalbox p, .modbox2 p {
+    margin: 10px 17px 5px;
+    color: #393939;
+    font-size: 13px;
+}
+
+.modalbase .saveProfile, .modbox2 input {
+    float: right;
+}
+
+.modalbase .saveProfile .watchContractorSubmit {
+    background: #FF0066;
+    padding: 2px 5px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.modbox2 .modalbase input {
+    margin: 5px 10px 5px 0!important;
+}
+
+
+
+#confirm-container {
+    position: fixed;
+    z-index: 1002;
+    width: 244px;
+    margin-left: -122px;
+    margin-top: -88px;
+    border: 3px solid #333;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: #f6f6f6;
+    font-size: 12px;
+    color: #393939;
+    height: 177px;
+    padding: 0 25px 0 35px;
+    top: 50%!important;
+    left: 50%!important;
+    
+}
+
+#confirm-container a.modal-close{
+    text-decoration: none;
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    width: 24px;
+    height: 23px;
+    background: #ccc;
+    border-radius: 50%;
+    text-align: center;
+    color: #000;
+    padding-top: 4px;
+}
+#confirm-container .buttons {
+    text-align: center;
+    width: 168px;
+    margin: auto;
+}
+
+#confirm-container .buttons div {
+    float: right;
+    margin: 0 5px;
+    display: inline;
+    font-size: 14px;
+}
+
+.simplemodal-wrap{
+    height: 100%; outline: 0px; width: 100%; overflow: auto;
+}
+.simplemodal-data{display: block;}
+
+
+.simplemodal-wrap .buttons .no {
+    background: #FF0066;
+    padding: 2px 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.simplemodal-wrap .buttons .yes {
+    background: #FF0066;
+    padding: 2px 5px;
+    color: #fff;
+    cursor: pointer;
+}
+#confirm-container .message {
+    color: #ff0065;
+    font-size: 18px;
+    text-align: center;
+    padding: 25px 0 5px;
+}

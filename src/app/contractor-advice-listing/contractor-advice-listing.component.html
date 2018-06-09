@@ -1,0 +1,18 @@
+<div class="letest_news_box margin_bottom_10px" *ngFor="let latest of latestArticleList | slice :0 : 1; let i= index">
+  
+  	<div class="book_mark" ><a href="javascript:void(0)"><img src="./assets/images/artical-message.png" alt="" title=""></a></div>
+  <img [src]="latest.image" alt="" onError="this.src='./assets/images/advice-article-default.png'"  title="" class="img-responsive">
+  <h5>{{latest.title}}</h5>
+  <p [innerHTML]="latest.description | slice : 0 : 100"></p>
+  <div class="letest_news_footer share-buttons"> 
+  	<!-- <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>  -->
+
+  	<share-buttons [tumblr]='false'  [google]='false'  [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false' url="http://dev.contractrecruit.co.uk/contractor_site/#/public/advice/{{latest.id}}"></share-buttons >
+
+
+  	<a routerLink="../advice/{{latest.id}}" href="javascript:void(0)" class="btn-primary news_read_more" >READ MORE<i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+
+
+  
+</div>
+

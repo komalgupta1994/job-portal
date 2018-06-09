@@ -1,0 +1,132 @@
+<section id="min_height" class="margin_top_40">
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-50">
+                        <div class="contractor_signup recruiter_signup">
+                            <h2 class="font_capitalizs">View <span class="text_pink">Applications</span></h2>
+                            <ul class="breadcomb color_active">
+                                <li><a href="javascript:void(0);" [routerLink]="['../recruiter-home']">Home</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li class="active">APPLICATIONS</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="applied_posted">
+                            <p>You have <span class="text_pink">{{listingData.length}}</span> Applications
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="loading" class="row">
+                  <img src="./assets/images/bx_loader.gif">
+                </div>
+
+                 <div class="errorbox" *ngIf="listingData.length === 0 && !loading"><b></b><br> 
+                        <li>There is no record.</li>
+                    </div>
+                <div class="pager_section">
+                    <div class="row">
+                        <div class="col-sm-50" *ngIf="listingData.length !== 0 && !loading">
+                            <div class="pazer"> <span>Show</span> 
+                                <a href="javascript:void(0);" [ngClass]="12===currentPageNo ? 'active':''" (click)="onPageJobList('12')">12</a> 
+                                <a href="javascript:void(0);" [ngClass]="16===currentPageNo ? 'active':''" (click)="onPageJobList('16')">16</a> 
+                                <a href="javascript:void(0);" [ngClass]="20===currentPageNo ? 'active':''" (click)="onPageJobList('20')">20</a> <span>results per page</span> </div>
+                        </div>
+                        <div class="col-sm-50" *ngIf="listingData.length !== 0">
+                            <div class="signup_form_section width_auto choose_template text-right width_auto200">
+                                <label>Filter By Job:</label>
+                                <select class="form-control minimal background_drop_down box_height_30 box_padding_3 padding_left_none java_developer" [(ngModel)]="currentJobId">
+                                    <option value="0">All Jobs</option>
+                                    <option value="{{item?.jobid}}" *ngFor="let item of filterByJobData;">{{item?.jobTitle}}</option>
+                                    <!-- <option value="">ALL JOBS</option>
+                                    <option value="1">124536</option>
+                                    <option value="5">5124536</option>
+                                    <option value="10">10124536</option>
+                                    <option value="20">20124536</option> -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contractor login end-->
+            <div class="container" *ngIf="!loading">
+                <div class="row">
+                    <div class="col-sm-50" *ngFor="let item of firstArray">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">{{item?.contractor_first_name}} {{item?.contractor_last_name}}  </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p><span>Viewable on</span> {{item?.contractor_visible_on ? item?.contractor_visible_on : 'N/A'}}</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> {{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</p>
+                                <p><span>Location :</span> {{item?.contractor_location ? item?.contractor_location : 'N/A'}}</p><br>
+                                <p style="height: 40px;"><span>Rate :</span> Commutable <a href="javascript:void(0);">£ {{item?.contractor_day_rate_min}} - £{{item?.contractor_day_rate_max}}</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£{{item?.contractor_rate_min}} - £{{item?.contractor_rate_max}}</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_viewed ? item?.last_viewed : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a *ngIf="item && item.resume && item.resume.length > 0" href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}" class="btn-primary hover_text_pink hover_white_pluse width_280px" target="_blank" download><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" (click)="viewContractorProfile(item?.contractor_reg_id, item?.contractor_first_name, item?.contractor_last_name)" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>                             
+                <app-ad-space *ngIf="listingData.length !== 0"></app-ad-space>   
+
+                <div class="row">
+                    <div class="col-sm-50" *ngFor="let item of secondArray">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">{{item?.contractor_first_name}} {{item?.contractor_last_name}}  </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p><span>Viewable on</span> {{item?.contractor_visible_on ? item?.contractor_visible_on : 'N/A'}}</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> {{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</p>
+                                <p><span>Location :</span> {{item?.contractor_location ? item?.contractor_location : 'N/A'}}</p><br>
+                                <p style="height: 40px;"><span>Rate :</span> Commutable <a href="javascript:void(0);">£ {{item?.contractor_day_rate_min}} - £{{item?.contractor_day_rate_max}}</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£{{item?.contractor_rate_min}} - £{{item?.contractor_rate_max}}</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_viewed ? item?.last_viewed : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a *ngIf="item && item?.resume && item?.resume.length > 0" href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}" class="btn-primary hover_text_pink hover_white_pluse width_280px" target="_blank" download><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" (click)="viewContractorProfile(item?.contractor_reg_id, item?.contractor_first_name, item?.contractor_last_name)" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>             
+            </div>
+            <div class="show_more_application"> <a *ngIf="listingData.length > 11" href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px" (click)="showMoreJobs()"><span>SHOW MORE APPLICATIONS</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a> </div>
+        </section>

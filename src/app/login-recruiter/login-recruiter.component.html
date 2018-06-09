@@ -1,0 +1,114 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor login-->
+
+
+
+
+  <div id="contractor-login">
+    <div class="container">
+      <div class="row">
+
+
+
+        <div class="col-sm-100">
+
+          <div class="errorbox" *ngIf="emailNameFlag || emailNamePatternFlag || passwordReqFlag || humanKnowFlag"><b>The following error(s) occured:</b><br> 
+            <li *ngIf="emailNameFlag">Email  is required!</li>
+            <li *ngIf="emailNamePatternFlag">Please Enter valid email.</li>
+            <li *ngIf="passwordReqFlag">Please enter a password.</li>
+            <li *ngIf="humanKnowFlag">Are you human field is required.</li>
+          </div>
+          
+          <div id="contractor_about_us" class="contractor_login contractor_signup">
+            <h2>Recruiter <span class="text_pink">lOGIN</span></h2>
+            <ul class="breadcomb">
+              <li><a href="#/public/home" class="hover_text_pink">Home</a></li>
+              <li class="right_arrow text_pink">&gt;</li>
+              <li>Recruiter</li>
+              <li class="right_arrow text_pink">&gt;</li>
+              <li class="active">Login </li>
+            </ul>
+          </div>
+
+          <div class="errorbox" *ngIf="invalidErrorMsg"><b>The following error(s) occured:</b><br> 
+            <li>{{invalidErrorMsg}}</li>
+            <!-- <li *ngIf="emailNamePatternFlag">Please Enter valid email.</li>
+            <li *ngIf="passwordReqFlag">Please enter a password.</li>
+            <li *ngIf="humanKnowFlag">Are you human field is required.</li> -->
+          </div>
+          <div class="alert alert-success margin-tp18" *ngIf="succesLoginFlag">
+            <a href="javascript:void(0)" class="close" title="close" (click)="succesLoginFlag = !succesLoginFlag">×</a> You are Log in <strong>succesfully!</strong>
+          </div>
+         <!--  <div class="alert alert-danger margin-tp18" *ngIf="errorMsgFlag">
+            <a href="javascript:void(0)" class="close" title="close" (click)="errorMsgFlag = !errorMsgFlag">×</a>
+            <strong>Error!</strong> Your Email id is not Registered !!
+          </div> -->
+          <div class="login_form_section">
+            <form #f="ngForm" (ngSubmit)="onLogin(f)">
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="EMAIL*" style="color:#fff;" [(ngModel)]="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                    <!-- <tooltip-content #emailTooltip>
+                      <span *ngIf="f?.form && f.form.controls && f.form.controls.email?.valid" style="color: white"> Email </span>
+                      <span [hidden]="!f.form.controls.email?.hasError('required')" style="color: white"> Email  is required!</span>
+                      <span [hidden]="!f.form.controls.email?.hasError('pattern')" style="color:white">Email invalid!</span>
+                    </tooltip-content> -->
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="PASSWORD*" [(ngModel)]="password" name="password" required>
+                    <!-- <tooltip-content #passwordTooltip>
+                      <span *ngIf="f?.form && f.form.controls && f.form.controls.password?.valid" style="color:white"> Password </span>
+                      <span [hidden]="!f.form.controls.password?.hasError('required')" style="color: white"> Password  is required!</span>
+                    </tooltip-content> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-10 col-md-9 col-xs-25">
+                  <div class="form-group"> <span class="add_value">{{number}} + {{number2}} =</span> </div>
+                </div>
+                <div class="col-sm-40 col-md-41 col-xs-75">
+                  <div class="form-group">
+                    <div class="input-group" style="width: 100%;">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ARE YOU HUMAN? *" [(ngModel)]="addNumber" name="addNumber" required>
+                    </div>
+                  </div>
+                </div>
+                <span *ngIf="!valid && addNumber " style="color: #C21F39">{{errorMessage}} </span>
+                <div class="col-sm-50" style="text-align: right;">
+                  <button type="submit" class="form-group form_login btn-default background_pink" style="border:none;"> login <i class="fa fa-plus" aria-hidden="true" style="color:#000;"></i> </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group forgot_click_here"> FORGOTTEN YOUR PASSWORD? <a [routerLink]="['/public/lost-password']" href="javascript:void(0)" class="text_pink">CLICK HERE</a> </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+  <!--contractor login section 2-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-100">
+        <div class="login_form_section">
+          <div class="registered_sectionlogin">
+            <h2>Not Registered Yet? <span class="text_pink">Sign Up in Minutes.</span> Set up your profile now!</h2>
+            <p>Sign up with ContractRecruit and gain access to all the best IT contractors on the market not to mention our industry-focused innovative functionality that will streamline the recruitment process and save valuable time.</p>
+          </div>
+          <div class="sign_up_right_side sign_up_right_side_login">
+            <a href="javascript:void(0)" routerLink="./../recruiterRegister" class="btn-primary hover_text_pink hover_white_pluse">SIGN UP <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<div *ngIf="!loading">
+  <div  class="letest_news_box" *ngFor="let news of newsList">
+  <div class="book_mark" routerLink="../news/{{news._id}}"><a href="javascprit:void(0)"><img src="./assets/images/it-news.png"  alt="" title=""></a></div>
+  <img src="{{news?.article_image}}" alt="" title="" class="img-responsive" onError="this.src='./assets/images/letest-news.png'" />
+  <h5><strong>{{news.article_title}}</strong></h5>
+  <p [innerHTML]="news.article_body | slice:0:100"> </p>
+  <div class="letest_news_footer share-buttons"> 
+
+
+  	<!-- <a href="javascprit:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="javascprit:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="javascprit:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>  -->
+
+  	<share-buttons [tumblr]='false'  [google]='false'  [whatsApp]='false' [pinterest]='false' [stumbleUpOn]='false' [reddit]='false' url="http://dev.contractrecruit.co.uk/contractor_site/#/public/news/{{news._id}}" description="test description"></share-buttons >
+
+
+
+
+  	<a href="javascprit:void(0)" routerLink="../news/{{news._id}}" class="btn-primary news_read_more">READ MORE<i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+</div>  
+</div>
+
+<div  *ngIf="loading">
+  <img src="./assets/images/bx_loader.gif">
+</div>

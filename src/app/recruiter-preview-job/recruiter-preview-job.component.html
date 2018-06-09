@@ -1,0 +1,106 @@
+<section>
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div id="contractor-signup">
+                <div class="container">
+                    <div *ngIf="previewJobErrorMsg">
+                        <div class="alert alert-danger margin-tp18">
+                            <a href="javascript:void(0)" class="close" title="close" (click)="previewJobErrorMsg =!previewJobErrorMsg">×</a> {{previewJobErrorMsg}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-100">
+                            <div class="contractor_signup befourlogin_fontsize">
+                                <h2 class="">JOB Preview - <span class="text_pink">{{previewDataList?.jobTitle ? previewDataList?.jobTitle : 'N/A'}}</span></h2>
+                                <ul class="breadcomb margin_left_10px">
+                                    <li><a href="javascript:void(0)" class="hover_text_pink" [routerLink]="['../recruiter-home']">Home</a></li>
+                                    <li class="right_arrow text_pink">&gt;</li>
+                                    <li>MANAGE JOBS</li>
+                                    <li class="right_arrow text_pink">&gt;</li>
+                                    <li class="active">JOB PREVIEW</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contractor login end-->
+            <div *ngIf="loading" class="row">
+              <img src="./assets/images/bx_loader.gif">
+        </div>
+        </section>
+        <section *ngIf="!loading">
+            <div class="container">
+                <div class="full_job_section1">
+                    <div class="row">
+                        <div class="col-md-14 col-sm-18">
+                            <div class="job_search_img"> <img src="./assets/images/page-search-recruiter.png" alt="search" title="search" class="img-responsive"> </div>
+                        </div>
+                        <div class="col-md-60 col-sm-52 col-md-offset-1">
+                            <div class="application_full_detail application_full_detail_recruiter">
+                                <p><span>Location:</span>
+                                    <label class="responsive_right"> {{previewDataList?.cityTown ? previewDataList?.cityTown : 'N/A'}}</label>
+                                </p>
+                                <p><span>Rate:</span> £{{previewDataList?.prefereedRate?.minRate ? previewDataList?.prefereedRate?.minRate : 'N/A'}} - £{{previewDataList?.prefereedRate?.maxRate ? previewDataList?.prefereedRate?.maxRate : 'N/A'}} p/<span *ngIf="previewDataList?.prefereedRate?.dailyHourlyRate === 'daily'">d</span>
+                                    <span *ngIf="previewDataList?.prefereedRate?.dailyHourlyRate === 'hourly'">h</span></p>
+                                <p><span>Start Date:</span> {{previewDataList?.startDate ? previewDataList?.startDate : 'N/A'}}</p>
+                                <p><span>Duration:</span> {{previewDataList?.duration ? previewDataList?.duration : 'N/A'}}</p>
+                                <p><span>Company: </span> {{previewDataList?.company ? previewDataList?.company : 'N/A'}}</p>
+                                <p><span>Ref: </span> {{previewDataList?.jobReference ? previewDataList?.jobReference : 'N/A'}}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-25 col-sm-30">
+                            <div class="experis"> <img src="./assets/images/experis.png" alt="search" title="search" class="img-responsive"> </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="full_job_section2">
+                    <div class="row">
+                        <div class="col-md-14 col-sm-20">
+                            <div class="job_search_ads"> <img src="./assets/images/job-ads.png" alt="ads" title="ads" class="img-responsive"> </div>
+                        </div>
+                        <div class="col-md-60 col-sm-50 col-md-offset-1">
+                            <div class="job_full_details">
+                                <h2>{{previewDataList?.jobSpecificationTitle}}</h2>
+                                {{previewDataList?.jobSpecification}}
+                               <!--  <p> The person hired for the position of Network Engineer will be responsible for the support of the global UTM and remote access environment. In this role the analyst will support Check Point UTMs, Cisco ASA Firewalls, Cisco ASA VPNs and Juniper SSL gateways.</p> -->
+                                <!-- <ul>
+                                    Primary Responsibilities include but are not limited to the following:
+                                    <li>* Support Check Point UTMs, Cisco ASA Firewalls, Cisco ASA VPNs and Juniper SSL gateways</li>
+                                    <li>* Support/Participate/Coordinate large network refresh projects.</li>
+                                    <li>* Determine client/user requirements.</li>
+                                    <li>* Assist/create procedural manuals and documents as needed.</li>
+                                    <li>* Maintain expertise in assigned area to fulfil position goals and objectives.</li>
+                                    <li>* Manage products throughout their life cycles.</li>
+                                    <li>* Participate/run weekly service review meetings with clients/vendors. </li>
+                                    <li>* Participate in an on call rotation for 2 week each month.</li>
+                                </ul>
+                                <ul>
+                                    Preferred Qualifications:
+                                    <li>* Bachelor's Degree from an accredited Institution</li>
+                                    <li>* CCSE Check Point certifications</li>
+                                    <li>* 3+ years supporting network technologies LAN Switching/Routing</li>
+                                    <li>* 3+ years supporting routing protocols and network desi</li>
+                                </ul> -->
+                                <!-- <p> Oscar Technology Limited is acting as an Employment Business in relation to this vacancy. </p>
+                                <p> All IT contract jobs on ContractRecruit are posted by IT recruitment companies and IT direct hirers based in the UK. We screen all IT Contract jobs that are posted to make sure they are relevant Contract roles within the core IT contract industries including Design and UX, Architecture and Development, Infrastructure and Support, PMO and Project Management and Intelligence and Analysis. </p> -->
+                                <div class="contant_footer">
+                                    <div class="row">
+                                        <div class="col-sm-50 col-xs-50">
+                                            <div class="margin_apply_bottom">
+                                                <a href="javascript:void(0);" [routerLink]="['../job-posting']" class="btn-primary hover_text_pink hover_white_pluse" (click)="goToJobPosting()">Edit Job <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-50 col-xs-50" *ngIf="postJobButtonFlag">
+                                            <div class="sign_up_right_side margin_apply_bottom"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse" (click)="saveJobPost()">Post Job <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-23 col-sm-30 col-md-offset-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

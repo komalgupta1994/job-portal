@@ -1,0 +1,565 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup">
+            <h2>webSIte  <span>information</span></h2>
+            <ul class="breadcomb">
+              <li><a href="#">Home</a></li>
+              <li class="right_arrow">></li>
+              <li class="active">webSIte information</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="manage_top_buttons">
+        <ul>
+          <li [ngClass]="'terms'===showtabValue ? 'active':''"><a href="javascript:void(0)" (click)="onTabClick('terms')">Terms of Use</a></li>
+          <li [ngClass]="'equal'===showtabValue ? 'active':''"><a href="javascript:void(0)" (click)="onTabClick('equal')">Equal Opps</a></li>
+          <li [ngClass]="'workWithUs'===showtabValue ? 'active':''"><a href="javascript:void(0)" (click)="onTabClick('workWithUs')">Work With Us</a></li>
+          <li [ngClass]="'cookies'===showtabValue ? 'active':''"><a href="javascript:void(0)" (click)="onTabClick('cookies')">Cookies Policy</a></li>
+          <li [ngClass]="'privacy'===showtabValue ? 'active':''"><a href="javascript:void(0)" (click)="onTabClick('privacy')">Privacy Policy</a></li>
+          <li [ngClass]="'security'===showtabValue ? 'active':''"><a href="javascript:void(0)" (click)="onTabClick('security')">Security</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+  <div class="container">
+    <div *ngIf="showtabValue == 'privacy'" class="panel-group trems_use_main signup_form_section privacy_policy_margin_bottom70" id="accordion">
+      <p>
+        We are committed to protecting and respecting your privacy.
+      </p>
+      <p>
+        This policy (together with our Terms of Use) sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us. Please read the following carefully to understand our views and practices regarding your personal data and how we will treat it. For the purpose of the Data Protection Act 1998 (the Act), the data controller is Contract Recruit Limited. Our nominated representative for the purpose of the Act is the information officer at Our firm.
+      </p>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          1. Information we may collect from you
+      <span class="glyphicon glyphicon-minus"></span>
+        </a>
+      </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <p>1.1 We may collect and process the following data about you:</p>
+            <p>1.1.1 Information that you provide by filling in forms on our site http://www.contractrecruit.co.uk (our site). This includes information provided at the time of registering to use our site, subscribing to our service, posting material or requesting further services. We may also ask you for information when you report a problem with our site;</p>
+            <p>1.1.2 If you contact us, we may keep a record of that correspondence;</p>
+            <p>1.1.3 We may also ask you to complete surveys that we use for research purposes, although you do not have to respond to them;</p>
+            <p>1.1.4 Details of transactions you carry out through our site and of the fulfilment of your orders; &</p>
+            <p>1.1.5 Details of your visits to our site including, but not limited to, traffic data, location data, weblogs and other communication data, whether this is required for our own purposes or otherwise and the resources that you access.</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          2. IP addresses and cookies
+       <span class="glyphicon glyphicon-plus"></span>
+        </a>
+      </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>2.1 We may collect information about your computer, including where available your IP address, operating system and browser type, for system administration and to report aggregate information to our sponsors, affiliates or associates. This is statistical data about our users' browsing actions and patterns, and does not identify any individual.</p>
+            <p>2.2 For the same reason, we may obtain information about your general internet usage by using a cookie file which is stored on the hard drive of your computer. Cookies contain information that is transferred to your computer's hard drive. They help us to improve our site and to deliver a better and more personalised service. They enable us:</p>
+            <p>2.2.1 To estimate our audience size and usage pattern.</p>
+            <p>2.2.2 To store information about your preferences, and so allow us to customise our site according to your individual interests.</p>
+            <p>2.2.3 To speed up your searches.</p>
+            <p>2.2.4 To recognise you when you return to our site.</p>
+            <p>2.3 You may refuse to accept cookies by activating the setting on your browser which allows you to refuse the setting of cookies. However, if you select this setting you may be unable to access certain parts of our site. Unless you have adjusted your browser setting so that it will refuse cookies, our system will issue cookies when you log on to our site.</p>
+            <p>2.4 Please note that our sponsors or associates may also use cookies, over which we have no control.</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          3. Where we store your personal data
+      <span class="glyphicon glyphicon-plus"></span>
+        </a>
+      </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>3.1 The data that we collect from you may be transferred to, and stored at, a destination outside the European Economic Area ("EEA"). It may also be processed by staff operating outside the EEA who work for us or for one of our suppliers. Such staff maybe engaged in, among other things, the fulfilment of your order, the processing of your payment details and the provision of support services. By submitting your personal data, you agree to this transfer, storing or processing. We will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this privacy policy.</p>
+            <p>3.2 All information you provide to us is stored on our service provider’s secure servers. Any payment transactions will be encrypted using SSL technology. Where we have given you (or where you have chosen) a password which enables you to access certain parts of our site, you are responsible for keeping this password confidential. We ask you not to share a password with anyone.</p>
+            <p>3.3 Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data transmitted to our site; any transmission is at your own risk. Once we have received your information, we will use strict procedures and security features to try to prevent unauthorised access.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="new-matter" *ngIf="showtabValue == 'terms'">
+      <div class="widecol w2 js">
+        <div class="static">
+          <!--<h3 class="mainhead">Terms of Use</h3>-->
+          <span style="font-size: 14px; color: #00ccff;"><strong>Terms of Use</strong></span>
+          <br />
+          <hr width="100%" />
+          <br />
+          <a href="#contractorterms"><span style="color: #ff0066"><strong>Contractor Terms</strong></span></a>
+          <br />
+          <a href="#RecTerms"><span style="color:#ff0066"><strong>Recruiter Terms</strong></span></a>
+          <br />
+          <a href="#companydetails"><span style="color: #ff0066;"><strong>Company Details</strong></span></a>
+          <br />
+          <br />
+          <br />
+          <a name="contractorterms"></a><a id="CT"><strong style="color: rgb(0, 204, 255); font-size: 14px;">Contractor Terms</strong></a>
+          <br />
+          <br /> It is important to note that by registering with this service, you are confirming your acceptance of these Contractor Terms and Conditions (&ldquo;Contractor Terms&rdquo;) so please ensure you read them carefully.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">1) Information About Us</span>
+          <br />
+          <br /> This site and its services are operated by Contract Recruit Limited (&ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;). We are registered in England &amp; Wales under company number 07796094 and have our registered office at 2 Upperton Gardens, Eastbourne, East Sussex, United Kingdom, BN21 2AH. Our VAT number is 123496123.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">2) Definitions</span>
+          <br />
+          <br /> In these Contractor Terms the following definitions apply:
+          <br />
+          <br />
+          <em><strong>&ldquo;Application&rdquo; &nbsp; </strong></em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <br /> means an application for a vacancy that has been advertised on the site and/or ContractRecruit services;
+          <br />
+          <br />
+          <em><strong>&ldquo;Contract&rdquo; &nbsp; &nbsp; &nbsp;</strong></em> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <br /> means a temporary contract advertised on the Site;
+          <br />
+          <br />
+          <em><strong>&ldquo;Contractor&rdquo; &nbsp; &nbsp; </strong></em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <br /> means the person registering to use the site and/or Contract Recruit services;
+          <br />
+          <br />
+          <em><strong>&ldquo;Contractor Profile&rdquo; &nbsp; &nbsp;</strong></em>
+          <br /> means your personal page on the Site containing your CV, ContractDiary, ContractMap and other information uploaded by you;
+          <br />
+          <br />
+          <em><strong>&ldquo;Contractor Services&rdquo;</strong></em>
+          <br /> means the diary, mapping and the Contract matching services operated by us and varied and amended from time to time;
+          <br />
+          <br />
+          <em><strong>&ldquo;Recruiter&rdquo; &nbsp; &nbsp; &nbsp; &nbsp;</strong></em> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <br /> means any entity registered on the Site seeking Contractors;
+          <br />
+          <br />
+          <em><strong>&ldquo;Site&rdquo; &nbsp; &nbsp;</strong></em> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <br /> means the website located at http://www.contractrecruit.co.uk together with any additional sites or online services provided by Us.&nbsp;
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">3) Agreement to Website General Terms of Use and Privacy Policy</span>
+          <br />
+          <br /> 3.1 The Contractor has read, understood and agrees to the Website General Terms of Use at Chapter One below and the Privacy Policy at Chapter Two below which are deemed incorporated into these Contractor Terms.
+          <br />
+          <br /> 3.2 By submitting your details to the Site you are authorising us to allow Recruiters and any other applicable third parties access to your CV, contact details and any other information you have provided that We consider necessary for matching you with a Contract or improving the Contractor Services generally.
+          <br />
+          <br /> 3.3 If you wish to restrict access to your details temporarily please email admin@contractrecruit.co.uk so that your Contractor Profile is restricted.
+          <br />
+          <br /> 3.4 By accepting these Contractor Terms you authorise Us and Recruiters to actively match your Contractor Profile with any current Contract vacancies.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">4) Contract Vacancies</span>
+          <br />
+          <br /> The Contractor acknowledges that Contract Recruit is not responsible for the content of any Contract vacancy advertising and that accordingly it is a matter for the Contractor to satisfy himself/herself as to the identity of the advertiser/recruiter and to the suitability of the Contract vacancy.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">5) Applications</span>
+          <br />
+          <br /> 5.1 By submitting an Application the Contractor agrees to:
+          <br />
+          <br /> 5.1.1 have read and understood the requirements for the Contract vacancy;
+          <br />
+          <br /> 5.1.2 provide a true and accurate reflection of the Contractor&rsquo;s employment, education, experience and training in any information given as part of the application (including without limitation, in any CV);
+          <br />
+          <br /> 5.1.3 provide correct personal details.
+          <br />
+          <br /> 5.2 If any information submitted as part of an Application is found to be false, we reserve the right to deny the Contractor access to the Site and its services. In the event that your Application is found to contain false or misleading details you shall indemnify Us against all and any costs and damages.&nbsp;
+          <br />
+          <br /> 5.3 Applications are assessed by the relevant Recruiter and all decisions relating to such applications are made by the relevant Recruiter and not Us. Accordingly, any requests for information relating to Applications should be addressed to the Recruiter.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">6) Our liability</span>
+          <br />
+          <br /> 6.1 The material displayed on our site is provided without any guarantees, conditions or warranties as to its accuracy. To the extent permitted by law, we, other members of our group of companies and third parties connected to us hereby expressly exclude:
+          <br />
+          <br /> 6.1.1 All conditions, warranties and other terms which might otherwise be implied by statute, common law or the law of equity.
+          <br />
+          <br /> 6.1.2 Any liability for any direct, indirect or consequential loss or damage incurred by any user in connection with our site or in connection with the use, inability to use, or results of the use of our site, any websites linked to it and any materials posted on it, including, without limitation any liability for:
+          <br />
+          <br /> 6.1.2.1&nbsp; loss of income or revenue;
+          <br />
+          <br /> 6.1.2.2&nbsp; loss of business;
+          <br />
+          <br /> 6.1.2.3&nbsp; loss of profits or contracts;
+          <br />
+          <br /> 6.1.2.4&nbsp; loss of anticipated savings;
+          <br />
+          <br /> 6.1.2.5&nbsp; loss of data;
+          <br />
+          <br /> 6.1.2.6&nbsp; loss of goodwill;
+          <br />
+          <br /> 6.1.2.7&nbsp; wasted management or office time; and
+          <br />
+          <br /> 6.1.2.8&nbsp; for any other loss or damage of any kind, however arising and whether caused by tort (including negligence), breach of contract or otherwise, even if foreseeable, provided that this condition shall not prevent claims for loss of or damage to your tangible property or any other claims for direct financial loss that are not excluded by any of the categories set out above.
+          <br />
+          <br /> 6.2 This does not affect our liability for death or personal injury arising from our negligence, nor our liability for fraudulent misrepresentation or misrepresentation as to a fundamental matter, nor any other liability which cannot be excluded or limited under applicable law.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">7) Variations</span>
+          <br />
+          <br /> We may revise these terms of use at any time by amending this page. You are expected to check this page from time to time to take notice of any changes we made, as they are binding on you. Some of the provisions contained in these terms of use may also be superseded by provisions or notices published elsewhere on our site.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">8) Jurisdiction and applicable law</span>
+          <br />
+          <br /> 8.1 The English courts will have exclusive jurisdiction over any claim arising from, or related to, a visit to our site.&nbsp;
+          <br />
+          <br /> 8.2 These terms of use and any dispute or claim arising out of or in connection with them or their subject matter or formation (including non-contractual disputes or claims) shall be governed by and construed in accordance with the law of England and Wales.
+          <br />
+          <br />
+          <br />
+          <br />
+          <a name="RecTerms"><span style="color:#00ccff; font-size: 12pt"><strong>Recruiter terms</strong></span></a>
+          <br />
+          <br /> These Recruiter Terms and Conditions (&ldquo;Recruiter Terms&rdquo;) are deemed accepted by the Recruiter when any Services are ordered or used by the Recruiter.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff">1. Definitions</span>
+          <br />
+          <br /> In these Recruiter Terms the following terms shall have the following meanings:
+          <br />
+          <br /> &ldquo;Agreement&rdquo;&nbsp; has the meaning set out in clause 2.1 of these Recruiter Terms
+          <br />
+          <br /> &ldquo;Affiliates&rdquo;&nbsp; means any holding company of the Company or any subsidiary of such holding company from time to time (and holding company and subsidiary shall have the definitions set out in section 1159 of the Companies Act 2006);
+          <br />
+          <br /> &ldquo;Business Day&rdquo;&nbsp; means a day other than a Saturday, Sunday or public holiday in England;
+          <br />
+          <br /> &ldquo;Company&rdquo;&nbsp; means the company providing the Services as set out on the Order Form;
+          <br />
+          <br /> &ldquo;Contractor&rdquo;&nbsp; means a person who uses Contract Recruit to search for, obtain information about and apply for contract opportunities;
+          <br />
+          <br /> &ldquo;CV&rdquo;&nbsp;&nbsp; means the curriculum vitae of the Contractor that is prepared and supplied by a Contractor;
+          <br />
+          <br /> &ldquo;Fees&rdquo;&nbsp;&nbsp; means the sums payable by the Recruiter to the Company for the supply of the Services;
+          <br />
+          <br /> &ldquo;Issue Date&rdquo;&nbsp; means the date that the Order Form is issued by the Company as set out on the Order Form;
+          <br />
+          <br /> &ldquo;Introductory Period&rdquo; means an initial free period subject to limitations as set out in clause 7;
+          <br /> &ldquo;Contract Recruit Network&rdquo; means the Sites and other recruitment websites, applications and widgets operated by the Company, its Affiliates or third parties in partnership with the Company and/or its Affiliates;
+          <br /> &ldquo;Order Form&rdquo;&nbsp; means the order form or online purchase confirmation page issued to the Recruiter by the Company;
+          <br />
+          <br /> &ldquo;Non Business Day&rdquo; means a day which is not a Business Day;
+          <br />
+          <br /> &ldquo;Recruiter&rdquo;&nbsp; means the person, company or firm named on the Order Form;
+          <br />
+          <br /> &ldquo;Recruiter Content&rdquo; means all or any part of the content and materials (including Contract advertisement particulars) supplied or made available by the Recruiter in connection with the Services;
+          <br />
+          <br /> &ldquo;Recruiter Services Menu&rdquo;&nbsp; means the menu of products/services that are available to be ordered by the Recruiter from the Company and which sets out specific conditions that apply in respect of the supply of individual products/services. A copy of the Recruiter Services Menu is located at [include link to terms of use document &ndash; TBC]
+          <br />
+          <br /> &ldquo;Service Duration&rdquo; means the period during which the Company shall provide the Services as set out on the Order Form;
+          <br />
+          <br /> &ldquo;Services&rdquo;&nbsp; means such of the product/services listed on the Recruiter Services Menu that the Company has agreed to supply to the Recruiter as set out on the Order Form;
+          <br />
+          <br /> &ldquo;Sites&rdquo;&nbsp;&nbsp; means the website(s) specified on the Order Form;
+          <br />
+          <br /> &ldquo;Upload System&rdquo; means the system (if any) made available by the Company to the Recruiter in order to facilitate upload of the Recruiter Content to the Sites and includes any Upload System Software; and
+          <br />
+          <br /> &ldquo;Upload System Software&rdquo; means any software supplied by the Company to the Recruiter to assist upload of Recruiter Content via the Upload System.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">2. Agreement Between the Company and the Recruiter</span>
+          <br />
+          <br /> 2.1 The Agreement between the Company and the Recruiter in respect of the Services (the &ldquo;Agreement&rdquo;) shall comprise the Order Form, the Recruiter Services Menu and these Recruiter Terms to the exclusion of all other terms and conditions (including any terms or conditions which the Recruiter purports to apply under any purchase order, confirmation of order or other document).
+          <br /> 2.2 In the event of a conflict in terms between the Order Form, the Recruiter Services Menu and these Recruiter Terms, the documents shall rank in the following order of precedence: (i) Order Form, (ii) Recruiter Services Menu and (iii) these Recruiter Terms.
+          <br /> 2.3 Except as set out in clause 20, the Contract cannot be terminated or cancelled by the Recruiter without the written agreement of the Company.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">3. Services</span>
+          <br />
+          <br /> 3.1 Subject to these Recruiter Terms and in consideration of the payment of the Fees by the Recruiter, the Company shall provide the Services to the Recruiter during the Service Duration.
+          <br /> 3.2 The Company shall use reasonable skill and care in its provision of the Services but the Company makes no representation or warranty that the Services and use of the Upload System will be uninterrupted or error free or fit for the Recruiter&rsquo;s particular purpose.
+          <br /> 3.3 The Company shall be entitled to temporarily suspend or alter the operation of the Services and/or Upload System for legal or technical reasons. The Company shall endeavour to notify the Recruiter as far in advance as possible of any temporary suspension or significant alteration but the Recruiter acknowledges that prior notice may not always be possible.
+          <br /> 3.4 The Company may in its sole discretion decline to post on or remove from the Sites and Services any of the Recruiter Content and/or require the Recruiter Content to be amended at any time if the Company considers that the Recruiter is in breach of any of clauses 4, 5 or 6 below.
+          <br /> 3.5 The Recruiter may request the removal of a Contract advertisement from the Sites and the Contract Recruit Network (as applicable) before the end of the Service Duration but shall not be entitled to any refund of Fees.
+          <br /> 3.6 If any quota of Services is not used up by the Recruiter within the Service Duration specified on the Order Form then such quota shall expire. The Recruiter shall remain responsible for full payment of the Fees.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">4. Recruiter General Warranties and Obligations</span>
+          <br />
+          <br /> 4.1 The Recruiter acknowledges and agrees to the specific conditions (if any) that apply in respect of the Services as set out in the Recruiter Services Menu.
+          <br /> 4.2 The Recruiter shall ensure that only its authorised personnel access the Services.
+          <br /> 4.3 The Recruiter shall not disclose any login password to any third party and shall not resell or licence the Services to any third party without the Company&rsquo;s prior written consent.
+          <br /> 4.4 The Recruiter shall deliver Recruiter Content to the Company in a format compatible with the technical specifications issued by the Company from time to time.
+          <br /> 4.5 The Recruiter undertakes and warrants that its use of the Services and all Recruiter Content (including, without limitation, Contract advertisements) comply with all applicable laws and codes of practice and shall not be defamatory, discriminatory or otherwise objectionable and shall not infringe any copyright, trade mark or other rights of any third party.
+          <br /> 4.6 The Recruiter authorises the Company to use and display Recruiter Content on the Contract Recruit Network.
+          <br /> 4.7 The Recruiter warrants that it holds all necessary consents and licences to use and grant the Company the right to use the Recruiter Content as envisaged by the Contract.
+          <br /> 4.8 The Recruiter shall not publish, disclose, reproduce or create derivative works from any information obtained pursuant to the Recruiter&rsquo;s use of the Services except for internal business purposes unless expressly agreed in writing by the Company.
+          <br /> 4.9 The Recruiter shall not copy, make modifications to, reverse engineer or decompile the Upload System Software, except to the extent permitted by law.
+          <br /> 4.10 The Recruiter shall not use any automatic extraction software (such as software tools commonly known as robots and spiders) or any other means to facilitate the downloading or capture of volume quantities of information from the Company.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">5. Contract Advertisements</span>
+          <br />
+          <br /> 5.1 If you wish to place an advertisement with our site, you must:
+          <br /> 5.1.1 complete your details and send them to affiliates@contractrecruit.co.uk;
+          <br /> 5.1.2 click the &lsquo;I accept&rsquo; button;
+          <br /> 5.1.3 enter your details on the payment screen;
+          <br /> 5.1.4 By clicking &lsquo;I accept&rsquo; on the order form, you accept these terms and conditions and accept that you are contracting with us on a commercial basis and not as a consumer;
+          <br /> 5.1.5 Subject to provision 14.1 and these terms and conditions, we shall at our reasonable discretion post any advertisement on our site for a period of 14 days. Any extension of this period constitutes a new posting and you will be charged for the extension in accordance with our usual price list;
+          <br /> 5.1.6 Subject to us receiving all relevant information from you at the time of completion of your details, we will endeavour to place your advertisement on our site within 24 hours of receipt of your order form and payment in cleared funds, but any such dates are estimates only, and time shall not be of essence in the provision of the advertising services to you.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">6. The Recruiter warrants that:</span>
+          <br />
+          <br /> 6.1 its Contract advertisement particulars shall be accurate, honest and truthful;
+          <br /> 6.2 its Contract advertisements shall not contain unnecessarily repeated words or phrases intended to cause a false positioning in the search results seen by a Contractor;
+          <br /> 6.3 its Contract advertisements shall not contain links to the website of the Recruiter (or any third party) or any Contract application contact information without the prior written agreement of the Company; and
+          <br /> 6.4 its Contract advertisements shall not promote any &lsquo;get rich quick&rsquo;, pyramid selling or network marketing opportunities or similar.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">7. Contractors and CVs</span>
+          <br />
+          <br /> 7.1 The Recruiter shall only use CVs and personally identifiable Contractor information for the purpose of finding Contracts for the Contractor.
+          <br /> 7.2 The Recruiter shall keep confidential and not supply or make available to any person CVs and personally identifiable Contractor information that the Recruiter receives from the Company or any Contractor without the Contractor&rsquo;s express consent.
+          <br /> 7.3 The Recruiter shall comply with the provisions of the Data Protection Act 1998 and, in particular, shall take all appropriate technical, organisational and security measures to prevent unauthorised access, loss and use of personal data relating to Contractors.
+          <br /> 7.4 The Recruiter accepts that it is responsible for satisfying itself as to the suitability of Contractors for a Contract vacancy and verifying the identity of such Contractors.
+          <br /> 7.5 ContractRecruit adheres to responsibility of only using Contractor and Recruiter personal information to contact Contractors or Recruiters by email or telephone regarding ContractRecruit, recruitment purposes and not for third party use.
+          <br />
+          <br />
+          <br />
+          <span style="font-size: 12px; color: #00ccff;">8. Your acknowledgements and warranties</span>
+          <br />
+          <br /> 8.1 You acknowledge that:
+          <br /> 8.1.1 we are not responsible for any information provided by any contractor or other third party to our site, and do not vet it for accuracy or suitability; and
+          <br /> 8.1.2 we do not make any claims or representations about finding
+          <br /> 8.1.3 suitable contractors.
+          <br /> 8.2 You warrant that all information and content is accurate and uploaded in good faith.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">9. Database</span>
+          <br />
+          <br /> 9.1 You acknowledge that all copyright and intellectual property rights in the contractor database belong to us, and that you do not acquire any such rights in the contractor database.
+          <br /> 9.2 We grant you a non-exclusive licence to use the candidate database to:
+          <br /> 9.2.1 use, search or download the contractor database for the sole purpose of finding a suitable candidate for a specific vacancy you wish to fill;
+          <br /> 9.2.2 contact Contractors for the sole purpose of finding a suitable candidate for a vacancy you wish to fill; and
+          <br /> 9.2.3 any other use expressly permitted by Contract Recruit Limited.
+          <br />
+          <br /> 9.3 We expressly do not grant you a licence to:
+          <br /> 9.3.1 Sell or licence the contractor database or any part of it to any third party;
+          <br /> 9.3.2 download the database through any automated process;
+          <br /> 9.3.3 contact any contractor on our site for any other purpose than finding a suitable person for a legitimate vacancy; or
+          <br /> 9.3.4 otherwise use or disclose any part of the contractor databases in a manner not expressly permitted by us under provision 9.2.
+          <br /> 9.4 You warrant to comply with any applicable data protection legislation at all times.
+          <br /> 9.5 You warrant that you will not deal with any contractor, or any data in relation to a contractor, in a way that brings our site or our business into disrepute.
+          <br /> 9.6 You acknowledge that you shall delete all information in relation to a contractor once the potential contract in relation to that contractor has been filled.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">10. Conduct</span>
+          <br />
+          <br /> 10.1 You warrant and represent that you will not say or do anything, in your dealings with contractors or otherwise, that will bring us or our site into disrepute.
+          <br /> 10.2 You warrant and represent that you will only contact any contractors, or use contractor information for the purpose of finding suitable candidates for contract vacancies.
+          <br /> 10.3 If you are an employment agency as defined by the Employment Agencies Act 1973, it is your responsibility to ensure that any material you supply or upload to our site complies with the Conduct of Employment Agencies and Employment Businesses Regulations 2003, as amended from time to time.
+          <br />
+          <br />
+          <span style="font-size: 12px; color: #00ccff;">11. Recruiter Indemnity</span>
+          <br />
+          <br /> The Recruiter shall indemnify the Company and its Affiliates against all claims, costs, damages, losses, expenses and liabilities suffered or incurred by the Company and its Affiliates arising as a result of any breach by the Recruiter of these terms or any other terms applicable to the use of the Site(s).
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">12. Fees</span>
+          <br />
+          <br /> 12.1 Fees are as stated on the Order Form and are exclusive of VAT which shall be paid by the Recruiter in addition at the rate and in the manner prescribed by law.
+          <br /> 12.2 The Recruiter shall pay all invoices within 30 days of the invoice date and by such method as may be agreed by the Company.
+          <br /> 12.3 If the Recruiter fails to pay any amount due to the Company by the due date for payment then:
+          <br /> 12.3.1 the Company reserves the right to charge interest at the rate of 4% per annum above Barclays Bank plc&rsquo;s base lending rate in force from time to time or such higher rate as may be permitted by law from the due date until settlement or discharge of the debt; and
+          <br /> 12.3.2 without prejudice to any other right or remedy available to the Company, the Company shall be entitled to suspend the Services until all monies owing to the Company have been paid in full by the Recruiter.
+          <br /> 12.4 The Company reserves the right to require the Recruiter to pay a deposit and/or a non-refundable advance payment before making Services available to the Recruiter. If a deposit is paid by the Recruiter, it shall be repaid by the Company to the Recruiter on termination of the Agreement subject to the Company&rsquo;s right to offset any outstanding amounts payable by the Recruiter against such deposit.
+          <br /> 12.5 The Company reserves the right to charge the Recruiter its reasonable administration costs in dealing with any failed payments and/or any costs incurred by the Company in relation to pursuing debt collection (including debt collection agency fees and expenses).
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">13. Payment</span>
+          <br />
+          <br /> 13.1 The fee for any one advertisement is as stated in the order form for a continuous period of 14 days. If you wish to delete an advertisement and replace it with another, this constitutes a new advertisement. Deleting an advertisement and posting it again a few days later also constitutes a new advertisement.
+          <br /> 13.2 All payments must be made by credit card, debit card or other methods of payment permitted by us from time to time in the manner stipulated on our site, or as advised by us from time to time.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">14. Refunds</span>
+          <br />
+          <br /> Any refunds will be granted at our sole discretion only. There is no automatic right of cancellation once your payment has been processed and you wish to cancel your advertisement, but we will remove your advertisement from our site at your request. In order for any refund to be considered a written request must be submitted to Us and no Fees must be outstanding at the date of such request.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">15. Advertising rules</span>
+          <br />
+          <br /> 15.1 When providing material for an advertisement to us, you must adhere to our rules in relation to postings. You may not:
+          <br /> 15.1.1 unnecessarily use key words or strings in your job descriptions or titles in order to influence the position of the advertisement in the results listing;
+          <br /> 15.1.2 provide material for anything other than a genuine Contract vacancy; &amp;
+          <br /> 15.1.3 advertise any other employment agency, employment website or recruitment company or similar business.
+          <br /> 15.1.4 By agreeing to these terms of use you are happy for us to contact you by email or telephone regarding recruitment opportunities or related to the product ContractRecruit.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">16. Intellectual Property Rights</span>
+          <br />
+          <br /> The Recruiter acknowledges that all intellectual property rights in the Services, technology supporting the Services (including the Upload System) and the Contract Recruit Network vest in the Company and/or its licensors and partners and that the Recruiter has no rights in, or to, such intellectual property other than the right to use in accordance with the Contract.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">17. Limitation of Liability</span>
+          <br />
+          <br /> 17.1 This clause sets out the entire financial liability of the Company to the Recruiter in respect of:
+          <br /> 17.1.1 any breach of the Agreement;
+          <br /> 17.1.2 any use made by the Recruiter of the Services; and
+          <br /> 17.1.3 any representation, statement or tortious act or omission (including negligence) arising under or in connection with the Agreement.
+          <br /> 17.1.4 Nothing in the Agreement shall exclude or limit the Company&rsquo;s liability for death or personal injury resulting from the negligence of the Company or for fraud or for any other liability that cannot be excluded or limited by law.
+          <br /> 17.1.5 All warranties, conditions and other terms implied by statute or common law in relation to the Services are, to the fullest extent permitted by law, excluded from the Agreement.
+          <br /> 17.1.6 The Company has no liability to verify the identity of any Contractors or check the suitability of any Contractors for any Contract vacancy.
+          <br /> 17.1.7 The Company shall not be liable to the Recruiter under or in connection with the Agreement for any loss of business, contracts, profits, anticipated savings, data, damage to hardware and software, or for any indirect, special or consequential loss.
+          <br /> 17.1.8 The Company does not accept liability for loss of any Recruiter Content.
+          <br /> 17.1.9 The Company&rsquo;s liability in respect of any failure to perform the Services in accordance with the Agreement shall be limited to the re-performance of the relevant part of the Services as far as is practicable.
+          <br /> 17.1.10 Subject to the provisions of this clause 18, the total liability of the Company to the Recruiter in respect of any loss or damage under or in connection with the Agreement shall not exceed the aggregate amount of Fees paid by the Recruiter in the twelve months immediately preceding the incurring of such loss or damage.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">18. Confidentiality</span>
+          <br />
+          <br /> The Company and the Recruiter agree to keep the terms of the Agreement and all information that is obtained about the business, finances, technology and affairs of the other strictly confidential. This clause shall not apply to information which has come into the public domain other than by breach of this clause or is required to be disclosed by law.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">19. Termination</span>
+          <br />
+          <br /> 19.1 Either party may terminate the Agreement:
+          <br /> 19.1.1 immediately upon written notice to the other party if the other party commits any material or persistent breach of any of the provisions of the Agreement and, in the case of a breach which is capable of remedy, fails to remedy the same within 14 days after receipt of a written notice giving particulars of the breach and requiring it to be remedied; or
+          <br /> 19.1.2 immediately upon written notice to the other party if the other party shall cease to carry on its business or shall have a liquidator, receiver or administrative receiver appointed to it or over any part of its undertaking or assets or shall pass a resolution for its winding up (otherwise than for the purpose of a bona fide scheme of solvent amalgamation or reconstruction where the resulting entity shall assume all the liabilities of it) or a court of competent jurisdiction shall make an administration order or liquidation order or similar order, or shall enter into any voluntary arrangement with its creditors, or shall be unable to pay its debts as they fall due.
+          <br /> 19.2 Upon termination of the Agreement for any reason:
+          <br /> 19.2.1 the Recruiter shall immediately cease using the Services, permanently delete any access passwords for the Services and erase any Upload System Software; and
+          <br /> 19.2.2 the Recruiter shall immediately pay to the Company all outstanding sums due to the Company under the Agreement.
+          <br /> 19.3 Termination of the Agreement shall not affect the accrued rights or liabilities of the Company or the Recruiter under the Agreement nor any provision of the Agreement which is expressed or required to survive or operate in such event.
+          <br />
+          <br />
+          <span style="color: rgb(0, 204, 255); font-size: 14px;">20.Fair Usage</span>
+          <br />
+          <br /> 20.1 Recruiters agree that CV downloads are to be used for day to day recruitment purposes only. If ContractRecruit feel that recruiters are downloading CV&rsquo;s for purposes of data collection or any other reason aside from recruitment purposes,&nbsp; ContractRecruit reserves the right to disable the recruiters account. This will be monitored and fair usage of CV downloads will be up to the discretion of ContractRecruit.
+          <br />
+          <br />
+          <span style="font-size: 14px; color: #00ccff;">21. General</span>
+          <br />
+          <br /> 21.1 The Agreement contains the entire agreement between the parties relating to the subject matter covered and supersedes any previous agreements, arrangements, written or oral, between the parties in relation to such matters.
+          <br /> 21.2 No amendment, variation or modification to the Agreement shall be deemed valid unless it is agreed in writing by the parties.
+          <br /> 21.3 The Recruiter shall not assign, transfer or deal in any other manner with all or any of its rights or obligations under the Agreement without the prior written consent of the Company.
+          <br /> 21.4 A person who is not a party to the Agreement has no right under the Contracts (Rights of Third Parties) Act 1999 to enforce any terms of the Agreement.
+          <br /> 21.5 Nothing in the Agreement shall be deemed to create any kind of partnership or joint venture between the Company and the Recruiter.
+          <br /> 21.6 No failure or delay by either party in exercising any of its rights or remedies under the Agreement shall operate as a waiver of those rights or remedies. No waiver shall be effective unless in writing and shall apply only in relation to the matter in respect of which it was specifically given. No waiver of any breach of the Agreement is a waiver of any subsequent or other breach.
+          <br /> 21.7 Neither party shall be liable for any delay or non-performance under the Agreement caused by any event beyond its reasonable control (a &ldquo;Force Majeure Event&rdquo;) provided that the party affected gives prompt notice in writing to the other party of such Force Majeure Event and uses all reasonable endeavours to continue to perform its obligations under the Agreement. If the Force Majeure Event continues for more than one month, the party not subject to the Force Majeure Event may terminate the Agreement by notice in writing to the other party.
+          <br /> 21.8 If any provision of the Agreement is held to be illegal, void, invalid or unenforceable the legality, validity and enforceability of the remainder of the Contract shall not be affected.
+          <br /> 21.9 Notices under the Contract must be in writing and shall only be deemed to have been duly served if hand delivered, sent by facsimile (provided the transmitting machine reports successful transmission), recorded delivery or email to the contact address of the party set out in the Order Form or such other contact address as may be notified by that party under this clause.
+          <br /> 21.10 The Agreement shall be governed by and construed in accordance with English law and the parties agree to submit to the exclusive jurisdiction of the English courts in relation to any disputes arising under or in connection with the Agreement.
+          <br />
+          <br />
+          <br />
+          <br />
+          <a name="companydetails"><span style="color: #00ccff;"><strong>Our Company Details</strong></span></a>
+          <br />
+          <br />
+          <strong>Registered Company Name:</strong> Contract Recruit Limited
+          <br />
+          <strong>Registered Address:</strong> 2 Upperton Gardens, Eastbourne, East Sussex, BN21 2AH
+          <br />
+          <strong>Registered Company Number:</strong> 07796094
+          <br />
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="new-matter" *ngIf="showtabValue == 'equal'">
+      <div class="widecol w2 js">
+        <div class="static">
+          <!--<h3 class="mainhead">Equal Opportunities</h3>-->
+          <span style="font-size: 14px; color: #00ccff;"><strong>Equal Opportunities</strong></span>
+          <br />
+          <hr />
+          <br />
+          <br /> We are looking to grow <strong>Contract</strong>Recruit into a European wide contract specialist job board with a large focus on team and company culture. We want to do this with integrity, collaboration and trust from our users externally and team internally.
+          <br />
+          <br /> It is the policy of <strong>Contract</strong>Recruit to treat all employees and job applicants fairly and equally regardless of their sex, sexual orientation, marital status, race, colour, nationality, ethnic or national origin, religion, age and disability.
+          <br />
+          <br />
+          <hr />
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="new-matter" *ngIf="showtabValue == 'workWithUs'">
+      <div class="widecol w2 js">
+        <div class="static">
+          <!--<h3 class="mainhead">Careers</h3>-->
+          <span style="font-size: 14px; color: #00ccff;"><strong>Careers at Contract</strong>Recruit</span>
+          <br />
+          <hr />
+          <br />
+          <a href="http://www.contractrecruit.co.uk/careers" target="_blank"><img alt="Image and video hosting by TinyPic" border="0" src="http://i61.tinypic.com/zwb9ya.jpg" /></a>
+          <br />
+          <br />
+          <span style="color: rgb(51, 51, 51); font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Verdana, Arial, 'Lucida Grande', sans-serif; font-size: 13px; line-height: 18px;">We don&#39;t know who you are. We don&rsquo;t know what you want. If you&rsquo;re looking for a job, I can tell you we don&rsquo;t have any currently.</span>
+          <br style="color: rgb(51, 51, 51); font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Verdana, Arial, 'Lucida Grande', sans-serif; font-size: 13px; line-height: 18px;" />
+          <span style="color: rgb(51, 51, 51); font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Verdana, Arial, 'Lucida Grande', sans-serif; font-size: 13px; line-height: 18px;">&nbsp;</span>
+          <br style="color: rgb(51, 51, 51); font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Verdana, Arial, 'Lucida Grande', sans-serif; font-size: 13px; line-height: 18px;" />
+          <span style="color: rgb(51, 51, 51); font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Verdana, Arial, 'Lucida Grande', sans-serif; font-size: 13px; line-height: 18px;">But if you have a particular set of skills, skills you have acquired over your career, skills which will really help <strong>Contract</strong>Recruit become the go to job site for all IT contractors then of course please get in touch.</span>
+          <br />
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="new-matter" *ngIf="showtabValue == 'cookies'">
+      <div class="widecol w2 js">
+        <div class="static">
+          <!--<h3 class="mainhead">Cookies Policy</h3>-->
+          <span style="font-size: 14px; color: #00ccff;"><strong>Cookies Policy</strong></span>
+          <br />
+          <hr width="100%" />
+          <h2 class="main-title">
+        <br />
+        <span style="font-size: 12px;"><a href="http://tinypic.com?ref=14ifpc5" target="_blank"><img alt="Image and video hosting by TinyPic" border="0" src="http://i62.tinypic.com/14ifpc5.jpg" /></a></span></h2>
+          <br /> A cookie is a small file which asks permission to be placed on your computer&#39;s hard drive. Once you agree, the file is added and the cookie helps analyse web traffic or lets you know when you visit a particular site. Cookies allow web applications to respond to you as an individual. The web application can tailor its operations to your needs, likes and dislikes by gathering and remembering information about your preferences. We use traffic log cookies to identify which pages are being used. This helps us analyse data about web page traffic and improve our website in order to tailor it to customer needs. We only use this information for statistical analysis purposes and then the data is removed from the system.
+          <br />
+          <br /> Overall, cookies help us provide you with a better website, by enabling us to monitor which pages you find useful and which you do not. A cookie in no way gives us access to your computer or any information about you, other than the data you choose to share with us. Most web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. This may prevent you from taking full advantage of the website.
+          <br />
+          <br />
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="new-matter" *ngIf="showtabValue == 'security'">
+      <div class="widecol w2 js">
+        <div class="static">
+          <!--<h3 class="mainhead">Security</h3>-->
+          <span style="font-size: 14px; color: #00ccff;"><strong>Security</strong></span>
+          <br />
+          <hr />
+          <br />
+          <br />
+          <a href="http://tinypic.com?ref=6rkjfq" target="_blank"><img alt="Image and video hosting by TinyPic" border="0" src="http://i60.tinypic.com/6rkjfq.jpg" /></a>
+          <br />
+          <br />
+          <br /> 1.1 The data that we collect from you may be transferred to, and stored at, a destination outside the European Economic Area (&quot;EEA&quot;). It may also be processed by staff operating outside the EEA who work for us or for one of our suppliers. Such staff maybe engaged in, among other things, the fulfilment of your order, the processing of your payment details and the provision of support services. By submitting your personal data, you agree to this transfer, storing or processing. We will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this privacy policy.
+          <br />
+          <br /> 1.2 All information you provide to us is stored on our service provider&rsquo;s secure servers. Any payment transactions will be encrypted using SSL technology. Where we have given you (or where you have chosen) a password which enables you to access certain parts of our site, you are responsible for keeping this password confidential. We ask you not to share a password with anyone.
+          <br />
+          <br /> 1.3 Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data transmitted to our site; any transmission is at your own risk. Once we have received your information, we will use strict procedures and security features to try to prevent unauthorised access.
+          <br />
+          <br />
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

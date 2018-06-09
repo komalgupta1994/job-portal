@@ -1,0 +1,312 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor signup-->
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup befourlogin_fontsize">
+            <h2>CONTRACTOR <span>signup</span></h2>
+            <ul class="breadcomb">
+              <li routerLink="../home"><a href="javascript:void(0)">Home</a></li>
+              <li class="right_arrow">></li>
+              <li class="active">CONTRACTOR SIGN UP</li>
+            </ul>
+          </div>
+          <div class="alert alert-success margin-tp18" *ngIf="succesMessageFlag">
+            <a href="javascript:void(0)" class="close" title="close" (click)="succesMessageFlag=false;">×</a> You are sign up <strong>succesfully!</strong>
+          </div>
+          <!-- <div class="alert alert-danger margin-tp18" *ngIf="ErrorMesageFlag">
+            <a href="javascript:void(0)" class="close" title="close" (click)="ErrorMesageFlag=false;">×</a>
+            <strong>Error!</strong> {{validateMsg}}
+          </div> -->
+          <div class="signup_form_section">
+            <div class="errorbox" *ngIf="(userForm && userForm.form && userForm.form.controls && userForm.form.invalid && userForm.submitted) || contractorInvalid || ErrorMesageFlag "><b>The following error(s) occured:</b>
+              <br>
+              <li *ngIf="ErrorMesageFlag">{{validateMsg}}</li>
+              <li *ngIf="userForm.form.controls.contractor_first_name?.hasError('required')">Please enter first name</li>
+              <li *ngIf="userForm.form.controls.contractor_first_name?.hasError('pattern')">Valid first name required</li>
+              <li *ngIf="userForm.form.controls.contractor_last_name?.hasError('required')">Please enter last name</li>
+              <li *ngIf="userForm.form.controls.contractor_email?.hasError('required')">Please enter an email address</li>
+              <li *ngIf="userForm.form.controls.contractor_email?.hasError('pattern')">Valid Email required</li>
+              <li *ngIf="userForm.form.controls.contractor_tel_no?.hasError('required')">Invalid mobile number.</li>
+              <li *ngIf="userForm.form.controls.contractor_tel_no?.hasError('pattern')">Invalid mobile number</li>
+              <li *ngIf="userForm.form.controls.contractor_current_password?.hasError('required') || passwordInvalid">Your password must be at least 6 characters in length.</li>
+              <li *ngIf="userForm.form.controls.contractor_job_title?.hasError('required')">Please enter Recent Job Title</li>
+              <li *ngIf="userForm.form.controls.contractor_postal_title?.hasError('required')">Please enter a postcode.</li>
+              <li *ngIf="userForm.form.controls.termOfUse?.hasError('required')">Please agree to our terms of use.</li>
+              <li *ngIf="cvInvalid">Please upload a CV.</li>
+              <li *ngIf="contractorServicesInavlid">Please select an option from Contractor Services</li>
+              <li *ngIf="contractorEndDateInvalid">Please enter your contract end date</li>
+              <li *ngIf="employmentSituation">Please indicate your current employment situation.</li>
+              <li *ngIf="postalCodeInvalid"> Invalid postcode, please enter a valid postcode. </li>
+              <li *ngIf="invalidFile">File format is not valid</li>
+            </div>
+
+            
+
+            <form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/user-name.png" alt="User Name"  class="img-responsive"></div>
+                      <input type="text" class="form-control" id="contractorFirstName" placeholder="Enter First Name" name="contractor_first_name" [(ngModel)]="contractor_first_name" pattern="[a-zA-Z][a-zA-Z ]+" required >
+                      <!-- <tooltip-content #firstNameTooltip>
+                        <span *ngIf="userForm?.form && userForm.form.controls && userForm.form.controls.contractor_first_name?.valid " style="color: #C21F39"> Contractor First Name</span>
+                        <span [hidden]="!userForm.form.controls.contractor_first_name?.hasError('required')" style="color: #C21F39"> Contractor First Name is required.</span>
+                        <span [hidden]="!userForm.form.controls.contractor_first_name?.hasError('minlength')" style="color: #C21F39">Contractor First Name min length is 3.</span>
+                        
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/user-name.png" alt="User Name"  class="img-responsive"></div>
+                      <input type="text" class="form-control"  placeholder="Enter Last Name" name="contractor_last_name" [(ngModel)]="contractor_last_name" required >
+                     <!--  <tooltip-content #lastNameTooltip>
+                        <span *ngIf="userForm?.form && userForm.form.controls && userForm.form.controls.contractor_last_name?.valid" style="color: #C21F39"> Contractor Last Name</span>
+                        <span [hidden]="!userForm.form.controls.contractor_last_name?.hasError('required')" style="color: #C21F39"> Contractor last Name is required.</span>
+                        <span [hidden]="!userForm.form.controls.contractor_last_name?.hasError('minlength')" style="color: #C21F39">Contractor last Name min length is 3.</span>
+                       
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/mail-address.png" alt="Email"  class="img-responsive"></div>
+                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email Address" name="contractor_email" [(ngModel)]="contractor_email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                      <!-- <tooltip-content #emailTooltip>
+                        <span *ngIf="userForm?.form && userForm.form.controls && userForm.form.controls.contractor_email?.valid " style="color: #C21F39">Contractor's Email</span>
+                        <span [hidden]="!userForm.form.controls.contractor_email?.hasError('required')" style="color: #C21F39"> Email is required.</span>
+                        <span [hidden]="!userForm.form.controls.contractor_email?.hasError('pattern')" style="color: #C21F39">Email invalid!</span>
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/mobile-number.png" alt="Telephone Number"  class="img-responsive"></div>
+                      <input type="number" class="form-control"  placeholder="Enter Mobile Number" name="contractor_tel_no" [(ngModel)]="contractor_tel_no" pattern="[0-9]*" min="0" required >
+                      <!-- <tooltip-content #phoneTooltip>
+                        <span *ngIf="userForm?.form && userForm.form.controls && userForm.form.controls.contractor_tel_no?.valid " style="color: #C21F39">Contractor's Mobile No </span>
+                        <span [hidden]="!userForm.form.controls.contractor_tel_no?.hasError('required')" style="color: #C21F39"> Mobile No is required! </span>
+                        <span [hidden]="!userForm.form.controls.contractor_tel_no?.hasError('pattern')" style="color: #C21F39">Mobile No is not valid!</span>
+                       
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/enter-password.png" alt="Enter Password"  class="img-responsive"></div>
+                      <input type="password" class="form-control"  placeholder="Enter Password" name="contractor_current_password" [(ngModel)]="contractor_current_password" required >
+                      <!-- <tooltip-content #contpassword>
+                        <span *ngIf="userForm?.form && userForm.form.controls && userForm.form.controls.contractor_current_password?.valid" style="color: #C21F39">Contractor's Password </span>
+                        <span [hidden]="!userForm.form.controls.contractor_current_password?.hasError('required')" style="color: #C21F39"> Password is required! </span>
+                       
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group" style="border-bottom: 1px solid #000; padding-bottom: 4px;">
+                      <div class="input-group-addon" style="border-bottom: 0;"><img src="./assets/images/upload-cv.png" alt="Upload CV" class="img-responsive"></div>
+                      <!-- <div class="fileUpload">
+                        <span>Find CV
+                            <img alt="search now" src="./assets/images/find-cv.png" title="search now">
+                          </span>
+                        <input type="file" class="upload" (change)="fileChangeEvent($event);" #myInput />
+                      </div> -->
+                      <span style="display: inline-block; margin-top: 5px; margin-left: 13px;">{{fileName}}</span>
+                      <div class="find_cv_from" style="text-align: right; margin: 2px 0 4px 0; float: right;"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" style="color: #fff !important;" aria-haspopup="true" aria-expanded="true">Find CV From<img src="./assets/images/find-cv.png" alt="Find CV" ></a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a href="javascript:void(0)"><img src="./assets/images/mail-box1.png" alt="OneDrive" title="OneDrive" class="img-responsive"></a> 
+                            <a href="javascript:void(0)"><img src="./assets/images/mail-box3.png" alt="GoogleDrive" title="GoogleDrive" class="img-responsive"></a> </li>
+                          <li (click)="chooseFromDropBox()"> <a href="javascript:void(0)"><img src="./assets/images/mail-box2.png" alt="Dropbox" title="Dropbox" class="img-responsive"></a>
+                            <div class="fileUpload">
+                              <a href="javascript:void(0)"><img src="./assets/images/mail-box4.png" alt="LocalDrive" title="LocalDrive" class="img-responsive"></a>
+                              <input type="file" class="upload" name="" style="height: 55px;" (change)="fileChangeEvent($event);" #myInput accept=".doc, .docx, .pdf, .otd, .rtf">
+                            </div>
+                            <!-- <a href="javascript:void(0)"><img src="./assets/images/mail-box4.png" alt="LocalDrive" title="LocalDrive" class="img-responsive"></a> --></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top: -35px;text-align: right;font-family: arial;cursor: inherit;">
+                    <a style="font-family: FacilePro; font-size:11px;color:#FF0066; ">.DOC</a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#999999;">, </a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#FF0066;">.DOCX</a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#999999;">, </a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#FF0066;">.PDF</a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#999999;">, </a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#FF0066;">.RTF</a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#999999;"> or</a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#FF0066;"> .ODT</a>
+                    <a style="font-family: FacilePro; font-size:11px;color:#999999;"> only</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/job-title.png" alt="Job Title"  class="img-responsive"></div>
+                      <input type="text" class="form-control"  placeholder="Enter Current Job Title" name="contractor_job_title" [(ngModel)]="contractor_job_title" required>
+                      <!--  <tooltip-content #contractor_job_titleTooltip>
+                        <span *ngIf="userForm?.form && userForm.form.controls && userForm.form.controls.contractor_job_title?.valid " style="color: #C21F39"> Job Title </span>
+                        <span [hidden]="!userForm.form.controls.contractor_job_title?.hasError('required')" style="color: #C21F39"> Job Title is required! </span>
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/job-title.png" alt="Job Title"  class="img-responsive"></div>
+                      <input type="text" class="form-control"  placeholder="Enter Postal Code" name="contractor_postal_title" [(ngModel)]="contractor_post_code" required (blur)="getLocation()">
+                      <!-- <tooltip-content #contractor_job_titleTooltip>
+                        <span *ngIf="userForm?.form && userForm.form.controls && userForm.form.controls.contractor_job_title?.valid " style="color: #C21F39"> Postal Code </span>
+                        <span [hidden]="!userForm.form.controls.contractor_job_title?.hasError('required')" style="color: #C21F39"> Postal Code is required! </span>
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/key-skills.png" alt="Key Skills"  class="img-responsive"></div>
+                     <!--  <div class="enter_your_skills"> -->
+                       <input type="text" class="form-control"  placeholder="Enter Key Skills (Separated with commas)" (keyup)="skillKeyUp($event)" [(ngModel)]="skill" name="skill">
+                        <!-- <select class="form-control minimal background_drop_down" [(ngModel)]="selectedSkill" name="skills" (change)="selectSkill()">
+                          <option value="">Select Skill</option>
+                          <option *ngFor="let skill of skillData" [value]="skill.skill_id">{{skill.skill_name}}</option>
+                        </select> -->
+                      <!-- </div> -->
+                    </div>
+                    <div class="add_sub_skills" *ngIf="selectedSkillArray.length>0">
+                      <a href="javascript:void(0)" *ngFor="let selectedSkill of selectedSkillArray; let i = index">
+                      <span *ngIf="selectedSkill !== ''">{{selectedSkill}}</span>
+                   <img src="./assets/images/close-icon.png" alt="Close" title="Close" (click)="removeSelectedSkill(i)"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="current_rate_signup situation35">
+                <h2>ENTER YOUR CURRENT RATE</h2>
+                <!-- <img src="./assets/images/price-filter.png" alt="ads" title="ads" class="img-responsive">  -->
+                <div class="rate_signup">
+                  <h2>RATE <span> &#163;{{contractor_rate_min}}</span> to <span> &#163;{{contractor_rate_max}}</span> p/d</h2>
+                </div>
+                <ion-range-slider type="double" prefix="£" class="width_100" (onFinish)="getRangeSliderValue($event)" #sliderElement min="0" value="100" max="2000" step="5" from="200" to="400" (onChange)="rateChange($event)">
+                </ion-range-slider>
+              </div>
+              <div class="current_rate_signup situation35">
+                <h2>CURRENT EMPLOYMENT SITUATION</h2>
+                <div class="checkbox-inline">
+                  <input #permanent type="radio" id="permanent" name="optradio" value="permanent" (change)="logRadio('permanant');" [(ngModel)]="currentEmploymentSituationCheck">
+                  <label for="permanent" class="radio-inline"><span></span> PERMANENT </label>
+                  <input #inContract type="radio" id="permanent2" name="optradio" value="inContract" (change)="logRadio('in contract');" [(ngModel)]="currentEmploymentSituationCheck">
+                  <label for="permanent2" class="radio-inline"><span></span> IN CONTRACT </label>
+                  <input #outOfContract type="radio" id="permanent3" name="optradio" value="outOfContract" (change)="logRadio('out of contract');" [(ngModel)]="currentEmploymentSituationCheck">
+                  <label for="permanent3" class="radio-inline"><span></span> OUT OF CONTRACT </label>
+                </div>
+              </div>
+              <div id="per" class="rgnote89" *ngIf="contractor_employment_situation == 'permanant'">
+                <div class="text-00 clear" style="margin-top:34px;"> NOTICE PERIOD? &nbsp;</div>
+                <br/>
+                <div>
+                  <select class="optn rgnopt" name="notice_period" style="margin-top:10px;" [(ngModel)]="noticePeriod">
+                    <option [value]="item.name" *ngFor="let item of noticePeriodList">{{item.name}}</option>
+                    <!-- <option value="7 DAYS"> 7 DAYS</option>
+                    <option value="2 WEEKS">2 WEEKS</option>
+                    <option value="1 MONTH">1 MONTH</option>
+                    <option value="2 MONTHS">2 MONTHS</option>
+                    <option value="3 MONTHS">3 MONTHS</option> -->
+                  </select>
+                </div>
+              </div>
+              <div class="rg_row" id="ext" style="display: block;" *ngIf="contractor_employment_situation == 'in contract'">
+                <!-- <div class="showdate rest_data_show show_ui_picker" style="float: right; display: none;">{{dateSelected | date: 'short'}}</div> -->
+                <div class="text-00 clear imtn" style="float: left;" *ngIf="!contractEndDate">Contract End Date :</div>
+                <div class="text-00 clear imtn" style="float: left;" *ngIf="contractEndDate">{{contractEndDate}}</div>
+                <div class="" style="position: relative; float: left;">
+                  <img src="./assets/images/a1.jpg" style="float: left; margin-right: 10px;" (click)="showDatePicker()">                
+                  <div id="datepicker" class="date-holder"></div>
+                </div>
+                <!-- <input type="date" [(ngModel)]="contractEndDate" name="contract_end_date" class="hasDatepicker" style="float: left;"> -->
+                <div class="text-00 text-438" style="padding-left:0;float: left;">MAKE MY DETAILS LIVE FROM?</div>
+                <div style="display: inline-block; margin-top: 18px;">
+                  <select class="optn text-ipn-opntn" name="details_live" style="float:right; margin-top: -20px;" [(ngModel)]="detailsLiveFrom">
+                    <option [value]="item.id" *ngFor="let item of noticePeriodList">{{item.name}}</option>
+                  </select>
+                </div>
+                <br>
+                <div style="margin-top: 32px"></div>
+                <div class="text-00 clear imtn" style="margin-top:10px;float: left;"> NOTICE PERIOD?</div>
+                <div style="    float: left;
+    margin-left: 10px;
+    margin-top: -6px;">
+                  <select class="optn tstximtm" name="contract_notice_period" style="margin-top:10px;" [ngModel]="noticePeriod">
+                    <option [value]="item.name" *ngFor="let item of noticePeriodList">{{item.name}}</option>
+                  </select>
+                </div>
+                <div id="happynotice" class="text-00" style="padding-right:0px; margin-left:13px;float: left;margin-top: 10px; height: 25px;"> HAPPY TO USE YOUR NOTICE PERIOD?</div>
+                <div class="current_rate_signup checkbox-inline" style=" width:70px; margin-top: 10px; float:right;">
+                  <input checked="checked" id="permanentyes" name="useNoticePeriod" [(ngModel)]="useNoticePeriod" type="radio" value="yes">
+                  <label class="radio-inline" for="permanentyes"><span></span> Yes </label>
+                </div>
+                <br>
+                <div class="current_rate_signup checkbox-inline" style=" width:70px; float:right;">
+                  <input checked="checked" [(ngModel)]="useNoticePeriod" id="permanentno" name="useNoticePeriod" type="radio" value="no">
+                  <label class="radio-inline" for="permanentno"><span></span> No </label>
+                </div>
+              </div>
+              <div class="current_rate_signup situation35">
+                <h2>CONTRACTOR SERVICES <span>Do you want to set up any of the following contractor services?</span></h2>
+                <div class="row">
+                  <div class="col-sm-50" *ngFor="let category of categoryData">
+                    <div class="service_box">
+                      <input type="checkbox" id="{{category.name}}" [value]="category.id" name="{{category.name}}" [checked]="category.checked" (change)="serviceChange(category)">
+                      <label for="{{category.name}}"><span></span> {{category.name}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="current_rate_signup situation35">
+                <div class="terms_of_use">
+                  <input type="checkbox" id="inlineCheckbox12" value="option153" [(ngModel)]="contractor_agree_terms_status" name="termOfUse" required>
+                  <label for="inlineCheckbox12"><span></span> I AGREE TO CONTRACTRECRUIT’S <a href="javascript:void(0)" routerLink="../terms_use" target="_blank">TERMS OF USE</a> </label>
+                </div>
+                <button type="submit" class="btn-primary pull-right hover_white_pluse">SIGN UP <i class="fa fa-plus plus_blue" aria-hidden="true"></i></button>
+                <!--   <a href="javascript:void(0)" class="btn-primary pull-right hover_white_pluse">SIGN UP <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> --></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <div id="contractor-login">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-100">
+        <app-login></app-login>
+      </div>
+    </div>
+  </div>
+</div> -->

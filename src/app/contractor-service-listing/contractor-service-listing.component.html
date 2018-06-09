@@ -1,0 +1,14 @@
+<ul *ngIf="!loading" id="services-nav-menu" class="clearfix">
+  <li *ngFor="let category of categoryData | slice:0:4" routerLink="../directory/{{category.contract_hub_category_id}}">
+    <a href="javascript:void(0)" class="hover">
+      <div class="icon"> <img [src]="category.contract_hub_small_icon" alt="" title="" class="menu_bar" style="height:57px; width:57px;" onError="this.src='./assets/images/ContractMap-icon.png'"> </div>
+      <div class="content">
+        <h4>{{category.contract_hub_category_name}}</h4>
+        <p>{{category.contract_hub_category_sub_title}}</p>
+      </div>
+    </a>
+  </li>
+</ul>
+<div *ngIf="loading">
+  <img src="./assets/images/bx_loader.gif">
+</div>

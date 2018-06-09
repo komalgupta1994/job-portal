@@ -1,0 +1,127 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+      
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup befourlogin_fontsize">
+            <h2 class="">your <span class="text_pink">account</span></h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)" class="hover_text_pink" [routerLink]="['../recruiter-home']">Home</a></li>
+              <li class="right_arrow text_pink">&gt;</li>
+              <li class="active">YOUR ACCOUNT</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="alert alert-success margin-tp18" *ngIf="manageAccountFlag">
+          <a href="javascript:void(0)" class="close" title="close" (click)="manageAccountFlag = !manageAccountFlag">×</a><strong>{{successMessage}}</strong>
+        </div>
+        <!-- <div class="alert alert-danger margin-tp18" *ngIf="manageErrorFlag">
+          <a href="javascript:void(0)" class="close" title="close" (click)="manageErrorFlag = !manageErrorFlag">×</a><strong>{{errorMessage}}</strong>
+        </div> -->
+        <div class="errorbox" *ngIf="WSErrorMsg"><b></b>
+        <br>
+        <li>{{WSErrorMsg}}</li>
+      </div>
+        <div class="errorbox" *ngIf="nameFlag || jobTitleFlag || telephoneFlag || telephoneValidFlag"><b>The following error(s) occured:</b>
+        <br>
+        <li *ngIf="nameFlag">Name is required.</li>
+        <li *ngIf="jobTitleFlag">JOB TITLE is required.</li>
+        <li *ngIf="telephoneFlag">TELEPHONE is required.</li>
+        <li *ngIf="telephoneValidFlag">please enter valid TELEPHONE is required.</li>
+      </div>
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="signup_form_section">
+            <form (ngSubmit)="saveRecruiterAccountForm(saveRecruiterAccount)" #saveRecruiterAccount="ngForm">
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="manage_top_buttons">
+                    <ul>
+                      <li class="active"><a href="javascript:void(0);">Your Account</a></li>
+                      <li><a href="javascript:void(0);" [routerLink]="['../profile']">Your Profile</a></li>
+                      <li><a href="javascript:void(0);" [routerLink]="['../manage-user']">Manage Users</a></li>
+                      <li><a href="javascript:void(0);" [routerLink]="['../manage-password']">Manage Password</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2 class="">Personal Details</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/recruiter-contractor-name.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Name" [(ngModel)]="name" name="name" required>
+                      <!-- <tooltip-content #nameTooltip>
+                        <span *ngIf="saveRecruiterAccount?.form && saveRecruiterAccount.form.controls && saveRecruiterAccount.form.controls.name?.valid" style="color: #C21F39">Name</span>
+                        <span [hidden]="!saveRecruiterAccount.form.controls.name?.hasError('required')" style="color: #C21F39">Name is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="nameFlag">Name is required.</span> -->
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/recruiter-job-title.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Job Title" [(ngModel)]="jobTitle" name="jobTitle" required>
+                      <!-- <tooltip-content #jobTitleTooltip>
+                        <span *ngIf="saveRecruiterAccount?.form && saveRecruiterAccount.form.controls && saveRecruiterAccount.form.controls.jobTitle?.valid " style="color: #C21F39">JOB TITLE</span>
+                        <span [hidden]="!saveRecruiterAccount.form.controls.jobTitle?.hasError('required')" style="color: #C21F39">JOB TITLE is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="jobTitleFlag">JOB TITLE is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2 class="">Contact Details</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/telephone-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Telephone" [(ngModel)]="telePhone" name="telePhone" required>
+                      <!-- <tooltip-content #telePhoneTooltip>
+                        <span *ngIf="saveRecruiterAccount?.form && saveRecruiterAccount.form.controls && saveRecruiterAccount.form.controls.telePhone?.valid" style="color: #C21F39">TELEPHONE</span>
+                        <span [hidden]="!saveRecruiterAccount.form.controls.telePhone?.hasError('required')" style="color: #C21F39">TELEPHONE is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="telephoneFlag">TELEPHONE is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2 class="">Account Details</h2>
+              </div>
+              <div class="total_number_users user_account_created">
+                <p><span>Super User :</span> {{accountSuperUserName ? accountSuperUserName : 'N/A'}}</p>
+                <p><span>Account Created : </span>{{accountCreatedValue | date}}</p>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="sign_up_right_side">
+                    <!-- <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse width_180px">Update Profile -->
+                    <button class="btn-primary hover_text_pink hover_white_pluse width_180px" type="submit">Update Profile
+                      <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i>
+                      <!-- </a>  -->
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--contractor login end-->
+  </div>
+</section>

@@ -1,0 +1,43 @@
+#profilePreviewMap {
+  height: 200px;
+}
+
+.min_height_335 {
+    min-height: 235px !important;
+}
+
+.contractor_profile {
+    border: 1px solid #ccc !important;
+    min-height: 260px;
+    overflow: auto;
+    padding: 15px 0;
+}
+
+.form-control.contractor_profile > option:hover {
+    background: #4cdbff none repeat scroll 0 0;
+    color: #fff;
+}
+
+.form-control.contractor_profile > {
+    background: #4cdbff none repeat scroll 0 0 !important;
+    color: #fff;
+}
+
+.form-control.contractor_profile > option {
+    color: #000;
+    cursor: context-menu;
+    font-size: 15px;
+    margin-bottom: 2px;
+    padding: 4px 20px 4px 10px;
+    font-family: 'HelveticaNeue';
+}
+
+.form-control.contractor_profile > option:first-child{
+    background: #4cdbff none repeat scroll 0 0;
+    color: #fff;
+    -webkit-transition: all 0.2s ease 0s;
+}
+
+.font_capitaliz {
+    text-transform: uppercase !important;
+}

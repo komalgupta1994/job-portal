@@ -1,0 +1,171 @@
+<section id="min_height">
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup befourlogin_fontsize">
+            <h2>Job <span>SEARCH</span></h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)">Home</a></li>
+              <li class="right_arrow">&gt;</li>
+              <li class="active">Contractor </li>
+              <li class="right_arrow">&gt;</li>
+              <li class="active">Job Search</li>
+            </ul>
+            <div class="pull-right job_search">
+              <a href="javascript:void(0)" *ngIf="!isPublic" (click)="lastSearchClick()" class="btn-primary width_180px hover_white_pluse">Last Search <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)" class="btn-primary width_180px hover_white_pluse" (click)="resetSearch()">Reset Search <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+          <div class="signup_form_section">
+            <div class="errorbox" *ngIf="(formNotValid && submitClick)"><b>The following error(s) occured:</b>
+              <br>
+              <li>Min rate always should be lesser than Max rate</li>
+              
+            </div>
+
+            <form #searchForm="ngForm">
+              <div class="job_search_keywords">
+                <h2>Keywords</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/job-title.png" alt="Job Title" title="Job Title" class="img-responsive"></div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Job Title" name="jobTitle" [(ngModel)]="jobTitle">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/Keywords.png" alt="Keywords" title="Keywords" class="img-responsive"></div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Keywords (Boolean Search)" name="keywords" [(ngModel)]="keywords">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/excluding.png" alt="Excluding" title="Excluding" class="img-responsive"></div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Excluding these words (separate with commas)" name="Excluding" [(ngModel)]="excluding">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2>Location &amp; Rates</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">Up to</div>
+                      <select class="form-control minimal background_drop_down" [(ngModel)]="distance" name="distance">
+                        <option value="0">Miles</option>
+                        <option value="1">1 mile</option>
+                        <option value="5">5 miles</option>
+                        <option value="10">10 miles</option>
+                        <option value="20">20 miles</option>
+                        <option value="30">30 miles</option>
+                        <option value="40">40 miles</option>
+                        <option value="50">50 miles</option>
+                        <option value="100">100 miles</option>
+                        <option value="1500">National</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">From</div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="City, Town, or PostCode" name="from" autocorrect="off" autocapitalize="off" spellcheck="off" #search>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-25 col-xs-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">From</div>
+                      <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Rate Min (£)" name="minRate" [(ngModel)]="minRate">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-25 col-xs-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon upto_border_none">To</div>
+                      <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Rate Max (£)" name="maxRate" [(ngModel)]="maxRate">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input value="daily" id="prepaid" name="rateTypeDaily" onchange="prepaidF()" checked="" type="radio" [(ngModel)]="rateType">
+                      <label for="prepaid" class="radio-inline"><span></span> Daily Rate </label>
+                      <input value="hourly" id="postpaid" name="rateTypeHourly" onchange="postpaidF()" type="radio" [(ngModel)]="rateType">
+                      <label for="postpaid" class="radio-inline"><span></span> Hourly Rate </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2>Contract Specification</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="form-control industry_sector">Industry Sector(S)</span>
+                      <div class="input-group-addon bordr_non">
+                        <img src="./assets/images/inform.png" alt="Enter Password" title="Password" class="img-responsive">
+                        <span class="tooltiptext_part">CTRL + click to select<br> multiple sectors</span>
+                      </div>
+                    </div>
+                    <select class="form-control padding_none contractor_profile min_height_335" name="industrySector" [(ngModel)]="industrySector" multiple="true" [(ngModel)]="industrySector">
+                      <option *ngFor="let industry of industrySectorData" value="{{industry.id}}">{{industry.industry}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="job_referance_margen">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon"><img src="./assets/images/reference-number.png" alt="Job Reference Number" title="Job Reference Number" class="img-responsive"></div>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Job Reference Number" name="jobPreferenceNumber" [(ngModel)]="jobPreferenceNumber">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon"><img src="./assets/images/show-contacts.png" alt="Show Contracts Posted Since" title="Show Contracts Posted Since" class="img-responsive"></div>
+                        <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Show Contacts Posted Since:" name="contacts" [(ngModel)]="showContacts"> -->
+                        <select class="form-control minimal background_drop_down" [(ngModel)]="showContracts" name="showContracts">
+                          <option value="0" selected disabled>Posted since</option>
+                          <option *ngFor ="let slot of timeSlotList" [value]="slot.id">{{slot.text}}</option>
+                          
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sign_up_right_side" (click)="searchJob(searchForm)">
+                <a href="javascript:void(0)"  class="btn-primary font_capitaliz hover_white_pluse">Search<i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+</section>

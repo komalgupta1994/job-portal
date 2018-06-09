@@ -1,0 +1,9 @@
+.footer_box a:hover{
+    color: #333 !important;
+    text-decoration: none !important;
+    transition: all .0s;
+}
+
+.my_applications_box .footer_box .view_company p a {
+    width: auto;
+}

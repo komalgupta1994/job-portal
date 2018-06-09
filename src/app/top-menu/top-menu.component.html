@@ -1,0 +1,326 @@
+<div class="navigation_header">
+  <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+  <nav style="height: 1px;" aria-expanded="false" id="bs-navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li class="firstli" (mouseenter) ="mouseEnter('firstli')" (mouseLeave)="mouseLeave('firstli')">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" (click)="removeClass();jobSearchFlag = !jobSearchFlag">Job Search <span class="caret"></span> <img src="./assets/images/nev-right.png" alt="ads" title="ads" class="img-responsive mobile_rightarrow"> </a>
+      
+        <ul class="navigation-dropdown">
+          <div class="dropdown-nav-wrap">
+            <li>
+              <h2 class="hidden-xs">IT Contract Search</h2>
+              <ul>
+                <li><a (click)="removeClass()" href="javascript:void(0)" routerLink="../public/jobSearch">Advanced Job Search</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">View Newest Contracts</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('sort', 2)" href="javascript:void(0)">View all IT Contracts</a></li>
+              </ul>
+            </li>
+            <li class="hidden-xs">
+              <h2>Search IT Contract By Skill</h2>
+              <ul>
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'php')" href="javascript:void(0)">PHP Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'java')" href="javascript:void(0)">Java Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'project manager')" href="javascript:void(0)">Project Manager Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'business analyst')" href="javascript:void(0)">Business Analyst Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'test analyst')" href="javascript:void(0)">Test Analyst Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'sap')" href="javascript:void(0)">SAP Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'pmo')" href="javascript:void(0)">PMO Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract('contractor_search_by_keywords', 'it support')" href="javascript:void(0)">IT Support Contract Jobs</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">View Contracts for all IT Skills</a></li>
+              </ul>
+            </li>
+            <li class="hidden-xs">
+              <h2>Search IT Contracts By Location</h2>
+              <ul>
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">IT Contracts in London</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">IT Contracts in Leeds</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">IT Contracts in Manchester</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">IT Contracts in Glasgow</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">IT Contracts in Bristol</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">IT Contracts in Edinburgh</a></li>
+                <hr class="visible-xs">
+                <li><a (click)="searchContract(null, null)" href="javascript:void(0)">View IT Contracts for all Locations</a></li>
+              </ul>
+            </li>
+          </div>
+        </ul>
+      </li>
+      <li class="secondli" (mouseenter) ="mouseEnter('secondli')" (mouseLeave)="mouseLeave('secondli')">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" (click)="removeClass();itContractorFlag = !itContractorFlag">IT Contractors <span class="caret"></span> <img src="./assets/images/nev-right.png" alt="ads" title="ads" class="img-responsive mobile_rightarrow"></a>
+        <!-- <ul class="navigation-dropdown" >
+          <div class="dropdown-nav-wrap" >
+          <ul>
+            <li class="hub-lst">
+              <div class="lst-news">
+                <h2><a>Join Us on ContractRecruit</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../contractorLogin"
+
+>Login</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../contractorLogin">Sign Up</a></li>
+                </ul>
+              </div>
+              
+            </li>
+            <li class="hub-dir it-contractors-custom">
+              <div class="cnt-hub-dir ">
+                <h2><a>ContractHub</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../hubHome">ContractHub Home</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/news">IT Contractor News</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../advice">IT Contractor Advice</a></li>
+                </ul>
+              </div>
+              <div class="contractor-services cnt-hub-dir">
+                <h2><a href="javascript:void(0);">Contractor Services</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=1">Umbrella Companies</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=2">Contractor Insurance</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=3">IT Training</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=4">MVL</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=5">CV Help</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=6">Working Abroad</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=7">IT Contractor Accountancy</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/directory.php?category_id=8">IT Contractor Mortgages</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="hub-advoice">
+              <div class="cnt-hub-advc">
+                <h2><a>Site Guides</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/contractors/guides">How to Use ContractRecruit</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/faqs">IT Contractor FAQs</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          </div>
+        </ul> -->
+
+        <ul class="navigation-dropdown">
+        <div class="dropdown-nav-wrap">
+            <li>
+                <h2 class="hidden-xs">Join Us on ContractRecruit</h2>
+                <ul>
+                    <li><a (click)="removeClass()" href="javascript:void(0)" routerLink="./contractorLogin">Login</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)" routerLink="./contractorSignup">Sign Up</a></li>
+                    <hr class="visible-xs">
+                    <li class="visible-xs"><a (click)="removeClass()" href="javascript:void(0)" routerLink="../public/contractor_hub_home">ContractHub Home</a></li>
+                    <hr class="visible-xs">
+                    <li class="visible-xs"><a (click)="removeClass()" href="javascript:void(0)" routerLink="../news_category">IT Contractor News</a></li>
+                    <hr class="visible-xs">
+                    <li class="visible-xs"><a (click)="removeClass()" href="javascript:void(0)" routerLink="../advice">IT Contractor Advice</a></li>
+                    <hr class="visible-xs">
+                    <li class="visible-xs"><a (click)="removeClass()" href="javascript:void(0)" class="visible-xs">Contractor Service</a></li>
+                </ul>
+            </li>
+            <li class="hidden-xs">
+                <h2 class="hidden-xs">ContractHub</h2>
+                <ul class="hidden-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)"  routerLink="../public/contractor_hub_home">ContractHub Home</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)" routerLink="../public/news">IT Contractor News</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)" routerLink="../public/advice">IT Contractor Advice</a></li>
+                </ul>
+                <h2 class="hidden-xs">Contractor Services</h2>
+                <ul class="hidden-xs">
+                    <li *ngFor="let category of categoryData" (click)="categoryClicked(category)"><a  href="javascript:void(0)">{{category.contract_hub_category_name}}</a></li>
+                    <hr class="visible-xs">
+                    <!-- <li><a (click)="removeClass()" href="javascript:void(0)">Contractor Insurance</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)">IT Training</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)">MVL</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)">CV Help</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)">Working Abroad</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)">IT Contractor Accountancy</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" href="javascript:void(0)">IT Contractor Mortgages</a></li> -->
+                </ul>
+            </li>
+            <li class="hidden-xs">
+                <h2 class="hidden-xs">Site Guides</h2>
+                <ul class="hidden-xs">
+                    <li><a (click)="removeClass()" routerLink="./guides" href="javascript:void(0)">How to Use ContractRecruit</a></li>
+                    <hr class="visible-xs">
+                    <li><a (click)="removeClass()" routerLink="./faq" href="javascript:void(0)">IT Contractor FAQs</a></li>
+                </ul>
+            </li>
+        </div>
+    </ul>
+
+
+
+
+
+
+      </li>
+      <li class="color-pink thirdli" (mouseenter) ="mouseEnter('thirdli')" (mouseLeave)="mouseLeave('thirdli')">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" (click)="removeClass();itRecruiterFlag = !itRecruiterFlag">IT Recruiters <span class="caret pink"></span> <img src="./assets/images/nev-right.png" alt="ads" title="ads" class="img-responsive mobile_rightarrow"></a>
+        <!-- <div class="cntrct-hub-nav" *ngIf="itRecruiterFlag">
+          <ul>
+            <li class="hub-lst">
+              <div class="lst-news">
+                <h2><a style="color: #FF0066;">Join Us on ContractRecruit</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../recruiterRegister">Login</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../recruiterRegister">Sign Up</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/recruiters/benefits">Why Should I Sign Up?</a></li>
+                </ul>
+              </div>
+              
+            </li>
+            <li class="hub-dir it-contractors-custom">
+              <div class="cnt-hub-dir ">
+                <h2><a style="color: #FF0066;">Search IT Contractors</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../advanced-search">Advanced Contractor Search</a></li>
+                </ul>
+              </div>
+              <div class="contractor-services cnt-hub-dir">
+                <h2><a style="color: #FF0066;">Quick Search</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../searchresult-loggedin">Contract Web Developers</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../searchresult-loggedin">Contract Project Managers</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../searchresult-loggedin">Contract Analysts</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../searchresult-loggedin">Contract Designers</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../searchresult-loggedin">Contract Software Developers</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="hub-advoice">
+              <div class="cnt-hub-advc">
+                <h2><a style="color: #FF0066;">Site Guides</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/recruiters/guides">How to Use ContractRecruit</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/faqs">Recruiter FAQs</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div> -->
+        <ul class="navigation-dropdown">
+              <div class="dropdown-nav-wrap">
+                  <li>
+                      <h2 class="hidden-xs">Join Us on ContractRecruit</h2>
+                      <ul>
+                          <li><a (click)="removeClass()" href="javascript:void(0)" routerLink="./recruiterLogin">Login</a></li>
+                          <hr class="visible-xs">
+                          <li><a (click)="removeClass()" href="javascript:void(0)" routerLink="./recruiterRegister">Sign Up</a></li>
+                          <hr class="visible-xs">
+                          <!-- <li class="hidden-xs"><a (click)="removeClass()" href="javascript:void(0)">Why Should I Sign Up</a></li>
+                          <li><a (click)="removeClass()" href="javascript:void(0)">Why use <span class="stong">Contract</span>Recruit?</a></li> -->
+                          <hr class="visible-xs">
+                          <li class="visible-xs"><a (click)="removeClass()" href="javascript:void(0)">Advanced Contractor Search</a></li>
+                      </ul>
+                  </li>
+                  <li class="hidden-xs">
+                      <h2 class="hidden-xs">Search IT Contractors</h2>
+                      <ul class="hidden-xs">
+                        <!--  routerLink="/recruiter/advanced-search" -->
+                          <li><a (click)="removeClass()" routerLink="/public/advanced-search" href="javascript:void(0)">Advanced Contractor Search</a></li>
+                      </ul>
+                      <h2 class="hidden-xs">Quick Search</h2>
+                      <ul class="hidden-xs">
+                        <!--  routerLink="/recruiter/searchresult-loggedin" -->
+                          <li><a (click)="removeClass();moveToSearchResult('Web Developers')" href="javascript:void(0)">Contract Web Developers</a></li>
+                          <hr class="visible-xs">
+                          <!--  routerLink="/recruiter/searchresult-loggedin" -->
+                          <li><a (click)="removeClass();moveToSearchResult('Project Managers')" href="javascript:void(0)">Contract Project Managers</a></li>
+                          <hr class="visible-xs">
+                          <!--  routerLink="/recruiter/searchresult-loggedin" -->
+                          <li><a (click)="removeClass();moveToSearchResult('Analysts')" href="javascript:void(0)">Contract Analysts</a></li>
+                          <hr class="visible-xs">
+                          <!--  routerLink="/recruiter/searchresult-loggedin"-->
+                          <li><a (click)="removeClass();moveToSearchResult('Designers')" href="javascript:void(0)">Contract Designers</a></li>
+                          <hr class="visible-xs">
+                          <!--  routerLink="/recruiter/searchresult-loggedin" -->
+                          <li><a (click)="removeClass();moveToSearchResult('Software Developers')" href="javascript:void(0)">Contract Software Developers</a></li>
+                      </ul>
+                  </li>
+                  <li class="hidden-xs">
+                      <h2>Site Guides</h2>
+                      <ul>
+                          <li><a (click)="removeClass()" routerLink="./guides" href="javascript:void(0)">How to Use ContractRecruit</a></li>
+                          <hr class="visible-xs">
+                          <!--  routerLink="/public/faq" -->
+                          <li><a (click)="removeClass()" routerLink="./faq" href="javascript:void(0)">Recruiter FAQs</a></li>
+                      </ul>
+                  </li>
+              </div>
+          </ul>
+      </li>
+      <li class="fourli" (mouseenter) ="mouseEnter('fourli')" (mouseLeave)="mouseLeave('fourli')">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" (click)="removeClass();aboutContractRecruitFlag = !aboutContractRecruitFlag">About ContractRecruit <span class="caret"></span> <img src="./assets/images/nev-right.png" alt="ads" title="ads" class="img-responsive mobile_rightarrow"></a>
+
+        <ul class="navigation-dropdown col-one">
+                                    <div class="dropdown-nav-wrap">
+                                        <li>
+                                            <h2 class="hidden-xs">About ContractRecruit</h2>
+                                            <ul>
+                                                <li><a (click)="removeClass();moveToAboutPage('contractRecruit')" href="javascript:void(0)">What is <span class="stong">Contract</span>Recruit?</a></li>
+                                                <hr class="visible-xs">
+                                                <li><a (click)="removeClass();moveToAboutPage('whoAreWe')" href="javascript:void(0)">Who are we?</a></li>
+                                                <hr class="visible-xs">
+                                                <li><a (click)="removeClass();moveToAboutPage('whatWeDo')" href="javascript:void(0)">What do we do?</a></li>
+                                            </ul>
+                                            <h2 class="hidden-xs">Site Usage</h2>
+                                            <ul class="hidden-xs">
+                                                <li><a (click)="removeClass();moveToTerms('terms')" href="javascript:void(0)">Terms of Use</a></li>
+                                                <hr class="visible-xs">
+                                                <li><a (click)="removeClass();moveToTerms('privacy')" routerLink="./privacy-policy" href="javascript:void(0)">Privacy Policy</a></li>
+                                                <hr class="visible-xs">
+                                                <li><a (click)="removeClass()" routerLink="./site-map" href="javascript:void(0)">Site Map</a></li>
+                                            </ul>
+                                        </li>
+                                    </div>
+                                </ul>
+        
+      <!--   <div class="cntrct-hub-nav" *ngIf="aboutContractRecruitFlag">
+          <ul>
+            <li class="hub-lst">
+              <div class="lst-news">
+                <h2><a>About ContractRecruit</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../about-recruiter">What is ContractRecruit?</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../about-recruiter">Who are we?</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="javascript:void(0)" routerLink="../about-recruiter">What do we do?</a></li>
+                </ul>
+              </div>
+              <div class="mobile-app">
+                <h2><a>Site Usage</a></h2>
+                <ul class="menu-cust-des">
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/terms">Terms of Use</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/privacy-policy">Privacy Policy</a></li>
+                  <li><a (click)="removeClass()" class=navigation-menu href="https://aws.contractrecruit.co.uk/sitemap">Site Map</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div> -->
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="worksmart_nev"><span>#</span>WorkSmart<span>PlayHard</span></div>

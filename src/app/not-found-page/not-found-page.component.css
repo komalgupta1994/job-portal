@@ -1,0 +1,12 @@
+.container{
+	height: calc(100vh - 265px);
+}
+.page_404_main {
+    margin: 0 auto;
+    vertical-align: middle;
+    width: auto;
+    display: table;
+    margin-top: -53px;
+    top: 50%;
+    position: relative;
+}

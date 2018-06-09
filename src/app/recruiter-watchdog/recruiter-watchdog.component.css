@@ -1,0 +1,97 @@
+.errorbox {
+    border: 2px dashed #FF0066;
+    color: #000;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #E7EDEA;
+    font-weight: normal;
+}
+.errorbox >b {
+    font-weight: normal;
+    margin-bottom: 10px;
+    display: block;
+}
+.errorbox > li {
+    display: inline-block;
+    background: #000;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    color: #ffffff;
+}
+
+#confirm-container {
+    position: fixed;
+    z-index: 1002;
+    width: 244px;
+    margin-left: -122px;
+    margin-top: -88px;
+    border: 3px solid #333;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: #f6f6f6;
+    font-size: 12px;
+    color: #393939;
+    height: 177px;
+    padding: 0 25px 0 35px;
+    top: 50%!important;
+    left: 50%!important;
+    
+}
+
+#confirm-container a.modal-close{
+    text-decoration: none;
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    width: 24px;
+    height: 23px;
+    background: #ccc;
+    border-radius: 50%;
+    text-align: center;
+    color: #000;
+    padding-top: 4px;
+}
+#confirm-container .buttons {
+    text-align: center;
+    width: 168px;
+    margin: auto;
+}
+
+#confirm-container .buttons div {
+    float: right;
+    margin: 0 5px;
+    display: inline;
+    font-size: 14px;
+}
+
+.simplemodal-wrap{
+    height: 100%; outline: 0px; width: 100%; overflow: auto;
+}
+.simplemodal-data{display: block;}
+
+
+.simplemodal-wrap .buttons .no {
+    background: #FF0066;
+    padding: 2px 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.simplemodal-wrap .buttons .yes {
+    background: #FF0066;
+    padding: 2px 5px;
+    color: #fff;
+    cursor: pointer;
+}
+#confirm-container .message {
+    color: #ff0065;
+    font-size: 18px;
+    text-align: center;
+    padding: 25px 0 5px;
+}
+
+.recruiter_watchdog_main{
+    margin-bottom: 20px;
+}

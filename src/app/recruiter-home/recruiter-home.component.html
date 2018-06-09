@@ -1,0 +1,366 @@
+<section id="min_height">
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div class="recruiter_watchdog_main padding_top_border">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-100">
+                            <div class="contractor_signup recruiter_signup">
+                                <h2 class="font_capitalizs color_white">Recruiter <span class="text_pink">Home</span></h2>
+                                <ul class="breadcomb color_active">
+                                    <li><a href="javascript:void(0);">Home</a></li>
+                                    <li class="right_arrow text_pink">&gt;</li>
+                                    <li>CONTRACTOR SEARCH</li>
+                                    <li class="right_arrow text_pink">&gt;</li>
+                                    <li class="active">RECRUITER HOME</li>
+                                </ul>
+                                <h3>QUiCK Stats for <span class="text_pink">Xcede</span> (Account: Luke Clothier)</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-80 col-md-80">
+                            <div class="recruiter_add_sub_skills"> <a href="javascript:void(0)">Overall Team  <img src="./assets/images/close-box.png" alt="Close" title="Close"></a> <a href="javascript:void(0)">Number of Applications  <img src="./assets/images/close-box.png" alt="Close" title="Close"></a> <a href="javascript:void(0)">Number of Jobs Posted  <img src="./assets/images/close-box.png" alt="Close" title="Close"></a> <a href="javascript:void(0)">Number of Jobs Viewed  <img src="./assets/images/close-box.png" alt="Close" title="Close"></a> </div>
+                        </div>
+                        <div class="col-sm-20 col-md-20">
+                            <div class="add_filter">
+                                <a href="javascript:void(0)"><img src="./assets/images/add-icon.png" alt="add" title="add"></a>
+                                <a href="javascript:void(0)"><img src="./assets/images/filter-icon.png" alt="filter" title="filter"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-80 col-md-80">
+                            <div class="recruiter_add_sub_skills">
+                                <img src="./assets/images/graph-img.png" alt="Close" title="Close" class="img-responsive">
+                                <!-- <button (click)="add()">Add Point!</button> -->
+                                <!-- <div [chart]="chart"></div> -->
+                            </div>
+                        </div>
+                        <div class="col-sm-20 col-md-20">
+                            <div class="graph_listing">
+                                <ul>
+                                    <li><i class="fa fa-circle-o color_1" aria-hidden="true"></i> Number of Applications</li>
+                                    <li><i class="fa fa-circle-o color_2" aria-hidden="true"></i> Number of Jobs Posted </li>
+                                    <li><i class="fa fa-circle-o color_3" aria-hidden="true"></i> Number of Jobs Viewed</li>
+                                   <!--  <li>
+                                        <i class="fa fa-angle-down color_2" aria-hidden="true"></i> Account users
+                                        <ul class="open_ul">
+                                            <li class="active">Overall Team</li>
+                                            <li>Overall Team</li>
+                                            <li>Overall Team</li>
+                                            <li>Overall Team</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-angle-down color_2" aria-hidden="true"></i> User Metrics
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-angle-down color_2" aria-hidden="true"></i> Time Period
+                                    </li>
+ -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contractor login end-->
+            <div class="container">
+                <div class="recruiter_home_heding">
+                    <div class="row">
+                        <div class="col-sm-45 col-md-50">
+                            <div class="quick_links_left">
+                                <h4>Quick <span class="text_pink">Links</span></h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-17 col-xs-20">
+                                    <img src="./assets/images/quick-searchs.png" alt="" title="" class="img-responsive">
+                                </div>
+                                <div class="col-sm-30 col-xs-30">
+                                    <div class="home_search_part">
+                                        <h3 class="text_pink">Search</h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-50 col-xs-50">
+                                    <div class="home_recruiter_contant">
+                                        <p class="text_pink" [routerLink]="['/recruiter/advanced-search']"><strong>Contractor Search</strong></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/saved-search']">Saved Search </a><span class="text_pink"><strong>{{quickLinkData?.search?.save_search}}</strong></span></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/watchdog']"><strong>Watch</strong>Dogs </a><span class="text_pink"><strong>{{quickLinkData?.search?.watchdog}}</strong></span></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/watch-list']"><strong>Watch</strong>List <span class="text_pink"><strong>{{quickLinkData?.search?.watchlist}}</strong></span></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-17 col-xs-20">
+                                    <img src="./assets/images/Jobs-home.png" alt="" title="" class="img-responsive">
+                                </div>
+                                <div class="col-sm-30 col-xs-30">
+                                    <div class="home_search_part">
+                                        <h3 class="text_pink">Jobs</h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-50 col-xs-50">
+                                    <div class="home_recruiter_contant">
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/job-posting']">Post a Job </a><span class="text_pink"><strong>{{quickLinkData?.job?.job_post}}</strong></span></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/manage-jobs']">Manage Jobs <span class="text_pink"><strong>{{quickLinkData?.job?.job_post}}</strong></span></a></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['../view-applications']">View Applications </a><span class="text_pink"><strong>{{quickLinkData?.job?.job_application}}</strong></span></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/job-posting']">Post a Premium Job</a><span class="text_pink"><strong> {{quickLinkData?.job?.premiumjob}}</strong></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-17 col-xs-20">
+                                    <img src="./assets/images/profile-home.png" alt="" title="" class="img-responsive">
+                                </div>
+                                <div class="col-sm-30 col-xs-30">
+                                    <div class="home_search_part">
+                                        <h3 class="text_pink">Profile</h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-50 col-xs-50">
+                                    <div class="home_recruiter_contant">
+                                        <p><a href="javascript:void(0);"><strong>PROFILE COMPLETION</strong> <span class="text_pink"><strong> {{quickLinkData?.profile}}</strong></span></a></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/view-profile']">View Profile</a></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/profile']">Edit Profile</a></p>
+                                        <p>Share Profile</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-17 col-xs-20">
+                                    <img src="./assets/images/account-home.png" alt="" title="" class="img-responsive">
+                                </div>
+                                <div class="col-sm-30 col-xs-30">
+                                    <div class="home_search_part">
+                                        <h3 class="text_pink">Account</h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-50 col-xs-50">
+                                    <div class="home_recruiter_contant">
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/manage-account']">View Current Plan</a></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/manage-account']">Edit Account Details</a></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/manage-user']">Add Another User</a></p>
+                                        <p><a href="javascript:void(0);" [routerLink]="['/recruiter/manage-user']">View Account Users</a><span class="text_pink"><strong> {{quickLinkData?.account?.users}}</strong></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-55 col-md-50">
+                            <div class="regional_stats_right">
+                                <h4>Regional <span class="text_pink">Stats</span></h4>
+                                <div class="graph_listing number_of_application">
+                                    <div class="add_filter margin_bottom_50">
+                                        <a href="javascript:void(0)"><img src="./assets/images/add-icon.png" alt="add" title="add"></a>
+                                        <a href="javascript:void(0)"><img src="./assets/images/filter-icon.png" alt="filter" title="filter"></a>
+                                    </div>
+                                    <p><a href="javascript:void(0);" [routerLink]="['../view-applications']">Number of Applications</a></p>
+                                    <ul>
+                                        <li><i class="fa fa-circle color_1" aria-hidden="true"></i> >100 </li>
+                                        <li><i class="fa fa-circle color_2" aria-hidden="true"></i> 75 - 100 </li>
+                                        <li><i class="fa fa-circle color_3" aria-hidden="true"></i> 25 - 75</li>
+                                        <li><i class="fa fa-circle color_4" aria-hidden="true"></i>
+                                            <25 </li>
+                                    </ul>
+                                </div>
+                                <img src="./assets/images/regional-stats.jpg" alt="" title="" class="img-responsive">
+                            </div>
+                            <div class="recruiter_add_sub_skills text_color_black"> <a href="javascript:void(0)">Overall Team   <img src="./assets/images/close-box.png" alt="Close" title="Close"></a> <a href="javascript:void(0)">Number of Applications  <img src="./assets/images/close-box.png" alt="Close" title="Close"></a> <a href="javascript:void(0)">1 Month   <img src="./assets/images/close-box.png" alt="Close" title="Close"></a> </div>
+                        </div>
+                        <div class="col-sm-20">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="container">
+                <div class="row">
+                    <div class="col-sm-33">
+                        <div class="ad_space margin_top_25">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-sm-34 margin_top_25">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-sm-33 margin_top_25">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <app-ad-space></app-ad-space>
+            <div id="contractor-login" class="quick_recruitor_search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-100">
+                            <div class="contractor_login">
+                                <h2 class="text-center font_size color_white text_align_left">Quick <span class="text_pink">Contractor Search</span></h2>
+                            </div>
+                            <div class="login_form_section">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-50">
+                                            <div class="form-group">
+                                                <input class="form-control" id="exampleInputEmail1" placeholder="ENTER SKILL OR JOB TITLE " type="text" [(ngModel)]="jobTitleValue" name="jobTitleValue">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-50">
+                                            <div class="form-group">
+                                                <!-- <input class="form-control" id="exampleInputPassword1" placeholder="ENTER LOCATION" type="text" [(ngModel)]="locationValue" name="locationValue"> -->
+                                                <input placeholder="ENTER LOCATION"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control box_height_30 box_padding_3" #homeSearch required id="exampleInputPassword1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-70">
+                                            <div class="form-group forgot_click_here text_align_left"> NEED A MORE ADVANCED SEARCH? <a [routerLink]="['/recruiter/advanced-search']" href="javascript:void(0)" class="text_pink">CLICK HERE</a> </div>
+                                        </div>
+                                        <div class="col-sm-30">
+                                            <div class="form-group">
+                                                <div class="form-group form_login margin_top_7 recruiter_home_login"> <a (click)="searchResultHomePage()" href="javascript:void(0)" class="btn-default background_pink">SEARCH <i class="fa fa-plus" aria-hidden="true"></i></a> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="recruiter_home_signup">
+                    <!-- <h2 class="font_capitalizs">Your Jobs with the <span class="text_pink">least</span> | Most applications </h2> -->
+                    <h2 class="font_capitalizs">Your Jobs with the <a href="javascript:void(0);" [ngClass]="'least'===sortType ? 'text_pink':''" (click)="getMostLeastJobs('least')">least</a> | <a href="javascript:void(0);" [ngClass]="'most'===sortType ? 'text_pink':''" (click)="getMostLeastJobs('most')">Most</a> applications </h2>
+                </div>
+                <div class="row">
+                    <div class=" col-md-33 col-sm-33" *ngFor="let item of leastMostData">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+                                <p class="text_pink">{{item?.recuriter_contact_name}}</p>
+                            </div>
+                            <div class="application_box_contant">
+                                <img [src]="item?.profileimage && item?.profileimage.length > 0 ? item?.profileimage[0]?.attachment_url+'/' +  item?.profileimage[0]?.attachment_name : './assets/images/application1.png'" alt="ads" title="ads" class="img-responsive" height="75px" width="75px">
+                                <h2>{{item?.jobTitle}}</h2>
+                            </div>
+                            <div class="application_box_contant2">
+                                <p><span class="text_pink">Location:</span>{{item?.cityTown ? item?.cityTown : 'N/A'}}</p>
+                                <p><span class="text_pink">Rate:</span> £{{item?.prefereedRate?.minRate}} - £{{item?.prefereedRate?.maxRate}} p/<cite style="font-style: normal;"*ngIf="item?.prefereedRate?.dailyHourlyRate === 'daily'">d</cite>
+                                    <cite style="font-style: normal;" *ngIf="item?.prefereedRate?.dailyHourlyRate === 'hourly'">h</cite></p>
+                                <p><span class="text_pink">Start Date:</span>{{item?.startDate | date}}</p>
+                                <p><span class="text_pink">Duration:</span>{{item?.duration ? item?.duration : 'N/A'}}</p>
+                                <p class="full_contant" style="height: 90px;">{{item?.jobSpecification | slice:0:200}}...</p>
+                            </div>
+                            <div class="footer_box">
+                                <div class="pull-left social_box_footer">
+                                    <p><span class="text_pink">{{item?.applied ? item?.applied : 'N/A'}}</span> Applications</p>
+                                </div>
+                                <div class="pull-right view_company">
+                                    <a href="javascript:void(0)" [routerLink]="['../job-posting']" (click)="passJobId(item?.jobid)" class="hover_text_pink">Edit Posting <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-34 col-sm-34">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+                                <p class="text_pink">Kent</p>
+                            </div>
+                            <div class="application_box_contant">
+                                <img src="./assets/images/application1.png" alt="ads" title="ads" class="img-responsive">
+                                <h2>Cyber Security Specialist</h2>
+                            </div>
+                            <div class="application_box_contant2">
+                                <p><span class="text_pink">Location:</span> Basingstoke, Hampshire</p>
+                                <p><span class="text_pink">Rate:</span> £200 - £260 p/d</p>
+                                <p><span class="text_pink">Start Date:</span> 10/07/2017</p>
+                                <p><span class="text_pink">Duration:</span> 6 Months</p>
+                                <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+                                    <br> Focusing on Retention you will be providing maternity cover...</p>
+                            </div>
+                            <div class="footer_box">
+                                <div class="pull-left social_box_footer">
+                                    <p><span class="text_pink">22</span> Applications</p>
+                                </div>
+                                <div class="pull-right view_company">
+                                    <a href="javascript:void(0)" class="hover_text_pink">Edit Posting <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-33 col-sm-33">
+                        <div class="my_applications_box">
+                            <div class="header_top">
+                                <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+                                <p class="text_pink">London</p>
+                            </div>
+                            <div class="application_box_contant">
+                                <img src="./assets/images/application1.png" alt="ads" title="ads" class="img-responsive">
+                                <h2>ION Marketview</h2>
+                            </div>
+                            <div class="application_box_contant2">
+                                <p><span class="text_pink">Location:</span> Basingstoke, Hampshire</p>
+                                <p><span class="text_pink">Rate:</span> £200 - £260 p/d</p>
+                                <p><span class="text_pink">Start Date:</span> 10/07/2017</p>
+                                <p><span class="text_pink">Duration:</span> 6 Months</p>
+                                <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+                                    <br> Focusing on Retention you will be providing maternity cover...</p>
+                            </div>
+                            <div class="footer_box">
+                                <div class="pull-left social_box_footer">
+                                    <p><span class="text_pink">18</span> Applications</p>
+                                </div>
+                                <div class="pull-right view_company">
+                                    <a href="javascript:void(0)" class="hover_text_pink">Edit Posting <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-100">
+                        <div class="show_more_application">
+                            <a [routerLink]="['/recruiter/manage-jobs']" href="javascript:void(0)" *ngIf="leastMostData.length > 0" class="btn-primary hover_text_pink hover_white_pluse  width_230px"><span>MANAGE ALL JOBS</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<div *ngIf="showWatchPopup" id="watchContractor" class="modalbox modbox2 window " style="display: block;">
+  <h3>Watch Contractor <span class="closex shut3" style="cursor: pointer;" (click)="closePopup()">X</span></h3>
+  <div class="modal-inner">
+    <div class="inputrowx">
+      <div class="formgroup">
+        <label for="notifyme">Notify me <span>(Choose Multiple)</span>:</label>
+        <span class="inp-auto auto284"><span>
+                        <select class="inpfocus2" name="notifyme" id="notifyMe" [(ngModel)]="notifyMeValue">
+                            <option value="24 hour">24 hours before live</option>
+                            <option value="2 day">2 days before live</option>
+                            <option value="1 week">1 week before live</option>
+                            <option value="all">All the above</option>
+                        </select>
+                    </span></span>
+      </div>
+    </div>
+    <div class="inputrowx">
+      <div class="formgroup">
+        <label for="attach-specific">Attach to specific job:</label>
+        <span class="inp-auto auto284"><span>
+                        <select class="inpfocus2" name="attachToJob" id="attachToJob" [(ngModel)]="currentJobId">
+                            <option value="0">All Jobs</option>
+                            <option value="{{item?.jobid}}" *ngFor="let item of jobListData;">{{item?.jobTitle}}</option>
+                        </select>
+                    </span></span>
+      </div>
+    </div>
+  </div>
+  <div class="modalbase">
+    <p class="modalview">View <a href="javascript:void(0);" [routerLink]="['../watch-list']">Watching Folder</a></p>
+    <div class="saveProfile">
+      <input class="shut4 watchContractorSubmit" (click)="addToWatchList()" type="submit" name="watchCon" id="watchCon" value="Watch">
+    </div>
+  </div>
+</div>

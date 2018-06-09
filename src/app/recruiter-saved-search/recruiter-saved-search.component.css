@@ -1,0 +1,76 @@
+.industry_min_heights {
+    border: 1px solid #ccc !important;
+    /*width: 170px;*/
+    float: right;
+}
+.form-group {
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+.popup {
+    background: #000;
+    border: 0 none;
+    border-radius: 4px;
+    bottom: 34px;
+    box-shadow: 0 0 20px 0 #999;
+    color: #fff;
+    display: none;
+    font-size: 12px;
+    font-weight: 400;
+    left: -192px;
+    min-height: 50px;
+    padding: 12px 14px;
+    position: absolute;
+    top: auto;
+    width: 226px;
+    display: none;
+}
+.popup b {
+    background: rgba(0, 0, 0, 0) url("../../assets/images/tooltip-spike.png") no-repeat scroll 0 0;
+    bottom: -19px;
+    height: 22px;
+    left: 186px;
+    position: absolute;
+    top: auto;
+    width: 40px;
+}
+
+.errorbox {
+    border: 2px dashed #FF0066;
+    color: #000;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #E7EDEA;
+    font-weight: normal;
+}
+.errorbox >b {
+    font-weight: normal;
+    margin-bottom: 10px;
+    display: block;
+}
+.errorbox > li {
+    display: inline-block;
+    background: #000;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    color: #ffffff;
+}
+
+ option {
+    color: #000;
+    cursor: context-menu;
+    font-size: 15px;
+    margin-bottom: 2px;
+    padding: 5px 20px 5px 10px;
+    font-family: 'HelveticaNeue';
+}
+
+ option:first-child{
+    /* background: #ff4c94;
+    color: #fff; */
+    -webkit-transition: all 0.2s ease 0s;
+}
+
+option:hover {background: #ff4c94; color: #FFF;}

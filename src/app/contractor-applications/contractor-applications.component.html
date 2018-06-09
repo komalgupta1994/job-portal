@@ -1,0 +1,455 @@
+<section>
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup my_application_headding">
+            <h2>my <span>Applications</span></h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)">Home</a></li>
+              <li class="right_arrow">&gt;</li>
+              <li class="active">APPLICATIONS</li>
+            </ul>
+            <div *ngIf="appliedJobList?.length > 0" class="pull-right applied_jobs">You have applied to <span>{{appliedJobList?.length}}</span> job(s)</div>
+            <div *ngIf="appliedJobList?.length==0 " class="pull-right applied_jobs">You have applied to <span>0</span> job</div>
+          </div>
+          <div *ngIf="appliedJobList?.length > 0" class="pull-right application_sort_by"> <a href="javascript:void(0)" class="dropdown-toggle btn-primary font_capitaliz hover_white_pluse" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By <i class="fa fa-sort-desc  plus_blue" aria-hidden="true"></i>
+              </a>
+            <ul class="dropdown-menu">
+              <li *ngFor="let option of sortOptions" (click)="currentPage=1;sortBy = option.id;getAppliedjobList()">{{option.short_name}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+</section>
+<section>
+  <div class="container">
+    <div class="errorbox" *ngIf="appliedJobList?.length==0 && !loading">
+      <br>
+      <li>There are no record</li>
+    </div>
+    <div class="row" *ngIf="!loading">
+      <div class=" col-md-33 col-sm-33" *ngFor="let job of appliedJobList">
+        <div class="my_applications_box" (click)="viewCompanyProfile()">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>15</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img style="height: 75px;" [src]="job.profileimage[0]?.attachment_url + '/'+ job.profileimage[0]?.attachment_name" onError="this.src='./assets/images/application1.png'" alt="ads" title="ads" class="img-responsive">
+            <h2>{{job.jobTitle}}</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> {{job.cityTown}}</p>
+            <p><span>Rate:</span> £{{job.prefereedRate.minRate}} - £{{job.prefereedRate.maxRate}} p/{{job.prefereedRate.dailyHourlyRate =='daily'? 'd' :'h'}}</p>
+            <p><span>Start Date:</span> {{job.startDate| date:'medium' :'MM-dd-yyyy' }}</p>
+            <p><span>Duration:</span> {{job.duration}}</p>
+            <p class="full_contant" style="height: 90px;">{{job.jobSpecification | slice:0:200}}...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company" (click)="viewCompany(job)">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue margin_left_20" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-34 col-sm-34">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>45</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application2.png" alt="ads" title="ads" class="img-responsive">
+            <h2>Cyber Security Specialist</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="col-md-33 col-sm-33">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>60</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application3.png" alt="ads" title="ads" class="img-responsive">
+            <h2>ION Marketview</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>-->
+    </div>
+    <div class="row" *ngIf="totalPage && (totalPage > currentPage)">
+      <div class="col-sm-100">
+        <div class="show_more_application" (click)="currentPage=currentPage+1; getAppliedjobList();"> <a href="javascript:void(0)" class="btn-primary hover_white_pluse"><span>SEE MORE JOBS</span> <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+      </div>
+    </div>
+    <div *ngIf="loading" class="row">
+      <img src="./assets/images/bx_loader.gif">
+    </div>
+    <app-ad-space></app-ad-space>
+    <!-- <div class="row">
+      <div class="col-sm-33">
+      <div class="ad_space">
+        <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+      </div>
+    </div>
+    <div class="col-sm-34">
+      <div class="ad_space">
+        <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+      </div>
+    </div>
+    <div class="col-sm-33">
+      <div class="ad_space">
+        <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+      </div>
+    </div>
+    </div> -->
+    <!-- <div class="row">
+      <div class=" col-md-33 col-sm-33">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>15</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application1.png" alt="ads" title="ads" class="img-responsive">
+            <h2>Retention Marketing Manager</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-34 col-sm-34">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>45</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application2.png" alt="ads" title="ads" class="img-responsive">
+            <h2>Cyber Security Specialist</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-33 col-sm-33">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>60</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application3.png" alt="ads" title="ads" class="img-responsive">
+            <h2>ION Marketview</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class=" col-md-33 col-sm-33">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>15</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application1.png" alt="ads" title="ads" class="img-responsive">
+            <h2>Retention Marketing Manager</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-34 col-sm-34">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>45</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application2.png" alt="ads" title="ads" class="img-responsive">
+            <h2>Cyber Security Specialist</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-33 col-sm-33">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>60</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application3.png" alt="ads" title="ads" class="img-responsive">
+            <h2>ION Marketview</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row">
+      <div class="col-sm-33">
+      <div class="ad_space">
+        <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+      </div>
+    </div>
+    <div class="col-sm-34">
+      <div class="ad_space">
+        <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+      </div>
+    </div>
+    <div class="col-sm-33">
+      <div class="ad_space">
+        <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+      </div>
+    </div>
+    </div> -->
+    <!-- <app-ad-space></app-ad-space>
+    <div class="row">
+      <div class=" col-md-33 col-sm-33">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>15</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application1.png" alt="ads" title="ads" class="img-responsive">
+            <h2>Retention Marketing Manager</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-34 col-sm-34">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>45</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application2.png" alt="ads" title="ads" class="img-responsive">
+            <h2>Cyber Security Specialist</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-33 col-sm-33">
+        <div class="my_applications_box">
+          <div class="header_top">
+            <img src="./assets/images/location-map.png" alt="ads" title="ads" class="img-responsive">
+            <p><span>60</span> Miles from Home</p>
+          </div>
+          <div class="application_box_contant">
+            <img src="./assets/images/application3.png" alt="ads" title="ads" class="img-responsive">
+            <h2>ION Marketview</h2>
+          </div>
+          <div class="application_box_contant2">
+            <p><span>Location:</span> Basingstoke, Hampshire</p>
+            <p><span>Rate:</span> £200 - £260 p/d</p>
+            <p><span>Start Date:</span> 10/07/2017</p>
+            <p><span>Duration:</span> 6 Months</p>
+            <p class="full_contant">Xcede are currently seeking a contract Marketing Manager for a 6 Month Contract with a leading UK brand.
+              <br> Focusing on Retention you will be providing maternity cover...</p>
+          </div>
+          <div class="footer_box">
+            <div class="pull-left social_box_footer">
+              <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right view_company">
+              <a href="javascript:void(0)">View Company <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-100">
+        <div class="show_more_application">
+          <a href="javascript:void(0)" class="btn-primary width_280px  hover_white_pluse"><span>SHOW MORE APPLICATIONs</span> <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</section>

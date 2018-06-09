@@ -1,0 +1,982 @@
+<section id="min_height" class="margin_top_40">
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-50">
+                        <div class="contractor_signup recruiter_signup befourlogin_fontsize">
+                            <h2 class="font_capitalizs">Search <span class="text_pink">Results</span></h2>
+                            <ul class="breadcomb color_active">
+                                <li><a href="javascript:void(0)" [routerLink]="currentUrl == '/public/searchresult-loggedin' ? '/public/recruiterLogin' : '/recruiter/recruiter-home'">Home</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li>ADVANCED SEARCH</li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li class="active">RESULTS</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="signup_form_section width_auto choose_template text-right width_auto200">
+                            <label>Sort By:</label>
+                            <select class="form-control minimal background_drop_downs box_height_30 box_padding_3 padding_left_none java_developer" [(ngModel)]="currentSortBy" (change)="sortChange()">
+                                <option value="{{item?.id}}" *ngFor="let item of sortByData;">{{item?.text}}</option>
+                                <!-- <option value="">ADDED (DESCENDING)</option>
+                                <option value="1">124536</option>
+                                <option value="5">5124536</option>
+                                <option value="10">10124536</option>
+                                <option value="20">20124536</option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="refine_rate">
+                    <div class="row">
+                        <div class="col-sm-70">
+                            <div class="">
+                                <!-- <img src="./assets/images/refind-rate.png" alt="" title="" class="img-responsive"> -->
+                                <!-- <ion-range-slider class="width_100" (onFinish)="getRangeSliderValue($event)" #searchResultElement min="200" value="100" max="800" step="10" from="300">
+                                </ion-range-slider> -->
+                                <ion-range-slider type="double" prefix="£" class="width_100" (onFinish)="getRangeSliderValue($event)" #searchResultElement min="0" value="100" max="2000" step="5" from="0" to="2000" [postfix]="savedResult['recuriter_search_by_rate_type'] == 'hourly' ? ' per hour' : ' per day'">
+                                </ion-range-slider>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-30">
+                            <div class="your_options_profile margin_top_25">
+                                <div class="dropdown">
+                                    <button class="background_drop_downs" type="button" id="dropdownMenu_1" (click)="showSearchOptionFlag = !showSearchOptionFlag">
+                                        Search Options
+                                    </button>
+                                    <ul class="dropdown-menu max-width" id="dropdownMenu1" [ngClass]="showSearchOptionFlag == true ? 'display_block' : 'display_none'">
+                                        <li (click)="goToAdvancedSearch()"><a href="javascript:void(0);">New Search</a></li>
+                                        <li (click)="goToAdvancedSearch()"><a href="javascript:void(0);">Refine Search</a></li>
+                                        <li [hidden]="searchOptionsDisabled"><a (click)="showSaveSearchBox = !showSaveSearchBox" href="javascript:void(0)" id="save_search">Save Search <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a> 
+                                            <div class="home_page_inquery">
+                                                <div id="hide_show_div" [ngClass]="showSaveSearchBox == true ? 'display_block' : 'display_none'">
+                                                    <div class="after_login_menu">
+                                                        <input type="text" placeholder="Enter Search Name" class="enter_border" [(ngModel)]="searchNameValue" name="searchNameValue">
+                                                        <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px" (click)="saveSearchField()"><span>Save Search</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><a (click)="showSendSearchBox = !showSendSearchBox" href="javascript:void(0)" id="send_search">Send Search <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                            <div class="home_page_inquery">
+                                                <div id="message_send" [ngClass]="showSendSearchBox == true ? 'display_block' : 'display_none'">
+                                                    <div class="after_login_menu">
+                                                        <input type="text" placeholder="Enter Email Here" class="enter_border" [(ngModel)]="emailValue" name="emailValue">
+                                                        <textarea placeholder="Message" class="enter_border" [(ngModel)]="messageValue" name="messageValue"></textarea>
+                                                        <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px" (click)="shareSearchResult()"><span>Share Search</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="loading" class="row">
+                  <img src="./assets/images/bx_loader.gif">
+                </div>
+                <div class="errorbox" *ngIf="searchNameErrorFlag"><b></b><br> 
+                    <li>Please Enter Search Name.</li>
+                </div>
+                <div class="errorbox" *ngIf="emailValueFlag"><b></b><br> 
+                    <li>Please Enter Eamil.</li>
+                </div>
+                <div class="errorbox" *ngIf="WSErrorMsg && !loading"><b></b><br> 
+                    <li>{{WSErrorMsg}}</li>
+                </div>
+                <div class="alert alert-success margin-tp18" *ngIf="successMessageFlag">
+                  <a href="javascript:void(0)" class="close" title="close" (click)="successMessageFlag = !successMessageFlag">×</a><strong>{{successMessage}}</strong>
+                </div>
+                <div class="pager_section_searchresult">
+                    <div class="row">
+                        <div class="col-sm-50" *ngIf="searchList.length > 0 && !loading">
+                            <div class="pazer"> <span>Show</span> 
+                                <a href="javascript:void(0);" [ngClass]="12===pageLimit ? 'active':''" (click)="onPageClick('12')">12</a> 
+                                <a href="javascript:void(0);" [ngClass]="16===pageLimit ? 'active':''" (click)="onPageClick('16')">16</a> 
+                                <a href="javascript:void(0);" [ngClass]="20===pageLimit ? 'active':''" (click)="onPageClick('20')">20</a> 
+                                <span>results per page</span> </div>
+                        </div>
+                        <div class="col-sm-50">
+                            <div class="applied_posted">
+                                <p>Your search returned <span class="text_pink">{{searchList?.length}}</span> Contractors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contractor login end-->
+            <div class="container" *ngIf="!loading">
+                <div class="row">
+                    <div class="col-sm-50" *ngFor="let item of firstArrayValue;let i=index;">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-50">
+                                        <h3 class="watch_list_hadding">{{item?.name}}  </h3>
+                                    </div>
+                                    <div class="col-xs-50">
+                                        <div class="header_right_side">
+                                            <div class="box_{{i}}" style="display: none; vertical-align: middle;">
+                                                <div class="box-inner" style="vertical-align: middle;float:right;" id="slidePhone_{{i}}" >{{item?.contractor_tel_no}}</div>
+                                            </div>
+                                            <a href="javascript:void(0);" (click)="slidePhoneNumber(i)"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            
+                                            <!-- <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a> -->
+                                            <a href="mailto:someone@example.com?Subject=Hello%20again" target="_top"><img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>{{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span>{{item?.contractor_address ? item?.contractor_address : 'N/A'}}</p>
+                                <p style="height: 40px;"><span>Rate :</span> 
+                                    <cite style="font-style: normal;">
+                                        Commutable
+                                        <a *ngIf="!item?.rate_type" href="javascript:void(0);">N/A</a>
+                                        <a *ngIf="item?.rate_type == 'daily'" href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}} Per Day</a>
+                                        <a *ngIf="item?.rate_type == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_hour}} - £{{item?.contractor_rate_max_hr}} Per Hour</a> 
+                                    </cite>
+                                    <br/>
+                                    
+                                    <cite style="font-style: normal;">
+                                        Relocatable
+                                        <!-- <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>  -->
+                                        <a *ngIf="!item?.contractor_daily_hourly_value_relocatable" href="javascript:void(0);">N/A</a>
+                                        <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'daily'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable}} - £{{item?.contractor_rate_max_relocatable}} Per Day</a>
+                                        <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable_hr}} - £{{item?.contractor_rate_max_relocatable_hr}} Per Hour</a> 
+                                    </cite>
+                                </p>
+                                <p><span>Availability :</span> {{item?.availability ? item?.availability : 'N/A'}} </p>
+                                <p><span>Key Skills :</span> {{item?.contractor_skills ? item?.contractor_skills : 'N/A'}} </p>
+                                <!-- <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p> -->
+                                <p><span>CV Highlight :</span> 
+                                    <!-- as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... --> 
+                                    {{item?.cv_highlight ? item?.cv_highlight : 'N/A'}}
+                                </p>
+                                <p><span>Notice Period :</span> {{item?.notice_period ? item?.notice_period : 'N/A'}} </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_view ? item?.last_view : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> 
+                                            <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details" (click)="showMoreDetails(i)"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details" [ngClass]="showMoreDetailsFlag[i] == true ? 'more-details-toggle' : ''" *ngIf=showLoginMoreDetailsOptions>
+                                    <div id="document_list">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li *ngIf="item && item?.resume && item?.resume?.length > 0"><a href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}" ><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li *ngIf="item && item?.resume && item?.resume?.length == 0"><a href="javascript:void(0);" (click)="showDownloadCVPopup()"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);" (click)="goToContractorProfile(item?.contractor_id, item?.name)"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li *ngIf="item?.is_watched == 0" (click)="openWatchPopup(item)"><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WATCH </span></a></li>
+                                                <li *ngIf="item?.is_watched == 1" (click)="openUnWatchPopup(item)"><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>UNWATCH </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="more-details" [ngClass]="showMoreDetailsFlag[i] == true ? 'more-details-toggle' : ''" *ngIf="showWithoutLoginMoreOptions">
+                                    <div id="document_list">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li>To view contractors full details please <a href="javascript:void(0)" routerLink="../recruiterLogin" title="login">Login</a> or <a href="javascript:void(0)" routerLink="../recruiterRegister" title="Register">Signup</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Luke Clothier  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Performance Architect</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> Worthing, West Sussex</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span>In Contract until <strong>23/10/2017</strong> </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> 4 Weeks Happy to use notice </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Shiv Shankar  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Senior Project Manager</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span> Available Immediately </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> N/A </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Luke Clothier  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Performance Architect</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> Worthing, West Sussex</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span>In Contract until <strong>23/10/2017</strong> </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> 4 Weeks Happy to use notice </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="row">
+                    <div class="col-sm-33" *ngFor="let item of list">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-34">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-33">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                </div> -->
+                <app-ad-space *ngIf="firstArrayValue.length > 0"></app-ad-space>
+                <div class="row">
+                    <div class="col-sm-50"  *ngFor="let item of secondArray;let i=index;">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">{{item?.name}}  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                           <div class="box_{{i+4}}" style="display: none; vertical-align: middle;">
+                                                <div class="box-inner" style="vertical-align: middle;float:right;" id="slidePhone_{{i+4}}" >{{item?.contractor_tel_no}}</div>
+                                            </div>
+                                            <a href="javascript:void(0);" (click)="slidePhoneNumber(i+4)"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <!-- <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a> -->
+                                            <a href="mailto:someone@example.com?Subject=Hello%20again" target="_top"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>{{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> {{item?.contractor_address ? item?.contractor_address : 'N/A'}}</p>
+                               <!--  <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p> -->
+                                    <p style="height: 40px;"><span>Rate :</span> 
+                                    <!-- <cite style="font-style: normal;" *ngIf="item?.rate_name == 'commutable'">
+                                        Commutable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>
+                                    </cite>
+                                    
+                                    <cite style="font-style: normal;" *ngIf="item?.rate_name == 'relocatable'">
+                                        Relocatable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <div *ngIf="item?.rate_type === 'hourly'">h</div></strong> 
+                                    </cite> -->
+                                    <cite style="font-style: normal;">
+                                        Commutable
+                                        <a *ngIf="!item?.rate_type" href="javascript:void(0);">N/A</a>
+                                        <a *ngIf="item?.rate_type == 'daily'" href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}} Per Day</a>
+                                        <a *ngIf="item?.rate_type == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_hour}} - £{{item?.contractor_rate_max_hr}} Per Hour</a> 
+                                    </cite>
+                                    
+                                    <cite style="font-style: normal;">
+                                        Relocatable
+                                        <a *ngIf="!item?.contractor_daily_hourly_value_relocatable" href="javascript:void(0);">N/A</a>
+                                        <!-- <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>  -->
+                                        <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'daily'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable}} - £{{item?.contractor_rate_max_relocatable}} Per Day</a>
+                                        <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable_hr}} - £{{item?.contractor_rate_max_relocatable_hr}} Per Hour</a> 
+                                    </cite>
+                                </p>
+                                <p><span>Availability :</span> {{item?.availability ? item?.availability : 'N/A'}} </p>
+                                <!-- <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p> -->
+                                <p><span>Key Skills :</span> {{item?.contractor_skills ? item?.contractor_skills : 'N/A'}} </p>
+                                
+                                <p><span>CV Highlight :</span> 
+                                    
+                                    {{item?.cv_highlight ? item?.cv_highlight : 'N/A'}}
+                                </p>
+                                <p><span>Notice Period :</span> {{item?.notice_period ? item?.notice_period : 'N/A'}} </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_view ? item?.last_view : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" (click)="showMoreDetails(i+4)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details" [ngClass]="showMoreDetailsFlag[i+4] == true ? 'more-details-toggle' : ''" *ngIf="showLoginMoreDetailsOptions">
+                                    <div id="document_list">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li *ngIf="item && item?.resume && item?.resume?.length > 0"><a href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li (click)="showDownloadCVPopup()" *ngIf="item && item?.resume && item?.resume?.length == 0"><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);" (click)="goToContractorProfile(item?.contractor_id, item?.name)"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <!-- <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li> -->
+                                                <li *ngIf="item?.is_watched == 0" (click)="openWatchPopup(item)"><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WATCH </span></a></li>
+                                                <li *ngIf="item?.is_watched == 1" (click)="openUnWatchPopup(item)"><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>UNWATCH </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="more-details" [ngClass]="showMoreDetailsFlag[i+4] == true ? 'more-details-toggle' : ''" *ngIf="showWithoutLoginMoreOptions">
+                                    <div id="document_list">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li>To view contractors full details please <a href="javascript:void(0)" routerLink="../recruiterLogin" title="login">Login</a> or <a href="javascript:void(0)" routerLink="../recruiterRegister" title="Register">Signup</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Luke Clothier  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Performance Architect</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> Worthing, West Sussex</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span>In Contract until <strong>23/10/2017</strong> </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> 4 Weeks Happy to use notice </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Shiv Shankar  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Senior Project Manager</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span> Available Immediately </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> N/A </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Luke Clothier  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Performance Architect</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> Worthing, West Sussex</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span>In Contract until <strong>23/10/2017</strong> </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> 4 Weeks Happy to use notice </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="row">
+                    <div class="col-sm-33" *ngFor="let item of list">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-34">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-33">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                </div> -->
+                <app-ad-space *ngIf="secondArray.length > 0"></app-ad-space>
+                <div class="row">
+                    <div class="col-sm-50" *ngFor="let item of thirdArray;let i=index;">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">{{item?.name}}  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <!-- <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a> -->
+                                            <div class="box_{{i+8}}" style="display: none; vertical-align: middle;">
+                                                <div class="box-inner" style="vertical-align: middle;float:right;" id="slidePhone_{{i+8}}" >{{item?.contractor_tel_no}}</div>
+                                            </div>
+                                            <a href="javascript:void(0);" (click)="slidePhoneNumber(i+8)"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="mailto:someone@example.com?Subject=Hello%20again" target="_top"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>{{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> {{item?.contractor_address ? item?.contractor_address : 'N/A'}}</p>
+                                <!-- <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p> -->
+                                    <p style="height: 40px;"><span>Rate :</span> 
+                                    <!-- <cite style="font-style: normal;" *ngIf="item?.rate_name == 'commutable'">
+                                        Commutable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>
+                                    </cite>
+                                    
+                                    <cite style="font-style: normal;" *ngIf="item?.rate_name == 'relocatable'">
+                                        Relocatable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong> 
+                                    </cite> -->
+                                    <cite style="font-style: normal;">
+                                        Commutable
+                                        <a *ngIf="!item?.rate_type" href="javascript:void(0);">N/A</a>
+                                        <a *ngIf="item?.rate_type == 'daily'" href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}} Per Day</a>
+                                        <a *ngIf="item?.rate_type == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_hour}} - £{{item?.contractor_rate_max_hr}} Per Hour</a> 
+                                    </cite>
+                                    
+                                    <cite style="font-style: normal;">
+                                        Relocatable
+                                        <a *ngIf="!item?.contractor_daily_hourly_value_relocatable" href="javascript:void(0);">N/A</a>
+                                        <!-- <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>  -->
+                                        <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'daily'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable}} - £{{item?.contractor_rate_max_relocatable}} Per Day</a>
+                                        <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable_hr}} - £{{item?.contractor_rate_max_relocatable_hr}} Per Hour</a> 
+                                    </cite>
+                                </p>
+                                <p><span>Availability :</span> {{item?.availability ? item?.availability : 'N/A'}} </p>
+                                <!-- <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p> -->
+                                <p><span>Key Skills :</span> {{item?.contractor_skills ? item?.contractor_skills : 'N/A'}} </p>
+                                
+                                <p><span>CV Highlight :</span> 
+                                    
+                                    {{item?.cv_highlight ? item?.cv_highlight : 'N/A'}}
+                                </p>
+                                <p><span>Notice Period :</span> {{item?.notice_period ? item?.notice_period : 'N/A'}} </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_view ? item?.last_view : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details" (click)="showMoreDetails(i+8)"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details" [ngClass]="showMoreDetailsFlag[i+8] == true ? 'more-details-toggle' : ''" *ngIf="showLoginMoreDetailsOptions">
+                                    <div id="document_list">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li *ngIf="item && item?.resume && item?.resume?.length > 0"><a href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li (click)="showDownloadCVPopup()" *ngIf="item && item?.resume && item?.resume?.length == 0"><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);" (click)="goToContractorProfile(item?.contractor_id, item?.name)"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <!-- <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li> -->
+                                                <li *ngIf="item?.is_watched == 0" (click)="openWatchPopup(item)"><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WATCH </span></a></li>
+                                                <li *ngIf="item?.is_watched == 1" (click)="openUnWatchPopup(item)"><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>UNWATCH </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="more-details" [ngClass]="showMoreDetailsFlag[i+8] == true ? 'more-details-toggle' : ''" *ngIf="showWithoutLoginMoreOptions">
+                                    <div id="document_list">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li>To view contractors full details please <a href="javascript:void(0)" routerLink="../recruiterLogin" title="login">Login</a> or <a href="javascript:void(0)" routerLink="../recruiterRegister" title="Register">Signup</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Luke Clothier  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Performance Architect</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> Worthing, West Sussex</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span>In Contract until <strong>23/10/2017</strong> </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> 4 Weeks Happy to use notice </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Shiv Shankar  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Senior Project Manager</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span> Available Immediately </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> N/A </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="recruiter_searchresult_box">
+                            <div class="watchlist_header padding_bottom_5">
+                                <div class="row">
+                                    <div class="col-xs-60">
+                                        <h3 class="watch_list_hadding">Luke Clothier  </h3>
+                                    </div>
+                                    <div class="col-xs-40">
+                                        <div class="header_right_side">
+                                            <a href="javascript:void(0);"> <img src="./assets/images/call-icon.png" alt="" title=""></a>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/message-icon.png" alt="" title=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content recruiter_searchresult_list">
+                                <p><span>Job Title :</span> <strong>Performance Architect</strong></p>
+                                <p class="location_backgroung_icon"><span>Location :</span> Worthing, West Sussex</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a><strong> p/d</strong>
+                                    <br>Relocatable <a href="javascript:void(0);">£25 - £70</a><strong> p/d</strong> </p>
+                                <p><span>Availability :</span>In Contract until <strong>23/10/2017</strong> </p>
+                                <p><span>Key Skills :</span> java, spring, hibernate, sql, javascript, node, NoSQL, Cucumber </p>
+                                <p><span>CV Highlight :</span> as a <a href="javascript:void(0);" class="background_highlight">java</a> developer I...we used <a href="javascript:void(0);" class="background_highlight">java</a> to do... the core <a href="javascript:void(0);" class="background_highlight">java</a> base was...it was <a href="javascript:void(0);" class="background_highlight">java</a> spring and... </p>
+                                <p><span>Notice Period :</span> 4 Weeks Happy to use notice </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse" id="more-details"> More Details <i class="fa fa-angle-down plus_blue text_pink" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-details">
+                                    <div id="document_list" style="display: none;">
+                                        <div class="cv_document_main">
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/download-cv-icon.png" alt="" title=""> <span>Download CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/view-profile-icon.png" alt="" title=""> <span>View Profile </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/highlighted-cv-icon.png" alt="" title=""> <span>Highlighted CV </span></a></li>
+                                                <li><a href="javascript:void(0);"><img src="./assets/images/WatchList-icon.png" alt="" title=""> <span>WatchList </span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="show_more_application"> <a *ngIf="searchList.length > 11" href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px" (click)="showMoreContractors()"><span>SHOW MORE CONTRACTORS</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a> </div>
+        </section>
+
+
+
+ <div *ngIf="showWatchPopup" id="watchContractor" class="modalbox modbox2 window " style="display: block;">
+  <h3>Watch Contractor <span class="closex shut3" style="cursor: pointer;" (click)="closePopup()">X</span></h3>
+  <div class="modal-inner">
+    <div class="inputrowx">
+      <div class="formgroup">
+        <label for="notifyme">Notify me <span>(Choose Multiple)</span>:</label>
+        <span class="inp-auto auto284"><span>
+                        <select class="inpfocus2" name="notifyme" id="notifyMe" [(ngModel)]="notifyMeValue">
+                            <option value="24 hour">24 hours before live</option>
+                            <option value="2 day">2 days before live</option>
+                            <option value="1 week">1 week before live</option>
+                            <option value="all">All the above</option>
+                        </select>
+                    </span></span>
+      </div>
+    </div>
+    <div class="inputrowx">
+      <div class="formgroup">
+        <label for="attach-specific">Attach to specific job:</label>
+        <span class="inp-auto auto284"><span>
+                        <select class="inpfocus2" name="attachToJob" id="attachToJob" [(ngModel)]="currentJobId">
+                            <option value="0">All Jobs</option>
+                            <option value="{{item?.jobid}}" *ngFor="let item of jobListData;">{{item?.jobTitle}}</option>
+                        </select>
+                    </span></span>
+      </div>
+    </div>
+  </div>
+  <div class="modalbase">
+    <p class="modalview">View <a href="javascript:void(0);" [routerLink]="['../watch-list']">Watching Folder</a></p>
+    <div class="saveProfile">
+      <input class="shut4 watchContractorSubmit" (click)="addToWatchList()" type="submit" name="watchCon" id="watchCon" value="Watch">
+    </div>
+  </div>
+</div>
+
+<!-- more-details-toggle -->
+
+
+
+<div id="confirm-container" class="simplemodal-container" *ngIf="unwatchPopupFlag">
+  <a href="javascript:void(0);" style="cursor: pointer;" title="Close" class="modal-close simplemodal-close" (click)="closeUnwatchPopup()">X</a>
+  <div tabindex="-1" class="simplemodal-wrap">
+    <div id="confirm" class="simplemodal-data">
+      <h3 class="message"></h3>
+      <p>Are you sure you want to stop watching this contractor?</p>
+      <div class="buttons">
+        <div class="no simplemodal-close" (click)="closeUnwatchPopup()">No</div>
+        <div class="yes" (click) = "unwatchContractor()">Yes</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirm-container" class="simplemodal-container" *ngIf="showDownloadCVFlag">
+  <a href="javascript:void(0);" style="cursor: pointer;" title="Close" class="modal-close simplemodal-close" (click)="closeDownloadCVPopup()">X</a>
+  <div tabindex="-1" class="simplemodal-wrap">
+    <div id="confirm" class="simplemodal-data">
+      <h3 class="message"></h3>
+      <p>CV is not available.</p>
+      <div class="buttons">
+        <div class="no simplemodal-close" (click)="closeDownloadCVPopup()">Ok</div>
+      </div>
+    </div>
+  </div>
+</div>
+

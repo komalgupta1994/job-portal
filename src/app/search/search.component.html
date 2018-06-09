@@ -1,0 +1,96 @@
+<section id="">
+  <div id="contractor-login">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_login">
+            <h2 class="text-center font_size font_size_30"><span>FIND YOUR</span> PERFECT IT CONTRACT <span>NOW</span></h2>
+          </div>
+          <div class="login_form_section">
+            <form>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ENTER JOB TITLE OR SKILL..." [(ngModel)]="title" name="title">
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="ENTER LOCATION..." name="location" autocorrect="off" autocapitalize="off" spellcheck="off" #search>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group search_now_home"><a href="javascript:void(0)" (click)="searchContract(title)">SEARCH NOW <img src="./assets/images/search-now-icon.png" alt="search now" title="search now"></a> </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="popular_searches" (click)="searchContract('mobile designer', 'london', '200')">
+        <p>POPULAR SEARCHES</p>
+        <div class="row">
+          <div class="col-sm-33">
+            <div class="popular_searches_box">
+              <div class="row">
+                <div class="col-md-26 col-sm-100">
+                  <div class="popular_searches_box_icon"> </div>
+                </div>
+                <div class="col-md-74 col-sm-100">
+                  <div class="popular_searches_box_contant" >
+                    <h5>MOBILE DESIGNER</h5>
+                    <ul>
+                      <li><a href="javascript:void(0)">LONDON</a></li>
+                      <li>|</li>
+                      <li><a href="javascript:void(0)">£200+ P/D</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-34" (click)="searchContract('it project manager', 'manchester', '225')">
+            <div class="popular_searches_box">
+              <div class="row">
+                <div class="col-md-26 col-sm-100">
+                  <div class="popular_searches_box_icon"> </div>
+                </div>
+                <div class="col-md-74 col-sm-100">
+                  <div class="popular_searches_box_contant" >
+                    <h5>IT PROJECT MANAGER</h5>
+                    <ul>
+                      <li><a href="javascript:void(0)">MANCHESTER</a></li>
+                      <li>|</li>
+                      <li><a href="javascript:void(0)">£225+ P/D</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-33" (click)="searchContract('javascript', 'london', '100')">
+            <div class="popular_searches_box">
+              <div class="row">
+                <div class="col-md-26 col-sm-100">
+                  <div class="popular_searches_box_icon"> </div>
+                </div>
+                <div class="col-md-74 col-sm-100">
+                  <div class="popular_searches_box_contant" >
+                    <h5>JAVASCRIPT DEVELOPER</h5>
+                    <ul>
+                      <li><a href="javascript:void(0)">LONDON</a></li>
+                      <li>|</li>
+                      <li><a href="javascript:void(0)">£100+ P/D</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

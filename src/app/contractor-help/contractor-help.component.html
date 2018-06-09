@@ -1,0 +1,323 @@
+<section>
+  <div id="contractor-login">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_login">
+            <h2 class="text-center font_size font_size_30"><span>Welcome to our</span> Help Centre </h2>
+          </div>
+          <div class="login_form_section">
+            <form>
+              <div class="row">
+                <div class="col-sm-23">
+                  <div class="dropdown dropdown_help"> <a href="javascript:void(0)" class="btn-default dropdown-toggle advice_dropdown" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> CONTRACTORS <span class="caret"></span> </a>
+                    <ul class="dropdown-menu dropdown-menu-help" aria-labelledby="dropdownMenu1">
+                      <li><a href="javascript:void(0)">Contractor</a></li>
+                      <li><a href="javascript:void(0)">Recruiter</a></li>
+                     <!--  <li><a href="javascript:void(0)">Something else here</a></li>
+                      <li><a href="javascript:void(0)">Separated link</a></li> -->
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-sm-77">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="SEARCH ALL OUR HELP ARTICLES HERE" [(ngModel)]="searchKeyword" name="search">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group search_now_home" (click)="searchHelp()"><a href="javascript:void(0)">SEARCH NOW <img src="./assets/images/search-now-icon.png" alt="search now" title="search now"></a> </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="web_page_help_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-40 col-md-30">
+        <div class="services_header contractor_help_header"> <img src="../../assets/images/contractor-services-icon.png" alt="" title=""> <span>CONTRACTOR help</span> </div>
+        <ul id="contractor_help_menu" class="clearfix">
+          <li *ngFor="let helpCategory of helpCategoryList;" (click)="getHelpByCategoryId(helpCategory._id)">
+            <a href="javascript:void(0)" class="">
+              <!-- <div class="icon"> <img [src]="helpCategory." alt="" title="" class="menu_bar"> </div> -->
+              <div class="content">
+                <h4>{{helpCategory.category_name}}</h4>
+              </div>
+            </a>
+          </li>
+          <!--          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/boolean-search.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>Boolean Search</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/completing-profile.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>Completing your profile</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/contractDiary.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>ContractDiary</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/ContractMap.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>ContractMap</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/job-search.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>Job Search</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/Login-profile.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>Login</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/my-admin-help.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>My Admin Help</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/quick-apply.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>Quick Apply</h4>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="">
+              <div class="icon"> <img src="images/view-applications.png" alt="" title="" class="menu_bar"> </div>
+              <div class="content">
+                <h4>View Applications </h4>
+              </div>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+      <div class="col-sm-60 col-md-68 col-md-offset-2">
+        <div class="contractor_help_view" *ngFor="let help of helpData">
+          <h2>{{help.help_article_title}}</h2>
+          <p [innerHTML]="help.help_article_body"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="mobile_responsive">
+  <div class="container">
+    <div class="services_header contractor_help_header"> <img src="images/contractor-services-icon.png" alt="" title=""> <span>CONTRACTOR help</span> </div>
+    <div class="row">
+      <div class="col-sm-100">
+        <div class="panel-group trems_use_main signup_form_section" id="accordion">
+      <div class="panel panel-default" *ngFor="let helpCategory of helpCategoryList;let i = index;" (click)="getHelpByCategoryId(helpCategory._id)">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}">
+          {{helpCategory?.category_name}}
+      <span class="glyphicon glyphicon-minus"></span>
+        </a>
+      </h4>
+        </div>
+        <div id="collapse{{i}}" class="panel-collapse collapse">
+          <div class="panel-body" >
+            <div *ngFor="let help of helpData"> 
+              <h2>{{help?.help_article_title}}</h2>
+            <p [innerHTML]="help?.help_article_body"></p>  
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+        <!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default" *ngFor="let helpCategory of helpCategoryList;let i = index;">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <img src="images/applying-contract.png" alt="" title="" class="menu_bar"> <span>{{helpCategory.category_name}}</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>Applying for a contract</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> <img src="images/boolean-search.png" alt="" title="" class="menu_bar"><span>Boolean Search</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>Boolean Search</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> <img src="images/completing-profile.png" alt="" title="" class="menu_bar"><span>Completing your profile</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>Completing your profile</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title"> 
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <img src="images/contractDiary.png" alt="" title="" class="menu_bar"><span>ContractDiary</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>ContractDiary</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFive">
+              <h4 class="panel-title"> 
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                <img src="images/ContractMap.png" alt="" title="" class="menu_bar"><span>ContractMap</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>ContractMap</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSix">
+              <h4 class="panel-title"> 
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                <img src="images/job-search.png" alt="" title="" class="menu_bar"><span>Job Search</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>Job Search</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSeven">
+              <h4 class="panel-title"> 
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                <img src="images/Login-profile.png" alt="" title="" class="menu_bar"><span>Login</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>Login</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingEight">
+              <h4 class="panel-title"> 
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                <img src="images/my-admin-help.png" alt="" title="" class="menu_bar"><span>My Admin Help</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>My Admin Help</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingNine">
+              <h4 class="panel-title"> 
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                <img src="images/quick-apply.png" alt="" title="" class="menu_bar"><span>Quick Apply</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>Quick Apply</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTen">
+              <h4 class="panel-title"> 
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                <img src="images/view-applications.png" alt="" title="" class="menu_bar"><span>View Applications</span> <i class="fa fa-caret-down drop_down_arrow" aria-hidden="true"></i></a> </h4>
+            </div>
+            <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
+              <div class="panel-body">
+                <div class="contractor_help_view margin_top_none">
+                  <h2>View Applications</h2>
+                  <p>We have hundreds of IT contracts posted on our site, with more being added on a daily basis, so we're sure you will find a contract that's perfect for you.</p>
+                  <p>After conducting your keyword search you will be shown all the contracts that fit your contract criteria, if you feel they are not right please return to the job search page and change the search. From the search results page you’re able to see the company who advertised the position, read more about the position and apply. To apply simply click the ‘Apply Now’ button. You will then be asked to attach a CV and cover letter and send off your application, your application will be sent to the recruiter directly.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

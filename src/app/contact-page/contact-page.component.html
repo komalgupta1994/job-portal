@@ -1,0 +1,216 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-login">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_login contractor_signup">
+            <h2>contact <span> us</span></h2>
+            <ul class="breadcomb">
+              <li><a href="#">Home</a></li>
+              <li class="right_arrow">&gt;</li>
+              <li class="active">contact us </li>
+            </ul>
+          </div>
+          <div class="errorbox" *ngIf="nameRequiredFlag || emailRequiredFlag || emailPatternFlag || messageRequiredFlag || humanBeingFlag"><b>The following error(s) occured:</b>
+            <br>
+            <li *ngIf="nameRequiredFlag">Name Required.</li>
+            <li *ngIf="emailRequiredFlag">Please enter a valid email address.</li>
+            <li *ngIf="emailPatternFlag">Please enter a valid email address.</li>
+            <li *ngIf="messageRequiredFlag">Please enter a message.</li>
+            <li *ngIf="humanBeingFlag">Incorrect captcha code.</li>
+          </div>
+          <div class="errorbox" *ngIf="invalidErrorMsg"><b></b>
+            <br>
+            <li>{{invalidErrorMsg}}</li>
+            <!-- <li *ngIf="emailNamePatternFlag">Please Enter valid email.</li>
+            <li *ngIf="passwordReqFlag">Please enter a password.</li>
+            <li *ngIf="humanKnowFlag">Are you human field is required.</li> -->
+          </div>
+          <div class="alert alert-success margin-tp18" *ngIf="succesLoginFlag">
+            <a href="javascript:void(0)" class="close" title="close" (click)="succesLoginFlag = !succesLoginFlag">×</a> Thank you, your message was successfully submitted. We will be in touch as soon as possible.
+          </div>
+          <div class="login_form_section contact_us_page">
+            <p><sup>"</sup> Here at ContractRecruit we are always happy to help and pride ourselves on our good customer care. If you have any issues or need advice, please do not hesitate to get in touch with one of our friendly staff <sup>"</sup></p>
+            <form>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group margin_bottom_30">
+                    <input type="text" class="form-control" id="exampleInputtext" placeholder="your name" style="color:#fff;" [(ngModel)]="nameValue" name="nameValue">
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group margin_bottom_30">
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="your email" [(ngModel)]="emailValue" name="emailValue" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group margin_bottom_30">
+                    <input type="text" class="form-control" id="exampleInputtext" placeholder="your subject" style="color:#fff;" [(ngModel)]="subjectValue" name="subjectValue">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group margin_bottom_30">
+                    <textarea class="form-control your_message_here" placeholder="your message" [(ngModel)]="messageValue" name="messageValue"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-10 col-md-9 col-xs-25">
+                  <div class="form-group"> <span class="add_value">{{number}} + {{number2}} =</span> </div>
+                </div>
+                <div class="col-sm-40 col-md-41 col-xs-75">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="your answer" [(ngModel)]="yourAnswer" name="yourAnswer">
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group form_login"> <a (click)="sendMail()" href="javascript:void(0)" class="btn-default">Send <i class="fa fa-plus" aria-hidden="true"></i></a> </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+  <!--contractor login section 2-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-100">
+        <div class="login_form_section">
+          <div class="registered_sectionlogin contact_us_social_hedding">
+            <h2>Contact <span>details</span></h2>
+            <p>If you would like more details, advice or sales please get in touch. If you are needing assistance using our site please first check our Help and Guide pages.</p>
+          </div>
+          <div class="row">
+            <div class="col-sm-50">
+              <div class="contact_us_social">
+                <div class="row">
+                  <div class="col-md-21 col-sm-20">
+                    <div class="contracthub_icon"> <img src="./assets/images/advance.png" alt="ads" title="ads" class="img-responsive"> </div>
+                  </div>
+                  <div class="col-md-79 col-sm-80">
+                    <div class="contracthub_advice">
+                      <h4>Our Address</h4>
+                      <p>ContractRecruit
+                        <br> The Old Court House 15 - 17 Prince's Street
+                        <br>Brighton East Sussex BN1 2WE </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-50">
+              <div class="contact_us_social">
+                <div class="row">
+                  <div class="col-md-21 col-sm-20">
+                    <div class="contracthub_icon"> <img src="./assets/images/advance.png" alt="ads" title="ads" class="img-responsive"> </div>
+                  </div>
+                  <div class="col-md-79 col-sm-80">
+                    <div class="contracthub_advice our_mails_list">
+                      <h4>Our Mails</h4>
+                      <p><a href="javascript:void(0)">Support@ContractRecruit.co.uk </a>
+                        <a href="javascript:void(0)">Enquiries@ContractRecruit.co.uk</a>
+                        <a href="javascript:void(0)">Sales@ContractRecruit.co.uk </a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-50">
+              <div class="contact_us_social">
+                <div class="row">
+                  <div class="col-md-21 col-sm-20">
+                    <div class="contracthub_icon"> <img src="./assets/images/advance.png" alt="ads" title="ads" class="img-responsive"> </div>
+                  </div>
+                  <div class="col-md-79 col-sm-80">
+                    <div class="contracthub_advice our_contacts_list">
+                      <h4>Our Contacts</h4>
+                      <p><span>Recruiters:</span> 0203 3300 713</p>
+                      <p><span>Contractors:</span> 0203 3300 712</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-50">
+              <div class="contact_us_social">
+                <div class="row">
+                  <div class="col-md-21 col-sm-20">
+                    <div class="contracthub_icon"> <img src="./assets/images/advance.png" alt="ads" title="ads" class="img-responsive"> </div>
+                  </div>
+                  <div class="col-md-79 col-sm-80">
+                    <div class="contracthub_advice our_social_list">
+                      <h4>Our Social</h4>
+                      <p class="letest_news_footer">
+                        <a href="https://www.facebook.com/ContractRecruit/" target="_blank"><i class="fa fa-facebook" aria-hidden="true" ></i> </a>
+                        <a href="https://twitter.com/ContractRec" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://plus.google.com/+ContractrecruitCoUkCR" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        <a href="https://www.youtube.com/user/ContractRecruit?feature=mhee" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i> </a>
+                        <a href="https://www.linkedin.com/company/2600056?trk=tyah" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        <a href="https://www.behance.net/contractrecruitsocia" target="_blank"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contractRecruit_slider testimonial_contact_slider">
+    <h2>Testimonials</h2>
+    <div class="container">
+      <swiper [config]="config">
+
+      <ul class="bxslider" class="swiper-wrapper">
+        <li class="swiper-slide">
+          <div class="row">
+            <div class="col-sm-30 col-md-25 col-md-offset-5">
+              <div class="left_icon">
+                <img src="./assets/images/testmonial-user.png" alt="" title="" class="img-responsive">
+              </div>
+            </div>
+            <div class="col-sm-70 col-md-offset-10 col-md-60">
+              <div class="slider_right_part">
+                <h4>James Wheeler <span>(Java Developer)</span></h4>
+                <p>ContractRecruit is extremely useful. As a contractor I find that most job boards don't cater for IT contract workers, but ContractRecruit is a breath of fresh air and has helped me find my most recent position in a matter of days. </p>
+              </div>
+            </div>
+          </div>
+          <div class="bx-caption"><span>contracthub</span></div>
+        </li>
+        <li class="swiper-slide">
+          <div class="row">
+            <div class="col-sm-30 col-md-25 col-md-offset-5">
+              <div class="left_icon">
+                <img src="./assets/images/testmonial-user.png" alt="" title="" class="img-responsive">
+              </div>
+            </div>
+            <div class="col-sm-70 col-md-offset-10 col-md-60">
+              <div class="slider_right_part">
+                <h4>Hussain Ahmed <span>(IT Recruitment Consultant)</span></h4>
+                <p>Save those unwanted calls by hiding your profile while in
+                  <br>Contract, using our helpful <strong>Contract</strong>Timer you can set it
+                  <br> live again when your Contract is nearing its end.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bx-caption"><span>contracthub</span></div>
+        </li>
+      </ul>
+    </swiper>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,296 @@
+<section id="min_height" class="margin_top_40">
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-100">
+                        <div class="contractor_signup recruiter_signup">
+                            <h2 class="font_capitalizs">Recruiter <span class="text_pink">WatcHdogs</span></h2>
+                            <ul class="breadcomb color_active">
+                                <li><a href="javascript:void(0)" [routerLink]="['../recruiter-home']">Home</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li class="active">WatcHdogs</li>
+                            </ul>
+                            <div class="pull-right applied_jobs">
+                                <p>You have <span class="text_pink">{{watchListDataArr.length}}</span> Watchdogs
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="errorbox" *ngIf="errorMsg && !loading"><br> 
+                        <li>{{errorMsg}}</li>
+                    </div>
+
+                    <div *ngIf="loading" class="row">
+                  <img src="./assets/images/bx_loader.gif">
+                </div>
+
+                <div class="alert alert-success margin-tp18" *ngIf="successMessageFlag">
+                  <a href="javascript:void(0)" class="close" title="close" (click)="successMessageFlag = !successMessageFlag">×</a><strong>Watchdog delete successfully.</strong>
+                </div>
+                <div class="pager_section">
+                    <div class="row">
+                        <div class="col-sm-50" *ngIf="watchListDataArr.length !== 0 && !loading">
+                            <div class="pazer">
+                                <span>Show</span>
+                                <a href="javascript:void(0);" [ngClass]="10===currentPageNo ? 'active':''" (click)="onPageJobList('10')">10</a>
+                                <a href="javascript:void(0);" [ngClass]="15===currentPageNo ? 'active':''" (click)="onPageJobList('15')">15</a>
+                                <a href="javascript:void(0);" [ngClass]="20===currentPageNo ? 'active':''" (click)="onPageJobList('20')">20</a>
+                                <span>results per page</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-50" *ngIf="watchListDataArr.length !== 0">
+                            <div class="signup_form_section sort_by_watchdog choose_template">
+                                <div class="form-group">
+                                    <div class="input-group responsive_width_100">
+                                        <div class="input-group-addon upto_border_none">Sort By:</div>
+                                        <select class="form-control minimal background_drop_down box_height_30 box_padding_3" (change)="watchDogChange(onPageClick)" [(ngModel)]="currentSortBy" name="currentSortBy">
+                                            <option value="{{item.id}}" *ngFor="let item of sortByData;">{{item.text}}</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contractor login end-->
+            <div class="recruiter_watchdog_main" *ngIf="!loading">
+                <div class="watchdog_box" *ngFor="let item of watchListDataArr">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-100">
+                                <div class="watchdog_headding">
+                                    <img src="./assets/images/job-watchdog.png" alt="Job" title="Job">
+                                    <h2>{{item?.name}}</h2>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <span class="search_span">Search</span>
+                                        </div>
+                                        <div class="col-sm-88">
+                                            <div class="search_box_right">
+                                                <span><strong>Job Title:</strong> {{item['params']['recuriter_search_job_title'] ? item['params']['recuriter_search_job_title'] : 'N/A'}}</span> <span class="pink_color_span">|</span> <span><strong>Location:</strong> {{item['params']['recuriter_search_location'] ? item['params']['recuriter_search_location'] : 'N/A'}}</span> <span class="pink_color_span">|</span> <span> <strong>Postcode: </strong>{{item['location']['postcode'] ? item['location']['postcode'] : 'N/A'}} </span> <span class="pink_color_span">| </span> <span><strong>Rate Min:</strong> £{{item['params']['recuriter_search_by_rate_min'] ? item['params']['recuriter_search_by_rate_min'] : 'N/A'}}</span> <span class="pink_color_span">|</span> <span><strong>Rate Max:</strong> £{{item['params']['recuriter_search_by_rate_max'] ? item['params']['recuriter_search_by_rate_max'] : 'N/A'}}</span> <span class="pink_color_span">|</span> <span><strong>Rate Type:</strong> {{item['params']['recuriter_search_by_rate_type'] ? item['params']['recuriter_search_by_rate_type'] : 'N/A'}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-30">
+                                            <span class="search_span">Date</span>
+                                        </div>
+                                        <div class="col-sm-88 col-xs-70">
+                                            <div class="search_box_right">
+                                                <span>{{item?.created ? item?.created : 'N/A'}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-30">
+                                            <span class="search_span">Set Up By</span>
+                                        </div>
+                                        <div class="col-sm-88 col-xs-70">
+                                            <div class="search_box_right">
+                                                <span>{{item?.setupby ? item?.setupby : 'N/A'}}  </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_footer">
+                                    <div class="row">
+                                        <div class="col-sm-50">
+                                            <div class="watchdog_mail_box recruiter_home_login">
+                                                <input class="form-control" id="exampleInputEmail1" placeholder="ENTER EMAIL ADDRESS" type="text" [(ngModel)]="item.emailId">
+                                                <a href="javascript:void(0);" class="btn-default background_pink" (click)="shareContractorProfile(item?.id, item.emailId)">share <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-50">
+                                            <div class="watchdog_footer_icon">
+                                                <a href="javascript:void(0);" (click)="playButtonClick(item)"><img src="./assets/images/play-icon.png" alt="Job" title="Job"> </a>
+                                                <!-- [routerLink]="['../job-posting']"-->
+                                                <a href="javascript:void(0);" (click)="editJob(item?.id)"><img src="./assets/images/watchdog-edit-icon.png" alt="Job" title="Job"> </a>
+                                                <a href="javascript:void(0);" (click)="deleteWatchDogOpenPopup(item?.id)"><img src="./assets/images/delete-icon.png" alt="Job" title="Job"> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="watchdog_box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-100">
+                                <div class="watchdog_headding">
+                                    <img src="./assets/images/job-watchdog.png" alt="Job" title="Job">
+                                    <h2>Java developer</h2>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <span class="search_span">Search</span>
+                                        </div>
+                                        <div class="col-sm-88">
+                                            <div class="search_box_right">
+                                                <span><strong>Job Title:</strong> ASP.NET</span> <span class="pink_color_span">|</span> <span><strong>Location:</strong> London, London</span> <span class="pink_color_span">|</span> <span> <strong>Postcode:</strong> EC1P</span> <span class="pink_color_span">| </span> <span><strong>Rate Min:</strong> £50</span> <span class="pink_color_span">|</span> <span><strong>Rate Max:</strong> £150</span> <span class="pink_color_span">|</span> <span><strong>Rate Type:</strong> Daily</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-30">
+                                            <span class="search_span">Date</span>
+                                        </div>
+                                        <div class="col-sm-88 col-xs-70">
+                                            <div class="search_box_right">
+                                                <span>10/02/2017 </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-30">
+                                            <span class="search_span">Set Up By</span>
+                                        </div>
+                                        <div class="col-sm-88 col-xs-70">
+                                            <div class="search_box_right">
+                                                <span>Anurag Srivastava  </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_footer recruiter_home_login">
+                                    <div class="row">
+                                        <div class="col-sm-50">
+                                            <div class="watchdog_mail_box">
+                                                <input class="form-control" id="exampleInputEmail1" placeholder="ENTER EMAIL ADDRESS" type="text">
+                                                <a href="javascript:void(0);" class="btn-default background_pink">share <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-50">
+                                            <div class="watchdog_footer_icon">
+                                                <a href="javascript:void(0);"><img src="./assets/images/play-icon.png" alt="Job" title="Job"> </a>
+                                                <a href="javascript:void(0);" [routerLink]="['../job-posting']"><img src="./assets/images/watchdog-edit-icon.png" alt="Job" title="Job"> </a>
+                                                <a href="javascript:void(0);"><img src="./assets/images/delete-icon.png" alt="Job" title="Job"> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="watchdog_box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-100">
+                                <div class="watchdog_headding">
+                                    <img src="./assets/images/job-watchdog.png" alt="Job" title="Job">
+                                    <h2>Web designer</h2>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <span class="search_span">Search</span>
+                                        </div>
+                                        <div class="col-sm-88">
+                                            <div class="search_box_right">
+                                                <span><strong>Job Title:</strong> ASP.NET</span> <span class="pink_color_span">|</span> <span><strong>Location:</strong> London, London</span> <span class="pink_color_span">|</span> <span> <strong>Postcode:</strong> EC1P</span> <span class="pink_color_span">| </span> <span><strong>Rate Min:</strong> £50</span> <span class="pink_color_span">|</span> <span><strong>Rate Max:</strong> £150</span> <span class="pink_color_span">|</span> <span><strong>Rate Type:</strong> Daily</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-30">
+                                            <span class="search_span">Date</span>
+                                        </div>
+                                        <div class="col-sm-88 col-xs-70">
+                                            <div class="search_box_right">
+                                                <span>10/02/2017 </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_search_box">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-30">
+                                            <span class="search_span">Set Up By</span>
+                                        </div>
+                                        <div class="col-sm-88 col-xs-70">
+                                            <div class="search_box_right">
+                                                <span>Anurag Srivastava  </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="watchdog_footer">
+                                    <div class="row">
+                                        <div class="col-sm-50">
+                                            <div class="watchdog_mail_box recruiter_home_login">
+                                                <input class="form-control" id="exampleInputEmail1" placeholder="ENTER EMAIL ADDRESS" type="text">
+                                                <a href="javascript:void(0);" class="btn-default background_pink">share <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-50">
+                                            <div class="watchdog_footer_icon">
+                                                <a href="javascript:void(0);"><img src="./assets/images/play-icon.png" alt="Job" title="Job"> </a>
+                                                <a href="javascript:void(0);" [routerLink]="['../job-posting']"><img src="./assets/images/watchdog-edit-icon.png" alt="Job" title="Job"> </a>
+                                                <a href="javascript:void(0);"><img src="./assets/images/delete-icon.png" alt="Job" title="Job"> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <!-- <div class="container">
+                <div class="row">
+                    <div class="col-sm-33" *ngFor="let item of list">
+                        <div class="ad_space margin_top_25">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-sm-34 margin_top_25">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-sm-33 margin_top_25">
+                        <div class="ad_space">
+                            <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <app-ad-space *ngIf="watchListDataArr.length !== 0"></app-ad-space>
+            
+            <div class="show_more_application">
+                <a *ngIf="watchListDataArr.length > 9" href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px" (click)="showMoreWatchDogs()"><span>SHOW MORE WATCHDOGS</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+            </div>
+        </section>
+
+
+<div id="confirm-container" class="simplemodal-container" *ngIf="openWatchdogPopupFlag">
+  <a href="javascript:void(0);" style="cursor: pointer;" title="Close" class="modal-close simplemodal-close" (click)="closeWatchdogDeletePopup()">X</a>
+  <div tabindex="-1" class="simplemodal-wrap">
+    <div id="confirm" class="simplemodal-data">
+      <h3 class="message"></h3>
+      <p>Are you sure you want to Delete watchdog ?</p>
+      <div class="buttons">
+        <div class="no simplemodal-close" (click)="closeWatchdogDeletePopup()">No</div>
+        <div class="yes" (click) = "deleteWatchDog()">Yes</div>
+      </div>
+    </div>
+  </div>
+</div>

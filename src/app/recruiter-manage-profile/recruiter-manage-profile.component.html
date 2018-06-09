@@ -1,0 +1,613 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+
+      <div class="errorbox" *ngIf="companyNameFlag || companySizeFlag || addressNameFlag || addressLine1Flag || addressLine2Flag || cityFlag || countryFlag || postCodeFlag || telephoneFlag || companyDescFlag || companyUrlFlag || companyEmailFlag || telephoneValidationFlag || emailAddValidationFlag || webAddValidationFlag"><b>The following error(s) occured:</b><br> 
+          <li *ngIf="companyNameFlag">Company Name is required.</li>
+          <li *ngIf="companySizeFlag">Company Size is required.</li>
+          <li *ngIf="addressNameFlag">Address Name is required.</li>
+          <li *ngIf="addressLine1Flag">Address Line1 is required.</li>
+          <li *ngIf="addressLine2Flag">Address Line2 is required.</li>
+          <li *ngIf="cityFlag">City is required.</li>
+          <li *ngIf="countryFlag">Nationality is required.</li>
+          <li *ngIf="postCodeFlag">Post Code is required.</li>
+          <li *ngIf="telephoneFlag">Telephone is required.</li>
+          <li *ngIf="companyDescFlag">Company Description is required.</li>
+          <li *ngIf="companyUrlFlag">Company Url is required.</li>
+          <li *ngIf="companyEmailFlag">Company Email is required.</li>
+          <li *ngIf="telephoneValidationFlag">Please enter valid phone no.</li>
+          <li *ngIf="emailAddValidationFlag">Please enter valid email address.</li>
+          <li *ngIf="webAddValidationFlag">Please enter valid web address.</li>
+      </div>
+
+      <div class="errorbox" *ngIf="WSErrorMsg"><b></b><br> 
+          <li>{{WSErrorMsg}}</li>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup befourlogin_fontsize">
+            <h2 class="">your <span class="text_pink">profile</span></h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)" class="hover_text_pink" [routerLink]="['../recruiter-home']">Home</a></li>
+              <li class="right_arrow text_pink">&gt;</li>
+              <li class="active">YOUR PROFILE</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="signup_form_section feed_profile_pages">
+            <form (ngSubmit)="saveRecruiterProfile(saveRecruiterPage)" #saveRecruiterPage="ngForm">
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="manage_top_buttons">
+                    <ul>
+                      <li><a href="javascript:void(0);" [routerLink]="['../manage-account']">Your Account</a></li>
+                      <li class="active"><a href="javascript:void(0);">Your Profile</a></li>
+                      <li><a href="javascript:void(0);" [routerLink]="['../manage-user']">Manage Users</a></li>
+                      <li><a href="javascript:void(0);" [routerLink]="['../manage-password']">Manage Password</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-success margin-tp18" *ngIf="succesMessageFlag">
+                <a href="javascript:void(0)" class="close" title="close" (click)="succesMessageFlag = !succesMessageFlag">×</a> You are updated profile <strong>succesfully!</strong>
+              </div>
+              <!-- <div class="alert alert-danger margin-tp18" *ngIf="ErrorMesageFlag">
+                <a href="javascript:void(0)" class="close" title="close" (click)="ErrorMesageFlag = !ErrorMesageFlag">×</a>
+                <strong>Error!</strong> {{errorMsg}}
+              </div> -->
+              <div class="job_search_keywords">
+                <h2 class="">Company Details</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-40">
+                  <div class="profile_image background_pink">
+                    <!-- <img src="./assets/images/profile-pik.png" alt="ads" title="ads" class="img-responsive">  -->
+
+                    <div style="margin-bottom: 30px;">
+                      
+                      <!-- <img *ngIf="!profileUrl" class="img-responsive" [src]="profileData && profileData.profileimage[0] ? profileData.profileimage[0].attachment_url+'/' +  profileData.profileimage[0].attachment_name : './assets/images/profile-pik.png'" alt="ads"> -->
+                      <img *ngIf="!profileUrl" class="img-responsive" [src]="profileData && profileData?.profileimage && profileData?.profileimage.length > 0 && profileData?.profileimage[0] ? profileData?.profileimage[0]?.attachment_url+'/' +  profileData?.profileimage[0]?.attachment_name : './assets/images/profile-pik.png'" alt="ads">
+                      <img *ngIf="profileUrl" class="img-responsive" [src]="profileUrl" alt="ads">
+                    </div>
+                    <!-- <a href="javascript:void(0);"></a> -->
+                    <!-- <input type="file" class="upload" (change)="recruiterFileChangeEvent($event)" /> -->
+                    <div class="fileUpload btn btn-primary">
+                      <span><img src="./assets/images/camera.png" alt="camera" title="camera"></span>
+                      <input [disabled]="companyEditableId == 0" type="file" class="upload" (change)="recruiterFileChangeEvent($event)" />
+                    </div>
+
+                    
+                    
+                  </div>
+                </div>
+                <div class="col-sm-60">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/company-name-icons.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Company Name" [(ngModel)]="companyName" name="companyName" required [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #companyNameTooltip>
+                        <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.companyName?.valid " style="color: #C21F39">COMPANY NAME</span>
+                        <span [hidden]="!saveRecruiterPage.form.controls.companyName?.hasError('required')" style="color: #C21F39">Company Name is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="companyNameFlag">Company Name is required.</span> -->
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/company-size-icon.png" alt="" title="" class="img-responsive"></div>                      
+                      <select class="form-control minimal background_drop_down box_padding_3 box_height_30" [(ngModel)]="companySize" name="companySize" required [disabled]="companyEditableId == 0">
+                        <option value="">Company Size</option>
+                        <option value="{{item?.sel_value}}" *ngFor="let item of companySizeArray">{{item?.display}}</option>
+                        <!-- <option value="1">124536</option>
+                        <option value="5">5124536</option>
+                        <option value="10">10124536</option>
+                        <option value="20">20124536</option> -->
+                      </select>
+                      <!-- <tooltip-content #companySizeTooltip>
+                        <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.companySize?.valid " style="color: #C21F39">COMPANY SIZE</span>
+                        <span [hidden]="!saveRecruiterPage.form.controls.companySize?.hasError('required')" style="color: #C21F39">Company Size is required.</span>
+                       
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="companySizeFlag">Company Size is required.</span> -->
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Address Name" [(ngModel)]="addressName" name="addressName" required [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #addressNameTooltip>
+                        <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.addressName?.valid " style="color: #C21F39">ADDRESS NAME</span>
+                        <span [hidden]="!saveRecruiterPage.form.controls.addressName?.hasError('required')" style="color: #C21F39">Address Name is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="addressNameFlag">Address Name is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Address Line 1" [(ngModel)]="addressLine1" name="addressLine1" required [disabled]="companyEditableId == 0">
+                     <!--  <tooltip-content #addressLine1Tooltip>
+                        <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.addressLine1?.valid " style="color: #C21F39">ADDRESS LINE 1</span>
+                        <span [hidden]="!saveRecruiterPage.form.controls.addressLine1?.hasError('required')" style="color: #C21F39">Address Line 1 is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="addressLine1Flag">Address Line 1 is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Address Line 2" [(ngModel)]="addressLine2" name="addressLine2" required [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #addressLine2Tooltip>
+                        <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.addressLine2?.valid " style="color: #C21F39">ADDRESS LINE 2</span>
+                        <span [hidden]="!saveRecruiterPage.form.controls.addressLine2?.hasError('required')" style="color: #C21F39">Address Line 2 is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="addressLine2Flag">Address Line 2 is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/recruiter-city-pastcode.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="City, Town" [(ngModel)]="city" name="city" required [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #cityTooltip>
+                        <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.city?.valid" style="color: #C21F39">CITY</span>
+                        <span [hidden]="!saveRecruiterPage.form.controls.city?.hasError('required')" style="color: #C21F39">City is required.</span>
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                  <!-- <span style="color:red" *ngIf="cityFlag">City is required.</span> -->
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/county-icon.png" alt="" title="" class="img-responsive"></div>
+
+                      <select class="form-control minimal background_drop_down box_padding_3 box_height_30" [(ngModel)]="country" name="country" required [disabled]="companyEditableId == 0">
+                        <option value="">Nationality</option>
+                        <option value="{{item?.id}}" *ngFor="let item of countryValueArray">{{item?.name}}</option>
+                      </select>
+
+
+                      <!-- <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="COUNTRY" [(ngModel)]="country" name="country" [tooltip]="countryTooltip" required> -->
+                     
+                    </div>
+                    <!-- <span style="color:red" *ngIf="countryFlag">Country is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/post-code-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Post Code" [(ngModel)]="postCode" name="postCode" required [disabled]="companyEditableId == 0">
+                      
+                    </div>
+                    <!-- <span style="color:red" *ngIf="postCodeFlag">Post Code is required.</span> -->
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/telephone-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Telephone" [(ngModel)]="telephone" name="telephone" required [disabled]="companyEditableId == 0">
+                      
+                    </div>
+                    <!-- <span style="color:red" *ngIf="telephoneFlag">Telephone is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <!-- <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="ADDRESS LINE 1" [(ngModel)]="postalAddressLine1" name="postalAddressLine1"> -->
+                      <div class="service_box">
+                          <input id="inlineCheckbox4" value="" type="checkbox" name="sameAsPerAddFlag" [(ngModel)]="sameAsPerAddFlag" (change)="samePermanentAdd()" [disabled]="companyEditableId == 0">
+                          <label for="inlineCheckbox4" class="padding_right_font">Postal Address is same as Permanent Address? <span></span></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Address Line 1" [(ngModel)]="postalAddressLine1" name="postalAddressLine1" [disabled]="companyEditableId == 0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Address Line 2" [(ngModel)]="postalAddressLine2" name="postalAddressLine2" [disabled]="companyEditableId == 0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/recruiter-city-pastcode.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="City, Town" [(ngModel)]="postalCity" name="postalCity" [disabled]="companyEditableId == 0">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/county-icon.png" alt="" title="" class="img-responsive"></div>
+                      <!-- <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="COUNTRY" [(ngModel)]="postalCountry" name="postalCountry"> -->
+
+                      <select class="form-control minimal background_drop_down box_padding_3 box_height_30" [(ngModel)]="postalCountry" name="postalCountry" [disabled]="companyEditableId == 0">
+                        <option value="">Nationality</option>
+                        <option value="{{item?.id}}" *ngFor="let item of countryValueArray">{{item?.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/post-code-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Post Code" [(ngModel)]="postalPostCode" name="postalPostCode" [disabled]="companyEditableId == 0">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/telephone-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Telephone" [(ngModel)]="postalTelephone" name="postalTelephone" (change)="postalTelephoneValidation(postalTelephone)" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #postalTelephoneTooltip>
+                        <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.postalTelephone?.valid" style="color: #C21F39">TELEPHONE</span>
+                         <span *ngIf="postalTelephoneValidationFlag" style="color: #C21F39">Please Enter Valid Phone No.</span>
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- <div *ngIf="showMultipleAddress"> -->
+                <div *ngFor="let item of addMulAddArray; let i=index">
+                  <div class="row">
+                    <div class="col-sm-100">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                          <input type="text" class="form-control box_padding_3 box_height_30" placeholder="Address Line 1" [(ngModel)]="addMulAddArray[i].addresslLine1" name="addMulAddArray[i].addressLine1Name" [disabled]="companyEditableId == 0">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-100">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><img src="./assets/images/address-name-icon.png" alt="" title="" class="img-responsive"></div>
+                          <input type="text" class="form-control box_padding_3 box_height_30" placeholder="Address Line 2" [(ngModel)]="addMulAddArray[i].addressLine2" name="addMulAddArray[i].addressLine2Name" [disabled]="companyEditableId == 0">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-50">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><img src="./assets/images/recruiter-city-pastcode.png" alt="" title="" class="img-responsive"></div>
+                          <input type="text" class="form-control box_padding_3 box_height_30" placeholder="City, Town" [(ngModel)]="addMulAddArray[i].city" name="addMulAddArray[i].cityName" [disabled]="companyEditableId == 0">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-50">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><img src="./assets/images/county-icon.png" alt="" title="" class="img-responsive"></div>
+                          <!-- <input type="text" class="form-control box_padding_3 box_height_30" placeholder="COUNTRY" [(ngModel)]="addMulAddArray[i].country" name="addMulAddArray[i].countryName"> -->
+                          
+                          <select class="form-control minimal background_drop_down box_padding_3 box_height_30" [(ngModel)]="addMulAddArray[i].country" name="addMulAddArray[i].countryName" [disabled]="companyEditableId == 0">
+                          <option value="">Nationality</option>
+                          <option value="{{item?.id}}" *ngFor="let item of countryValueArray">{{item?.name}}</option>
+                          </select>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-50">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><img src="./assets/images/post-code-icon.png" alt="" title="" class="img-responsive"></div>
+                          <input type="text" class="form-control box_padding_3 box_height_30" placeholder="Post Code" [(ngModel)]="addMulAddArray[i].postCode" name="addMulAddArray[i].postName" [disabled]="companyEditableId == 0">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-50">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><img src="./assets/images/telephone-icon.png" alt="" title="" class="img-responsive"></div>
+                          <input type="text" class="form-control box_padding_3 box_height_30" placeholder="Telephone" [(ngModel)]="addMulAddArray[i].telephone" name="addMulAddArray[i].telephone1" (change)="otherTelephoneValidation(addMulAddArray[i].telephone)" [disabled]="companyEditableId == 0">
+                          <!-- <tooltip-content #otherTelephoneTooltip>
+                           <span *ngIf="otherTelephoneValidationFlag" style="color: #C21F39">Please Enter Valid Phone No.</span>
+                        </tooltip-content> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sign_up_right_side margin_top_-30px">
+                    <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_180px" (click)="removeAddress(item)" [ngClass]="companyEditableId == 0 ? 'anchor_disable': ''">Remove
+                      <i class="fa fa-minus plus_blue text_pink" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              <!-- </div> -->
+
+
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="sign_up_right_side margin_top_-30px">
+                    <!-- <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_180px">Remove
+                      <i class="fa fa-minus plus_blue text_pink" aria-hidden="true"></i>
+                    </a> -->
+                    <p class="text_pink">
+                      <a href="javascript:void(0);" class="text_pink" (click)="addMultiplePhone()" [ngClass]="companyEditableId == 0 ? 'anchor_disable': ''">
+                        <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i> Add Another Address
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords">
+                <h2 class="">Company Description</h2>
+              </div>
+              <div class="form-group company_description">
+                <div class="input-group">
+                  <textarea class="form-control box_padding_3 box_height_30" placeholder="Company Description" rows="8" [(ngModel)]="companyDescription" name="companyDescription" required [disabled]="companyEditableId == 0">
+                  </textarea>
+                  <!-- <tooltip-content #companyDescTooltip>
+                    <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.companyDescription?.valid " style="color: #C21F39">COMPANY DESCRIPTION</span>
+                    <span [hidden]="!saveRecruiterPage.form.controls.companyDescription?.hasError('required')" style="color: #C21F39">Company Description is required.</span>
+                  </tooltip-content> -->
+                </div>
+                <!-- <span style="color:red" *ngIf="companyDescFlag">Company Description is required.</span> -->
+              </div>
+              <div class="job_search_keywords">
+                <h2 class="">Company Social</h2>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/web-address-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Web Address" [(ngModel)]="webAddress" name="webAddress" required [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #webAddressTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.webAddress?.valid " style="color: #C21F39">WEB ADDRESS</span>
+                      <span *ngIf="webAddValidationFlag" style="color: #C21F39">Please Enter Valid Web Address</span>
+                      <span [hidden]="!saveRecruiterPage.form.controls.webAddress?.hasError('required')" style="color: #C21F39">Company Url is required.</span>
+                    </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="companyUrlFlag">Company Url is required.</span> -->
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/email-address-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Email Address" [(ngModel)]="emailAddress" name="EmailAddress" required [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #emailAddTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.EmailAddress?.valid " style="color: #C21F39">EMAIL ADDRESS</span>
+                      <span *ngIf="emailAddValidationFlag" style="color: #C21F39">Please Enter Valid Email Address</span>
+                      <span [hidden]="!saveRecruiterPage.form.controls.emailAddress?.hasError('required')" style="color: #C21F39">Company Email is required.</span>
+                    </tooltip-content> -->
+                    </div>
+                    <!-- <span style="color:red" *ngIf="companyEmailFlag">Company Email is required.</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/rss-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Rss Url" [(ngModel)]="rssUrl" name="rssUrl" (change)="rssUrlValidation(rssUrl)" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #rssUrlTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.rssUrl?.valid " style="color: #C21F39">RSS URL</span>
+                      <span *ngIf="rssUrlValidationFlag" style="color: #C21F39">Please Enter Valid RSS URL</span>
+                    </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/rss-feed-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Full Url To Your Rss Feed" [(ngModel)]="fullUrlRssFeed" name="fullUrlRssFeed" (change)="rssFeedUrlValidation(fullUrlRssFeed)" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #rssFeedUrlTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.fullUrlRssFeed?.valid " style="color: #C21F39">FULL URL TO YOUR RSS FEED</span>
+                      <span *ngIf="rssFeedUrlValidationFlag" style="color: #C21F39">Please Enter Valid RSS Feed URL</span>
+                    </tooltip-content> -->
+                    </div>
+                    <div class="feed_profile_page">
+                      <p class="">Display feed on profile page?</p>
+                      <div class="input-group group_inline_rights">
+                        <input value="1" id="prepaid1" name="service_type3" checked="" type="radio" [(ngModel)]="rssDisplayFeed" name="rssDisplayFeed" value="rssYes" [disabled]="companyEditableId == 0">
+                        <label for="prepaid1" class="radio-inline"><span></span> Yes </label>
+                        <input value="2" id="postpaid2" name="service_type3" type="radio" [(ngModel)]="rssDisplayFeed" name="rssDisplayFeed" value="rssNo" [disabled]="companyEditableId == 0">
+                        <label for="postpaid2" class="radio-inline"><span></span> No </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/link-icons.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Social Link Name" [(ngModel)]="socialLinkName" name="socialLinkName" (change)="socialLinkValidation(socialLinkName)" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #socialLinkTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.socialLinkName?.valid " style="color: #C21F39">SOCIAL LINK NAME</span>
+                      <span *ngIf="socialLinkValidationFlag" style="color: #C21F39">Please Enter Valid Social Link</span>
+                    </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/twitter-account-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Twitter Account Name" [(ngModel)]="fullUrlTwitterFeed" name="fullUrlTwitterFeed" (change)="twitterValidation(fullUrlTwitterFeed)" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #twitterTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.fullUrlTwitterFeed?.valid " style="color: #C21F39">TWITTER ACCOUNT NAME</span>
+                      <span *ngIf="twitterValidationFlag" style="color: #C21F39">Please Enter Valid Twitter Account</span>
+                    </tooltip-content> -->
+                    </div>
+                    <div class="feed_profile_page">
+                      <p class="">Display feed on profile page?</p>
+                      <div class="input-group group_inline_rights">
+                        <input value="3" id="prepaid3" name="service_type3" checked="" type="radio" [(ngModel)]="twitterDisplayFeed" name="twitterDisplayFeed" value="twitterYes" [disabled]="companyEditableId == 0">
+                        <label for="prepaid3" class="radio-inline"><span></span> Yes </label>
+                        <input value="4" id="postpaid4" name="service_type3" type="radio" [(ngModel)]="twitterDisplayFeed" name="twitterDisplayFeed" value="twitterNo" [disabled]="companyEditableId == 0">
+                        <label for="postpaid4" class="radio-inline"><span></span> No </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/link-icons.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Social Link Name" [(ngModel)]="linkedinUrl" name="linkedinUrl" (change)="linkedinValidation(linkedinUrl)" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #linkedinTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.linkedinUrl?.valid " style="color: #C21F39">SOCIAL LINK NAME</span>
+                      <span *ngIf="linkedinValidationFlag" style="color: #C21F39">Please Enter Valid Social Link</span>
+                    </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/twitter-account-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Twitter Account Name" [(ngModel)]="fullUrlLinkedinFeed" name="fullUrlLinkedinFeed" (change)="linkedinFeedValidation(fullUrlLinkedinFeed)" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #fullLinkedinTooltip>
+                      <span *ngIf="saveRecruiterPage?.form && saveRecruiterPage.form.controls && saveRecruiterPage.form.controls.fullUrlLinkedinFeed?.valid " style="color: #C21F39">TWITTER ACCOUNT NAME</span>
+                      <span *ngIf="fullLinkedinValidationFlag" style="color: #C21F39">Please Enter Valid Twitter Account Name</span>
+                    </tooltip-content> -->
+                    </div>
+                    <div class="feed_profile_page">
+                      <p class="">Display feed on profile page?</p>
+                      <div class="input-group group_inline_rights">
+                        <input value="5" id="prepaid5" name="service_type3" checked="" type="radio" [(ngModel)]="linkedinDisplayFeed" name="linkedinDisplayFeed" value="linkedinYes" [disabled]="companyEditableId == 0">
+                        <label for="prepaid5" class="radio-inline"><span></span> Yes </label>
+                        <input value="6" id="postpaid6" name="service_type3" type="radio" [(ngModel)]="linkedinDisplayFeed" name="linkedinDisplayFeed" value="linkedinNo" [disabled]="companyEditableId == 0">
+                        <label for="postpaid6" class="radio-inline"><span></span> No </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" *ngFor="let item of addMulSocialArray;let i=index">
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/link-icons.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1{{i}}" placeholder="Other Social Link Name" [(ngModel)]="addMulSocialArray[i].otherSocialLink" name="addMulSocialArray[i].otherSocialLink" [disabled]="companyEditableId == 0">
+                      <!-- <tooltip-content #otherLinkedinTooltip>
+                     
+                      <span *ngIf="linkedinValidationFlag" style="color: #C21F39">Please Enter Valid Social Link</span>
+                    </tooltip-content> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-50">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/twitter-account-icon.png" alt="" title="" class="img-responsive"></div>
+                      <input type="text" class="form-control box_padding_3 box_height_30" id="exampleInputEmail1" placeholder="Other Account Name" [(ngModel)]="addMulSocialArray[i].otherSocialFeed" name="addMulSocialArray[i].otherSocialFeed" [disabled]="companyEditableId == 0">
+                     <!--  <tooltip-content #otherFullLinkedinTooltip>
+                      <span *ngIf="fullLinkedinValidationFlag" style="color: #C21F39">Please Enter Valid Twitter Account Name</span>
+                    </tooltip-content> -->
+                    </div>
+                    <div class="feed_profile_page">
+                      <p class="">Display feed on profile page?</p>
+                      <div class="input-group group_inline_rights">
+                        <input value="otherYes" id="prepaidyes_{{i}}" name="service_type3" checked="" type="radio" [(ngModel)]="addMulSocialArray[i].otherRadio" name="addMulSocialArray[i].otherRadio" [disabled]="companyEditableId == 0">
+                        <label for="prepaidyes_{{i}}" class="radio-inline"><span></span> Yes </label>
+                        <input value="otherNo" id="prepaidno_{{i}}" name="service_type3" type="radio" [(ngModel)]="addMulSocialArray[i].otherRadio" name="addMulSocialArray[i].otherRadio" [disabled]="companyEditableId == 0" >
+                        <label for="prepaidno_{{i}}" class="radio-inline"><span></span> No </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sign_up_right_side margin_top_-30px"> 
+                  <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_180px" (click)="removeSocialLink(item)" [ngClass]="companyEditableId == 0 ? 'anchor_disable': ''">Remove<i class="fa fa-minus plus_blue text_pink" aria-hidden="true"></i></a>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-sm-100">
+                  <div class="sign_up_right_side margin_top_-30px"> 
+                    <!-- <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse width_180px">Remove<i class="fa fa-minus plus_blue text_pink" aria-hidden="true"></i></a> -->
+                    <p class="text_pink">
+                      <a href="javascript:void(0);" class="text_pink" (click)="addAnotherSocialLink()" [ngClass]="companyEditableId == 0 ? 'anchor_disable': ''">
+                        <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i> Add Another Social Link</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <!-- <div class="col-xs-43 responsive_padding_right_none">
+                  <div class=""> <a href="javascript:void(0);" [routerLink]="['../view-profile']" class="btn-primary hover_text_pink hover_white_pluse width_180px">Preview<i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a> </div>
+                </div> -->
+                <div class="col-xs-57">
+                  <div class="sign_up_right_side">
+                    <button [disabled]="companyEditableId == 0" class="btn-primary hover_text_pink hover_white_pluse width_180px" type="submit">Save Changes
+                      <!-- <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse width_180px">Save Changes -->
+                      <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i>
+                      <!-- </a>  -->
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--contractor login end-->
+  </div>
+</section>

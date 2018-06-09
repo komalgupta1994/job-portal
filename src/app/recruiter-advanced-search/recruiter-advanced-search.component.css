@@ -1,0 +1,76 @@
+:host/deep/.close_inquerys {
+    right: 10px;
+}
+
+:host/deep/.close_inquerys {
+    cursor: pointer;
+    display: inline;
+    position: absolute;
+    top: -10px;
+    z-index: 9999;
+}
+
+
+
+.mapping_view_page .container {
+    width: 840px !important;
+}
+
+
+ 
+
+.close_mapping {
+    cursor: pointer;
+    display: inline;
+    position: absolute;
+    top: -10px;
+    z-index: 9999;
+    right: 10px;
+}
+
+:host/deep/.form-control > option {
+    color: #000;
+    cursor: context-menu;
+    font-size: 15px;
+    margin-bottom: 2px;
+    padding: 5px 20px 5px 10px;
+    font-family: 'HelveticaNeue';
+}
+
+:host/deep/.form-control > option:first-child{
+    /*background: #ff4c94;
+    color: #fff;*/
+    -webkit-transition: all 0.2s ease 0s;
+}
+
+:host/deep/option:hover {background: #ff4c94; color: #FFF;}
+
+:host/deep/.irs-single{ background: #ff0066; }
+:host/deep/.irs-single:after{border-top-color:#ff0066;}
+:host/deep/.irs-bar{background: #ff0066;}
+:host/deep/.irs-bar-edge{background: #ff0066; border-radius: 5px 0 0 5px; left:-5px;}
+:host/deep/.irs-slider{ width:2px; background: #ff0066;  }
+
+.text_pink{
+    cursor: pointer;
+        padding-top: 8px;
+}
+.text_pink .tooltiptext_part{
+    width: 296px;
+    bottom: 28px;
+
+}
+.text_pink .tooltiptext_part::after {
+    right: 50%;
+    left: auto;
+}
+
+
+.text_pink a{
+    color: #ff0066 !important;
+}
+
+.text_pink:hover .tooltiptext_part{
+    visibility: visible;
+    opacity: 1;
+}

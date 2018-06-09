@@ -1,0 +1,322 @@
+<section id="min_height">
+  <!--navigation top end-->
+  <!--contractor login-->
+  <div id="contractor-signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-100">
+          <div class="contractor_signup befourlogin_fontsize">
+            <h2>CONTRACTOR <span>PROFILE</span></h2>
+            <ul class="breadcomb">
+              <li><a href="javascript:void(0)">Home</a></li>
+              <li class="right_arrow">&gt;</li>
+              <li><a href="javascript:void(0)">Contractor </a></li>
+              <li class="right_arrow">&gt;</li>
+              <li class="active">View Profile </li>
+            </ul>
+            <div class="pull-right job_search">
+              <a href="javascript:void(0);" class="btn-info hover_white_pluse">View Profile 
+                <i class="fa fa-plus plus_black" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="btn-primary hover_white_pluse" [routerLink]="['../EditProfile']">Edit Profile 
+                <i class="fa fa-plus plus_blue " aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contractor_view_profile_main">
+        <form>
+          <div class="row">
+            <div class="col-md-30 col-sm-40">
+              <div class="profile_left_part signup_form_section width_auto">
+                <div class="view_profile_image"> <img [src] = " profileData?.contractorProfileUrl[0] ? profileData.contractorProfileUrl[0].attachment_url +'/' +  profileData.contractorProfileUrl[0].attachment_name : './assets/images/profile-pik.png' " alt="ads" title="ads" class="img-responsive"> </div>
+                <div class="profile_form">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <img class="img-responsive" src= './assets/images/account-pass.png'>
+                      </div>
+                       <!-- <div class="input-group-addon"><img src="./assets/images/account-pass.png" alt="Enter Password" title="Password" class="img-responsive"></div> -->
+                      <label [tooltip]="userName" class="form-control">{{profileData?.userName}}</label>
+                      <tooltip-content #userName>
+                        <span style="color: #C21F39"> User Name</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/mail-address.png" alt="Email" title="Email" class="img-responsive"></div>
+                      <label [tooltip]="emailAddress" class="form-control">{{profileData?.emailAddress}}</label>
+                      <tooltip-content #emailAddress>
+                        <span style="color: #C21F39">Email Address</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group" *ngIf="profileData && securityClearenceData">
+                      <div class="input-group-addon"><img src="./assets/images/security-clearance.png" alt="Enter Password" title="Password" class="img-responsive"></div>
+                      <label [tooltip]="securityClearance" class="form-control">{{getSecurityClearnceName(profileData) ? getSecurityClearnceName(profileData) : 'NA'}}</label>
+                      <!-- <tooltip-content #securityClearance>
+                        <span style="color: #C21F39">Security Clearance</span>
+                      </tooltip-content> -->
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <div class="input-group">
+                      <div class="input-group-addon border_bottom_none"><img src="./assets/images/eu-driving-licence.png" alt="Enter Password" title="Password" class="img-responsive"></div>
+                      <label class="eu_driving_licence">EU Driving Licence?</label>
+                      <div class="input-group group_inline_right eu_driving_licence"> {{profileData?.euDrivingLicence ? "Yes" : "No"}} </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/post-code.png" alt="Post Code" title="Post Code" class="img-responsive"></div>
+                      <label [tooltip]="postCode" class="form-control">{{profileData?.postcode ? profileData?.postcode : 'NA'}}</label>
+                      <tooltip-content #postCode>
+                        <span style="color: #C21F39">Post Code</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-xs-60">
+                      <div class="input-group">
+                        <div class="input-group-addon upto_border_none day_rate_align"><img src="./assets/images/day-rate.png" alt="Post Code" title="Post Code" class="img-responsive"> Day Rate</div>
+                        <label [tooltip]="dayRate_min" class="form-control">{{profileData?.dayRate_min ? profileData?.dayRate_min : 'NA'}}</label>
+                        <tooltip-content #dayRate_min>
+                          <span style="color: #C21F39">Minimum</span>
+                        </tooltip-content>
+                      </div>
+                    </div>
+                    <div class="col-xs-40">
+                      <div class="input-group">
+                        <div class="input-group-addon upto_border_none">-</div>
+                        <label [tooltip]="dayRate_max" class="form-control">{{profileData?.dayRate_max ? profileData?.dayRate_max : 'NA'}}</label>
+                        <tooltip-content #dayRate_max>
+                          <span style="color: #C21F39">Maximum</span>
+                        </tooltip-content>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/availability.png" alt="Availability" title="Availability" class="img-responsive"></div>
+                      <label [tooltip]="availability" class="form-control">{{profileData?.availability ? profileData?.availability : 'NA'}}</label>
+                      <tooltip-content #availability>
+                        <span style="color: #C21F39">Availability</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/web-address.png" alt="Web Address" title="Web Address" class="img-responsive"></div>
+                      <label [tooltip]="webAddress" class="form-control">{{profileData?.webAddress ? profileData?.webAddress : 'NA'}}</label>
+                      <tooltip-content #webAddress>
+                        <span style="color: #C21F39">WebAddress</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/stack-overflo.png" alt="Stack Overflow Web Address" title="Stack Overflow Web Address" class="img-responsive"></div>
+                      <label [tooltip]="stackOverWebAddress" class="form-control">{{profileData?.stackOverWebAddress ? profileData?.stackOverWebAddress : 'NA'}}</label>
+                      <tooltip-content #stackOverWebAddress>
+                        <span style="color: #C21F39">StackOver WebAddress</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/GitHub-Web.png" alt="Enter GitHub Web Address" title="Enter GitHub Web Address" class="img-responsive"></div>
+                      <label [tooltip]="gitHubWebAddress" class="form-control">{{profileData?.gitHubWebAddress ? profileData?.gitHubWebAddress : 'NA'}}</label>
+                      <tooltip-content #gitHubWebAddress>
+                        <span style="color: #C21F39">GitHub WebAddress</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/Linkedin-Web.png" alt="Enter Linkedin Web Address" title="Enter Linkedin Web Address" class="img-responsive"></div>
+                      <label [tooltip]="linkedinWebAddress" class="form-control">{{profileData?.linkedinWebAddress ? profileData?.linkedinWebAddress : 'NA'}}</label>
+                      <tooltip-content #linkedinWebAddress>
+                        <span style="color: #C21F39">Linkedin WebAddress</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><img src="./assets/images/Behance-Web.png" alt="Enter Behance Web Address" title="Enter Behance Web Address" class="img-responsive"></div>
+                      <label [tooltip]="behanceWebAddress" class="form-control">{{profileData?.behanceWebAddress ? profileData?.behanceWebAddress : 'NA'}}</label>
+                      <tooltip-content #behanceWebAddress>
+                        <span style="color: #C21F39">Behance WebAddress</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-70 col-sm-60">
+              <div class="view_profile_map">
+                <!-- <agm-map [latitude]="lat" [longitude]="lng">
+                  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                  <agm-polygon [paths]="polygonPath" [editable]="true" [draggable]="true"></agm-polygon>
+                </agm-map> -->
+                <div id="profilePreviewMap"></div>
+              </div>
+              <div class="signup_form_section width_auto">
+                <div class="row">
+                  <div class="col-md-22 col-sm-50">
+                    <div class="form-group">
+                      <div class="input-group width_100_commutable">
+                        <label [tooltip]="commutable" class="form-control">{{profileData?.commutable && 
+                        (profileData?.commutable =='commutable' || profileData?.commutable =='relocatable') ? profileData?.commutable  : 'commutable'}}</label>
+                        <tooltip-content #commutable>
+                          <span style="color: #C21F39">commutable</span>
+                        </tooltip-content>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-24 col-sm-50">
+                    <div class="form-group row">
+                      <div class="col-xs-55">
+                        <div class="input-group">
+                          <div class="input-group-addon upto_border_none">Rate</div>
+                          <label [tooltip]="rate_min" class="form-control">{{profileData?.rate_min ? profileData?.rate_min : 'NA'}}</label>
+                          <tooltip-content #rate_min>
+                            <span style="color: #C21F39">Minimum</span>
+                          </tooltip-content>
+                        </div>
+                      </div>
+                      <div class="col-xs-45">
+                        <div class="input-group">
+                          <div class="input-group-addon upto_border_none">-</div>
+                          <label [tooltip]="rate_max" class="form-control">{{profileData?.rate_max ? profileData?.rate_max : 'NA'}}</label>
+                          <tooltip-content #rate_max>
+                            <span style="color: #C21F39">Maximum</span>
+                          </tooltip-content>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-22 col-sm-45">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <label for="prepaid" class="radio-inline"><span></span> {{profileData?.dailyHourlyValue ? profileData?.dailyHourlyValue : 'NA'}} </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords signup_form_section width_auto">
+                <h2>CURRENT JOB TITLE</h2>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><img src="./assets/images/current-job-title.png" alt="Current Job Title" title="Current Job Title" class="img-responsive"></div>
+                    <label [tooltip]="currentJobTitle" class="form-control">{{profileData?.currentJobTitle ? profileData?.currentJobTitle: 'NA'}}</label>
+                    <tooltip-content #currentJobTitle>
+                      <span style="color: #C21F39">Current Job Title</span>
+                    </tooltip-content>
+                  </div>
+                </div>
+              </div>
+              <div class="job_search_keywords signup_form_section width_auto">
+                <h2>Skills & Experience</h2>
+                <div class="add_sub_skills" *ngIf="skillArray && skillArray.length>0">
+                  <ul>
+                     <li *ngFor="let skill of skillArray">
+                      {{skill}}
+                    </li>
+                  </ul>
+                </div>
+                <!--            <div class="add_sub_skills"> <span>PHP <img src="./assets/images/close-icon.png" alt="Close" title="Close"></span> <span>java <img src="./assets/images/close-icon.png" alt="Close" title="Close"></span> <span>JAVASCRIPT <img src="./assets/images/close-icon.png" alt="Close" title="Close"></span> </div> -->
+              </div>
+              <div class="signup_form_section summary_industry_box width_auto">
+                <div class="row">
+                  <div class="col-sm-50">
+                    <div class="form-group">
+                      <div class="input-group"> <span class="form-control industry_sector">SummAry</span>
+                        <div class="input-group-addon bordr_non"></div>
+                      </div>
+                      <textarea [tooltip]="summary" class="form-control textares" rows="3" [disabled]="true">{{profileData?.summary ? profileData?.summary: 'NA'}}
+                      </textarea>
+                      <tooltip-content #summary>
+                        <span style="color: #C21F39">Summary</span>
+                      </tooltip-content>
+                    </div>
+                  </div>
+                  <div class="col-sm-50">
+                    <div class="form-group">
+                      <div class="input-group"> <span class="form-control industry_sector">Industry Sector</span>
+                        <div class="input-group-addon bordr_non"></div>
+                      </div>
+                      <div class="view_industry_sector">
+                        <ul class="form-control industry_min_heights padding_none" *ngIf="profileData && profileData.industrySector && industrySectorData && profileData.industrySector.length>0">
+                          <li *ngFor="let sector of profileData.industrySector">{{getIndustrySectorName(sector)}}</li>
+                          
+                        </ul>
+                        <ul class="form-control industry_min_heights padding_none" *ngIf="!profileData || !profileData.industrySector || !industrySectorData || profileData.industrySector.length == 0">
+                          <li>NA</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="signup_form_section width_auto profile_form">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><img src="./assets/images/certification-icon.png" alt="Certification" title="Certification" class="img-responsive"></div>
+                    <label [tooltip]="certification" class="form-control">{{profileData?.certification ? profileData?.certification: 'NA'}}</label>
+                    <tooltip-content #certification>
+                      <span style="color: #C21F39">Certification</span>
+                    </tooltip-content>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><img src="./assets/images/qualification-icon.png" alt="Qualification" title="Qualification" class="img-responsive"></div>
+                    <label [tooltip]="qualification" class="form-control">{{profileData?.qualification? profileData?.qualification:'NA'}}</label>
+                    <tooltip-content #qualification>
+                      <span style="color: #C21F39">Qualification</span>
+                    </tooltip-content>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><img src="./assets/images/current-job-title.png" alt="Preferred Job" title="Preferred Job" class="img-responsive"></div>
+                    <label [tooltip]="yourPreferredJobTitle" class="form-control">{{profileData?.yourPreferredJobTitle ? profileData?.yourPreferredJobTitle: 'NA'}}</label>
+                    <tooltip-content #yourPreferredJobTitle>
+                      <span style="color: #C21F39">Preferred JobTitle</span>
+                    </tooltip-content>
+                  </div>
+                </div>
+              </div>
+              <div class="signup_form_section width_auto">
+                <div class="job_search_keywords">
+                  <h2>DOWNLOAD CV</h2>
+                </div>
+                <div class="row">
+                  <div class="col-md-70 col-sm-62">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon"><img src="./assets/images/download-icon.png" alt="Download" title="Download" class="img-responsive"></div>
+                        <label *ngIf="profileData" [tooltip]="docFile" class="form-control">{{profileData?.uploadCV[0]?.attachment_name ? profileData?.uploadCV[0]?.attachment_name : 'NA'}}</label>
+                        <tooltip-content #docFile>
+                          <span style="color: #C21F39">Docment</span>
+                        </tooltip-content>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-30 col-sm-38">
+                    <div *ngIf="profileData && profileData.uploadCV.length>0" class="current_rate_signup margin_top_10"> <a [href]="profileData?.uploadCV[0]?.attachment_url + '/' + profileData?.uploadCV[0]?.attachment_name" [download]="profileData.uploadCV[0]?.attachment_name" class="btn-primary font_capitaliz hover_white_pluse">Download <i class="fa fa-plus plus_blue" aria-hidden="true"></i></a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--contractor login end-->
+</section>

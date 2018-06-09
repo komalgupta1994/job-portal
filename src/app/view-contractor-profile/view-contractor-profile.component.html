@@ -1,0 +1,144 @@
+<section id="min_height" class="margin_top_40">
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-70">
+                        <div class="contractor_signup recruiter_signup  befourlogin_fontsize">
+                            <h2 class="font_capitalizs">Contractor <span class="text_pink">PROFILE</span></h2>
+                            <ul class="breadcomb color_active">
+                                <li><a href="javascript:void(0);" [routerLink]="['../recruiter-home']">Home</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li><a href="javascript:void(0)">Saved Search</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li><a href="javascript:void(0)">Search Results</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li class="active">profile</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-30">
+                        <div class="your_options_profile your_options_profile_options">
+                            <div class="dropdown">
+                                <button class="" type="button" (click)="showSearchOptionFlag = !showSearchOptionFlag">
+                                    Your Options
+                                </button>
+                                <ul class="dropdown-menu" [ngClass]="showSearchOptionFlag == true ? 'display_block' : 'display_none'">
+                                    <li *ngIf="contractorData && contractorData?.uploadCV && contractorData?.uploadCV?.length > 0"><a href="{{contractorData?.uploadCV[0]['attachment_url']}}/{{contractorData?.uploadCV[0]['attachment_name']}}">Download CV</a></li>
+                                    <li *ngIf="contractorData && contractorData?.uploadCV && contractorData?.uploadCV?.length == 0"><a href="javascript:void(0)">Download CV</a></li>
+                                    <li><a href="mailto:someone@example.com?Subject=Hello%20again" target="_top">Email Contractor</a></li>
+                                    <li *ngIf="contractorData?.is_watched == 0" (click)="watchContractor()"><a href="javascript:void(0)">Watch Contractor</a></li>
+                                    <li *ngIf="contractorData?.is_watched == 1" (click)="unwatchContractor()"><a href="javascript:void(0)">Unwatch Contractor</a></li>
+                                    <li><a (click)="showShareProfileBox = !showShareProfileBox"  href="javascript:void(0)" id="send_search">Share Profile <i class="fa fa-plus plus_blue text_pink" aria-hidden="true" ></i></a>
+                                        <div class="home_page_inquery">
+                                            <div id="message_send" [ngClass]="showShareProfileBox == true ? 'display_block' : 'display_none'">
+                                                <div class="after_login_menu">
+                                                    <input type="text" placeholder="Enter Email Here" class="enter_border" [(ngModel)]="emailContractor" name="emailContractor">
+                                                    <textarea placeholder="Message" class="enter_border" [(ngModel)]="messageValue" name="messageValue"></textarea>
+                                                    <a href="javascript:void(0)" class="btn-primary hover_text_pink hover_white_pluse width_280px" (click)="shareContractorProfile()"><span>Share Search</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="errorbox" *ngIf="emailValueFlag"><b></b><br> 
+                        <li>Please Enter Email.</li>
+                    </div>
+                    <div class="alert alert-success margin-tp18" *ngIf="successMessageFlag">
+                  <a href="javascript:void(0)" class="close" title="close" (click)="successMessageFlag = !successMessageFlag">×</a><strong>Share profile successfully.</strong>
+                </div>
+            <!--contractor login end-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-50">
+                        <div class="recruiter_view_profile_left">
+                            <h2>{{currentContractorFirstName}}</h2>
+                            <p><span>PHP</span></p>
+                            <p><span *ngIf="contractorData?.dailyHourlyValue == 'daily'">£{{contractorData?.rate_min}} - £{{contractorData?.rate_max}}</span>
+                            <span *ngIf="contractorData?.dailyHourlyValue == 'hourly'">£{{contractorData?.contractor_rate_min_hour}} - £{{contractorData?.contractor_rate_max_hr}}</span> Commutable <span class="pink_color">|</span> <span *ngIf="contractorData?.contractor_daily_hourly_value_relocatable == 'daily'">£{{contractorData?.contractor_rate_min_relocatable}} - £{{contractorData?.contractor_rate_max_relocatable}}</span> 
+                            <span *ngIf="contractorData?.contractor_daily_hourly_value_relocatable == 'hourly'">£{{contractorData?.contractor_rate_min_relocatable_hr}} - £{{contractorData?.contractor_rate_max_relocatable_hr}}</span>
+                        ReLOCatable</p>
+                        </div>
+                        <div class="recruiter_view_profile_left2">
+                            <p><span>Location:</span> {{contractorData?.location ? contractorData?.location : 'N/A'}}</p>
+                            <p><span>Email:</span> {{contractorData?.emailAddress ? contractorData?.emailAddress : 'N/A'}}</p>
+                            <p><span>Mobile:</span> {{contractorData?.contractor_tel_no ? contractorData?.contractor_tel_no : 'N/A'}}</p>
+                        </div>
+                        <div class="recruiter_view_profile_left3">
+                            <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;<span style="font-size: 14px">{{contractorData?.gitHubWebAddress ? contractorData?.gitHubWebAddress : 'N/A'}}</span></a><br/>
+                            <a href="javascript:void(0)"><i class="fa fa-laptop" aria-hidden="true"></i>&nbsp;<span style="font-size: 14px">{{contractorData?.linkedinWebAddress ? contractorData?.linkedinWebAddress : 'N/A'}}</span></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="recruiter_view_profile_right">
+                            <h5>Availability</h5>
+                            <p>{{contractorData?.availability ? contractorData?.availability : 'N/A'}}</p>
+
+                            <div class="graph_img">
+                                <span>10</span>
+                                Days
+                            </div>
+
+
+                            <!-- <img src="./assets/images/days.png" alt="" title=""> -->
+                            <p class="font_size14">My Notice Period is </p>
+                            <h3>{{contractorData?.notice_period ? contractorData?.notice_period : 'N/A'}}</h3>
+                            <p class="font_size12">I am happy to use my notice period : {{contractorData?.happy_notice ? contractorData?.happy_notice : 'N/A'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile_maps">
+                <!-- <img src="./assets/images/profile-map.png" alt="" title="" class="img-responsive"> -->
+               <!--  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                </agm-map> -->
+
+                <div id="viewContractorProfile"></div>
+                
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-100">
+                        <div class="profile_my_work">
+                            <h3>My Work</h3>
+                            <h5>Summary</h5>
+                            <p>{{contractorData?.summary ? contractorData?.summary : 'N/A'}}</p>
+                            <h5>Preferred Job Title</h5>
+                            <div class="add_sub_skills"> <a href="javascript:void(0)">{{contractorData?.yourPreferredJobTitle ? contractorData?.yourPreferredJobTitle : 'N/A'}} <img src="./assets/images/close-icon.png" alt="Close" title="Close"></a> </div>
+                            <h3>Key Skills </h3>
+                            <div class="add_sub_skills margin_bottom_none">
+                                <p *ngIf="keySkills.length == 0">N/A</p>
+                                <p *ngIf="keySkills.length > 0"> <a href="javascript:void(0)" *ngFor="let item of keySkills">{{item}} <img src="./assets/images/close-icon.png" alt="Close" title="Close"></a></p>                                
+                            </div>
+                            <div class="profile_education">
+                                <h3>Education </h3>
+                                <p *ngIf="qualification.length == 0">N/A</p>
+                                <ul *ngIf="qualification.length > 0">
+                                    <li *ngFor="let item of qualification"><img src="./assets/images/education-icon.png" alt="" title=""> {{item}}</li>
+                                    <!-- <li><img src="./assets/images/education-icon.png" alt="" title=""> M.S.C</li> -->
+                                </ul>
+                            </div>
+                            <div class="profile_education">
+                                <h3>Certifications </h3>
+                                <p *ngIf="certification.length == 0">N/A</p>
+                                <ul *ngIf="certification.length > 0">
+                                    <li *ngFor="let item of certification"><img src="./assets/images/certifications-icon.png" alt="" title=""> {{item}}</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-100">
+                                <div class="sign_up_right_side sign_up_right_side_btn_part margin_left_blue10"> <a href="javascript:void(0)" (click)="moveToAnotherPage()" class="btn-primary hover_text_pink hover_white_pluse">Return To Search Results <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

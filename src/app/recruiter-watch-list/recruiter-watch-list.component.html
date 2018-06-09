@@ -1,0 +1,574 @@
+<section id="min_height" class="margin_top_40">
+            <!--navigation top end-->
+            <!--contractor login-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-100">
+                        <div class="contractor_signup recruiter_signup">
+                            <h2 class="font_capitalizs">Recruiter <span class="text_pink">WatchList</span></h2>
+                            <ul class="breadcomb color_active">
+                                <li><a href="javascript:void(0)" [routerLink]="['../recruiter-home']">Home</a></li>
+                                <li class="right_arrow text_pink">&gt;</li>
+                                <li class="active">WATCHLIST</li>
+                            </ul>
+                            <div class="signup_form_section width_auto choose_template text-right width_auto" *ngIf="watchListData.length > 0">
+                                <label>Filter By Job:</label>
+                                <select class="form-control minimal background_drop_down box_height_30 box_padding_3 padding_left_none java_developer" [(ngModel)]="filterByJobId" (change)="filterByJobChange()">
+                                    <option value="0">All Jobs</option>
+                                    <option value="{{item?.jobid}}" *ngFor="let item of filterByJobData;">{{item?.jobTitle}}</option>
+                                    <!-- <option value="">ALL JOBS</option>
+                                    <option value="1">124536</option>
+                                    <option value="5">5124536</option>
+                                    <option value="10">10124536</option>
+                                    <option value="20">20124536</option> -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="errorbox" *ngIf="errorMsg && !loading"><br> 
+                        <li>{{errorMsg}}</li>
+                    </div>
+                    <div *ngIf="loading" class="row">
+                  <img src="./assets/images/bx_loader.gif">
+                </div>
+                <div class="pager_section" *ngIf="watchListData.length > 0 && !loading">
+                    <div class="row">
+                        <div class="col-sm-50">
+                            <div class="pazer"> 
+                                <span>Show</span> 
+                                <a href="javascript:void(0);" [ngClass]="12===pageLimit ? 'active':''" (click)="onPageClick('12')">12</a> 
+                                <a href="javascript:void(0);" [ngClass]="16===pageLimit ? 'active':''" (click)="onPageClick('16')">16</a> 
+                                <a href="javascript:void(0);" [ngClass]="20===pageLimit ? 'active':''" (click)="onPageClick('20')">20</a> 
+                                <span>results per page</span> 
+                            </div>
+                        </div>
+                        <div class="col-sm-50">
+                            <div class="signup_form_section width_auto choose_template text-right width_auto">
+                                <label>Sort By:</label>
+                                <select class="form-control minimal background_drop_down box_height_30 box_padding_3 padding_left_none java_developer" [(ngModel)]="currentSortBy" (change)="sortChange()">
+                                    <option value="{{item?.id}}" *ngFor="let item of watchListSortData;">{{item?.text}}</option>
+                                    <!-- <option value="">AVAILABLILITY (SOONEST)</option>
+                                    <option value="1">124536</option>
+                                    <option value="5">5124536</option>
+                                    <option value="10">10124536</option>
+                                    <option value="20">20124536</option> -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--contractor login end-->
+            <div class="container" *ngIf="!loading">
+                <div class="row">
+                    <div class="col-sm-50" *ngFor="let item of firstArray">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">{{item?.contractor_first_name}} {{item?.contractor_last_name}}</h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <strong><span>{{item?.available}}</span></strong>
+                                            <!-- <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a>  -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> {{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</p>
+                                <p><span>Location :</span> {{item?.contractor_location ? item?.contractor_location : 'N/A'}}</p>
+                                <p style="height: 40px;">
+                                    <span style="height: 40px;">Rate :</span> 
+                                    <cite style="display: block; float: left; width: 70%; font-style: normal;">Commutable 
+                                        <a *ngIf="!item?.rate_type" href="javascript:void(0);">N/A</a>
+                                    <a *ngIf="item?.rate_type == 'daily'" href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}} Per Day</a>
+                                    <a *ngIf="item?.rate_type == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_hour}} - £{{item?.contractor_rate_max_hr}} Per Hour</a> 
+                                    <cite class="sapeter">|</cite> 
+                                    Relocatable
+                                    <!-- <a href="javascript:void(0);">£25 - £70</a> p/d  -->
+                                    <a *ngIf="!item?.contractor_daily_hourly_value_relocatable" href="javascript:void(0);">N/A</a>
+                                    <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'daily'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable}} - £{{item?.contractor_rate_max_relocatable}} Per Day</a>
+                                    <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable_hr}} - £{{item?.contractor_rate_max_relocatable_hr}} Per Hour</a> 
+                                    </cite>
+
+                                    <!-- <cite style="font-style: normal;" *ngIf="item?.rate_name == 'commutable'">
+                                        Commutable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>
+                                    </cite>
+                                    
+                                    <cite style="font-style: normal;" *ngIf="item?.rate_name == 'relocatable'">
+                                        Relocatable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong> 
+                                    </cite> -->
+                                </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-53 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_viewed ? item?.last_viewed : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-47 col-md-64">
+                                        <div class="footer_right_part"> 
+                                            <a *ngIf="item && item?.resume && item?.resume?.length > 0" href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0);" (click)="watchContractorProfile(item?.contractor_reg_id, item?.contractor_first_name, item?.contractor_last_name)" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Hidden Profile </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p><span>Viewable on</span> 12/10/2018</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-doneicon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Performance Architect</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£100 - £400</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£250 - £700</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span><img src="./assets/images/unviewed.png" alt="" title=""></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+               <!--  <div class="row">
+                    <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Simian Gallantry </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p><span>Permanent </span> 6 Weeks Notice</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Senior Project Manager</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£25 - £70</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Luke Clothier </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p class="font_waight_normal">Available Immediately</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-doneicon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Performance Architect</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£100 - £400</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£250 - £700</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span><img src="./assets/images/unviewed.png" alt="" title=""></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="row">
+                    <div class="col-sm-33">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-34">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-33">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                </div> -->
+                <app-ad-space *ngIf="firstArray.length > 0"></app-ad-space>
+                <div class="row">
+                    <div class="col-sm-50" *ngFor="let item of secondArray">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">{{item?.contractor_first_name}} {{item?.contractor_last_name}} </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <strong><span>{{item?.available}}</span></strong>
+                                            <!-- <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a>  -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> {{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</p>
+                                <p><span>Location :</span> {{item?.contractor_location ? item?.contractor_location : 'N/A'}}</p>
+                                <p style="height: 40px;"><span>Rate :</span> 
+
+                                    Commutable 
+                                    <a *ngIf="!item?.rate_type" href="javascript:void(0);">N/A</a>
+                                    <a *ngIf="item?.rate_type == 'daily'" href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}} Per Day</a>
+                                    <a *ngIf="item?.rate_type == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_hour}} - £{{item?.contractor_rate_max_hr}} Per Hour</a> 
+                                    <span class="sapeter">|</span> 
+                                    Relocatable 
+                                    <a *ngIf="!item?.contractor_daily_hourly_value_relocatable" href="javascript:void(0);">N/A</a>
+                                    <!-- <a href="javascript:void(0);">£25 - £70</a> p/d  -->
+                                    <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'daily'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable}} - £{{item?.contractor_rate_max_relocatable}} Per Day</a>
+                                    <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable_hr}} - £{{item?.contractor_rate_max_relocatable_hr}} Per Hour</a> 
+                                    <!-- Commutable <a href="javascript:void(0);">£10 - £40</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£25 - £70</a> p/d  -->
+
+                                    <!-- <cite style="font-style: normal;" *ngIf="item?.rate_name == 'commutable'">
+                                        Commutable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>
+                                    </cite>
+                                    
+                                    <cite style="font-style: normal;" *ngIf="item?.rate_name == 'relocatable'">
+                                        Relocatable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong> 
+                                    </cite> -->
+                             </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_viewed ? item?.last_viewed : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> 
+                                            <a *ngIf="item && item?.resume && item?.resume?.length > 0" href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0);" (click)="watchContractorProfile(item?.contractor_reg_id, item?.contractor_first_name, item?.contractor_last_name)" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Hidden Profile </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p><span>Viewable on</span> 12/10/2018</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-doneicon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Performance Architect</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£100 - £400</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£250 - £700</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span><img src="./assets/images/unviewed.png" alt="" title=""></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Shiv Shankar </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p><span>Permanent </span> 6 Weeks Notice</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Senior Project Manager</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£25 - £70</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Luke Clothier </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p class="font_waight_normal">Available Immediately</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-doneicon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Performance Architect</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£100 - £400</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£250 - £700</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span><img src="./assets/images/unviewed.png" alt="" title=""></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="row">
+                    <div class="col-sm-33">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-34">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-sm-33">
+                        <div class="ad_space"> <img src="./assets/images/ad-space.png" alt="ads" title="ads" class="img-responsive"> </div>
+                    </div>
+                </div> -->
+                <app-ad-space *ngIf="secondArray.length > 0"></app-ad-space>
+                <div class="row">
+                    <div class="col-sm-50" *ngFor="let item of thirdArray">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-sm-26 col-md-34">
+                                        <h3 class="watch_list_hadding">{{item?.contractor_first_name}} {{item?.contractor_last_name}} </h3>
+                                    </div>
+                                    <div class="col-sm-74 col-md-64">
+                                        <div class="header_right_side">
+                                            <strong><span>{{item?.available}}</span></strong>
+                                            <!-- <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a> -->
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> {{item?.contractor_job_title ? item?.contractor_job_title : 'N/A'}}</p>
+                                <p><span>Location :</span> {{item?.contractor_location ? item?.contractor_location : 'N/A'}}</p>
+                                <p style="height: 40px;"><span>Rate :</span> 
+                                    <!-- Commutable <a href="javascript:void(0);">£10 - £40</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£25 - £70</a> p/d  -->
+                                    <!-- <cite style="font-style: normal;" *ngIf="item?.rate_name == 'commutable'">
+                                        Commutable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong>
+                                    </cite>
+                                    
+                                    <cite style="font-style: normal;" *ngIf="item?.rate_name == 'relocatable'">
+                                        Relocatable <a href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}}</a><strong> p/<span *ngIf="item?.rate_type === 'daily'">d</span>
+                                        <span *ngIf="item?.rate_type === 'hourly'">h</span></strong> 
+                                    </cite> -->
+                                    Commutable
+                                    <a *ngIf="!item?.rate_type" href="javascript:void(0);">N/A</a> 
+                                    <a *ngIf="item?.rate_type == 'daily'" href="javascript:void(0);">£{{item?.rate_min}} - £{{item?.rate_max}} Per Day</a>
+                                    <a *ngIf="item?.rate_type == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_hour}} - £{{item?.contractor_rate_max_hr}} Per Hour</a> 
+                                    <span class="sapeter">|</span> 
+                                    Relocatable 
+                                    <a *ngIf="!item?.contractor_daily_hourly_value_relocatable" href="javascript:void(0);">N/A</a> 
+                                    <!-- <a href="javascript:void(0);">£25 - £70</a> p/d  -->
+                                    <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'daily'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable}} - £{{item?.contractor_rate_max_relocatable}} Per Day</a>
+                                    <a *ngIf="item?.contractor_daily_hourly_value_relocatable == 'hourly'" href="javascript:void(0);">£{{item?.contractor_rate_min_relocatable_hr}} - £{{item?.contractor_rate_max_relocatable_hr}} Per Hour</a> 
+                                </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>{{item?.last_viewed ? item?.last_viewed : 'N/A'}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> 
+                                            <a *ngIf="item && item?.resume && item?.resume?.length > 0" href="{{item?.resume[0]['attachment_url']}}/{{item?.resume[0]['attachment_name']}}" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> 
+                                            <a href="javascript:void(0);" (click)="watchContractorProfile(item?.contractor_reg_id, item?.contractor_first_name, item?.contractor_last_name)" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Luke Clothier </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p class="font_waight_normal">Available Immediately</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-doneicon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Performance Architect</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£100 - £400</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£250 - £700</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span><img src="./assets/images/unviewed.png" alt="" title=""></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Shiv Shankar </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p><span>Viewable on</span> 14/09/2018</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-close-icon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Senior Project Manager</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£10 - £40</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£25 - £70</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span>23/10/2016</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-50">
+                        <div class="recruiter_watch_list_box">
+                            <div class="watchlist_header">
+                                <div class="row">
+                                    <div class="col-md-36 col-sm-26">
+                                        <h3 class="watch_list_hadding">Luke Clothier </h3>
+                                    </div>
+                                    <div class="col-md-64 col-sm-74">
+                                        <div class="header_right_side">
+                                            <p class="font_waight_normal">Available Immediately</p>
+                                            <a href="javascript:void(0);"> <img src="./assets/images/whatch-doneicon.png" alt="" title=""></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch_list_content">
+                                <p><span>Job Title :</span> Performance Architect</p>
+                                <p><span>Location :</span> North West Nuneaton, Warwickshire</p>
+                                <p><span>Rate :</span> Commutable <a href="javascript:void(0);">£100 - £400</a> <span class="sapeter">|</span> Relocatable <a href="javascript:void(0);">£250 - £700</a> p/d </p>
+                            </div>
+                            <div class="watchlist_footer">
+                                <div class="row">
+                                    <div class="col-sm-50 col-md-36">
+                                        <div class="footer_left_part">
+                                            <p>Last viewed <span><img src="./assets/images/unviewed.png" alt="" title=""></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-50 col-md-64">
+                                        <div class="footer_right_part"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>Download CV</span> <i class="fa fa-download plus_blue text_pinks" aria-hidden="true"></i></a> <a href="javascript:void(0);" [routerLink]="['../view-contractor-profile']" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>View Profile</span> <i class="fa fa-plus plus_blue text_pinks" aria-hidden="true"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div *ngIf="watchListData.length > 11" (click)="showMoreList()" class="show_more_application"> <a href="javascript:void(0);" class="btn-primary hover_text_pink hover_white_pluse width_280px"><span>SHOW MORE APPLICATIONS</span> <i class="fa fa-plus plus_blue text_pink" aria-hidden="true"></i></a> </div>
+        </section>

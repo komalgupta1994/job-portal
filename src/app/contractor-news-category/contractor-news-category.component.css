@@ -1,0 +1,8 @@
+.swiper-slide li{margin: 0 60px;}
+:host /deep/ .swiper-slide li p > p {
+    color: #fff;
+}
+
+.letest_news_box p {
+    height: 70px;
+}

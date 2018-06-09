@@ -1,0 +1,202 @@
+.margin-tp18{
+	margin-top: 18px;
+}
+
+:host/deep/.irs-from{ background: #00ccff;}
+:host/deep/.irs-from:after{ border-top-color:#00ccff; }
+:host/deep/.irs-to{ background: #00ccff;}
+:host/deep/.irs-to:after{ border-top-color:#00ccff; }
+:host/deep/.irs-bar{ background:#00ccff;}
+:host/deep/.irs-slider{background:#00ccff; width:2px !important;}
+
+:host/deep/input[type="checkbox"]:checked + label span{ background: rgba(0, 0, 0, 0) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6Mjc2OTZGMzc5NzgxMTFFNzlDREVFMzAxRkZDMzdBNTAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6Mjc2OTZGMzg5NzgxMTFFNzlDREVFMzAxRkZDMzdBNTAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNzY5NkYzNTk3ODExMUU3OUNERUUzMDFGRkMzN0E1MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyNzY5NkYzNjk3ODExMUU3OUNERUUzMDFGRkMzN0E1MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Ps8NKyMAAABYSURBVHjaYmQ487+TgYEhE4h5GUgDn4F4OgPQgE+f/vwnGYD0gPSCDAADoGkkYbAeoF4mBgrBqAGjBgwOA1iguYoXkh1IA6yMDD8Yyc3OIM1m3Ay7AQIMAK9xZNI9TerSAAAAAElFTkSuQmCC) no-repeat scroll 0 center; }
+:host/deep/a{ color:#00ccff !important;}
+:host/deep/.current_rate_signup .terms_of_use a {color: #ff0066 !important;}
+:host/deep/.rate_signup h2{ font-size: 16px; }
+:host/deep/.rate_signup span{ font-size: 20px; }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+   
+   
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    left: -82px;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    clear: none !important;
+     display:inherit !important;
+     width:auto !important; 
+     margin-left:auto !important;
+    margin-bottom:auto !important;
+    float:none !important;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.fileUpload span {
+    background: #00ccff none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 10px 12px 2px;
+    margin-top: -7px;
+    display: inline-block;
+}
+.fileUpload span img {
+    display: inline;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+
+#ext.rg_row {
+    width: 570px;
+    
+}
+
+.rg_row {
+    padding-bottom: 40px;
+}
+.rg-msn-reg .showdate.rest_data_show {
+    margin-top: 24px;
+}
+.showdate {
+    font-family: helveticaN;
+    font-size: 12px;
+    font-weight: 600;
+    float: left;
+    padding-right: 20px;
+ 
+}
+#datepicker {
+    border: none;
+}
+.rg-msn-reg .rg_row > img {
+    margin-top: 20px;
+}
+.ui-datepicker-trigger {
+    cursor: pointer;
+}
+.ui-datepicker-trigger {
+    display: inline;
+    float: left;
+}
+.rg-msn-reg .text-438 {
+    margin-top: 24px;
+    padding-right: 36px;
+    word-spacing: 1px;
+}
+.text-00 {
+    
+    font-size: 11px;
+    font-weight: 600;
+    float: left;
+ 
+}
+.active2 {
+    color: #656565;
+}
+.r_s1 {
+    
+    
+    font-size: 12px;
+    
+    display: block;
+    font-weight: 600;
+}
+
+.current_rate_signup input[type="radio"] + label span {
+    background: rgba(0, 0, 0, 0) url("uncheck_box.png") no-repeat scroll 0 center;
+}
+
+.current_rate_signup input[type="radio"]:checked + label span {
+  background: rgba(0, 0, 0, 0) url("check_box.png") no-repeat scroll 0 center;
+}
+
+.rgnote89 {
+    margin-top: -23px;
+    margin-bottom: 92px !important;
+}
+
+
+.text-00 {
+    
+    margin-top: 37px;
+    font-size: 11px;
+    font-weight: 600;
+    float: left;
+    padding-right: 20px;
+    margin-top: 4px;
+}
+
+.clear {
+    clear: both;
+}
+.optn {
+    float: left;
+    margin-top: 30px;
+}
+.errorbox {
+    border: 2px dashed #FF0066;
+    color: #000;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #E7EDEA;
+    font-weight: normal;
+}
+.errorbox >b {
+    font-weight: normal;
+    margin-bottom: 10px;
+    display: block;
+}
+.errorbox > li {
+    display: inline-block;
+    background: #000;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    color: #ffffff;
+}
+
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+
+}
+
+input[type=date]::-webkit-inner-spin-button, 
+input[type="date"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+
+}
+
+
+
+.signup_form_section .find_cv_from img {
+    
+    margin-right: 5px;
+}
+
+.date-holder{
+    position: absolute;
+    right: -232px;
+    z-index: 9;
+}

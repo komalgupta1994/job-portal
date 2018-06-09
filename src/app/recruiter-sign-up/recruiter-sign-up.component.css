@@ -1,0 +1,60 @@
+.margin-tp18{
+	margin-top: 18px;
+}
+
+
+.btn-primary {
+    padding: 5px 15px;
+ }
+
+.popup {
+    background: #000;
+    border: 0 none;
+    border-radius: 4px;
+    bottom: 34px;
+    box-shadow: 0 0 20px 0 #999;
+    color: #fff;
+    display: none;
+    font-size: 12px;
+    font-weight: 400;
+    left: -192px;
+    min-height: 50px;
+    padding: 12px 14px;
+    position: absolute;
+    top: auto;
+    width: 226px;
+    display: none;
+}
+.popup b {
+    background: rgba(0, 0, 0, 0) url("../../assets/images/tooltip-spike.png") no-repeat scroll 0 0;
+    bottom: -19px;
+    height: 22px;
+    left: 186px;
+    position: absolute;
+    top: auto;
+    width: 40px;
+}
+
+.passcode_img:hover .popup{display: inline;}
+
+.errorbox {
+    border: 2px dashed #FF0066;
+    color: #000;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #E7EDEA;
+    font-weight: normal;
+}
+.errorbox >b {
+    font-weight: normal;
+    margin-bottom: 10px;
+    display: block;
+}
+.errorbox > li {
+    display: inline-block;
+    background: #000;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    color: #ffffff;
+}

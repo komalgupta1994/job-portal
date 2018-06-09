@@ -1,0 +1,21 @@
+
+.recruiter_home_login a:hover {
+    color: #000 !important;
+}
+.open_ul{
+	margin-top: 10px;
+}
+.open_ul li{
+	font-weight: normal;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.active{color: #00ccff;}
+
+.display_block{
+	display: block;
+}
+.display_none{
+	display: none;
+}

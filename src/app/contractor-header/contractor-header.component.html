@@ -1,0 +1,61 @@
+<header id="after_login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-14 col-sm-7 col-md-5" (click)="toggleMenu()">
+        <div class="tongal_icon_bar"> <a href="javascript:void(0)" id="inquery_now_home"> <img src="./assets/images/menu-bar.png" alt="menu" title="menu" class="img-responsive"> </a> </div>
+      </div>
+      <div class="col-xs-86 col-sm-93 col-md-95">
+        <div class="header_right_ads"> <a href="javascript:void(0)"> <img src="./assets/images/login-after-logo.png" alt="ads" title="ads" class="img-responsive"> </a> </div>
+      </div>
+    </div>
+    <div class="home_page_inquery" *ngIf="showMenu">
+      <div id="inquerymaindiv">
+        <div class="after_login_menu">
+          <ul id="recuriter_logged_in_nav" class="navigation-lists">
+            <li [routerLink]="['../contractor/viewProfile']" (click)="toggleMenu()">
+              <a href="javascript:void(0)"><span class="icon-user-icon"></span><span class="nav-menu-heading">Profile</span></a>              
+            </li>
+            <li [routerLink]="['../contractor/jobSearch']" (click)="toggleMenu()"><a href="javascript:void(0)"><span class="icon-search2"></span><span class="nav-menu-heading">Search</span></a>
+              
+            </li>
+            <li [routerLink]="['../contractor/application']" (click)="toggleMenu()"><a href="javascript:void(0)"><span class="icon-applications"></span><span class="nav-menu-heading">Applications</span></a>
+              
+            </li>
+            <li [routerLink]="['../contractor/jobSavedSearch']" (click)="toggleMenu()"><a href="javascript:void(0)"><span class="icon-search-plus"></span><span class="nav-menu-heading">Saved Search</span></a>
+              
+            </li>
+            <li [routerLink]="['../contractor/hubHome']" (click)="toggleMenu()"><a href="javascript:void(0)"><span class="icon-msg-icon"></span><span class="nav-menu-heading"><b>Contract</b>Hub</span></a>
+              
+            </li>
+
+            <li [routerLink]="['../contractor/help']" (click)="toggleMenu()"><a href="javascript:void(0)"><span class="icon-msg-icon"></span><span class="nav-menu-heading">Help</span></a>
+              
+            </li>
+
+           <!--  <li [routerLink]="['../contractor/about']"><a href="javascript:void(0)"><span class="icon-msg-icon"></span><span class="nav-menu-heading">About</span></a>
+              
+            </li> -->
+
+            <!-- <li [routerLink]="['../contractor/viewProfile']"><a href="javascript:void(0)"><span class="icon-gears"></span><span class="nav-menu-heading">Admin</span></a></li> -->
+            <li (click)="logoutContractor()" [routerLink]="['../public']"><a href="javascript:void(0)"><span class="icon-lock"></span><span class="nav-menu-heading">Logout</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+        <div style="padding: 50px">
+            <button class="" [routerLink]="['../contractor/viewProfile']">Profile</button> 
+            <button class=""  [routerLink]="['../contractor/jobSearch']">Search</button> 
+            <button class=""  [routerLink]="['../contractor/application']">Applications</button> 
+            <button class=""  [routerLink]="['../contractor/jobSavedSearch']">Saved Search</button> 
+            <button class=""  [routerLink]="['../contractor/hubHome']">Contract-hub</button> 
+            <button class="" [routerLink]="['../contractor/viewProfile']">Admin</button> 
+            <button class=""  [routerLink]="['../public']">LogOut</button> 
+
+              
+        </div>
+
+        
+      </div> -->
+  </div>
+</header>

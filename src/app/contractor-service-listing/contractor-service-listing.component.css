@@ -1,0 +1,58 @@
+#services-nav-menu li .icon {
+    float: left;
+    margin-top: 7px;
+    padding: 3.3%;
+    width: 25%;
+}
+
+#services-nav-menu li a .icon {
+    float: left;
+    width: 30%;
+    padding: 5%;
+    margin-top: inherit;
+}
+
+#services-nav-menu li a .content {
+    float: left;
+    width: 70%;
+    padding: 5%;
+    color: #000000;
+}
+
+#services-nav-menu li a .content h4 {
+    font-size: 23px;
+    margin-top: 10px;
+}
+
+#services-nav-menu li a .content h4 {
+    text-align: center;
+}
+
+#services-nav-menu li a .content p {
+    display: none;
+}
+
+#services-nav-menu li:hover a .icon{
+	float: left;
+    width: 30%;
+    padding: 5%;
+    margin-top: 7px;
+}
+
+#services-nav-menu li:hover a .icon img {
+    height: 80px !important;
+    width: 80px !important;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#services-nav-menu li:hover a .content h4 {
+    margin-top: 0px;
+    text-align: center;
+}
+#services-nav-menu li:hover a .content p {
+    display: block;
+    width: 90%;
+    margin-left: 15px;
+} 

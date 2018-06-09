@@ -1,0 +1,16 @@
+.contractrecruit_banner:hover #brand-new h5{
+	font-size: 17px;
+    width: auto;
+    transition: all ease 0.2s;
+}
+
+.contractor_footer_ad a:hover {
+    
+    color: #00cc33;
+    
+}
+
+
+.contractor_footer_ad a:hover i {
+    color: #000;
+}
